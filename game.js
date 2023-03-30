@@ -6,6 +6,8 @@ let shipBackgroundColor = [150, 170, 190];
 
 let asteroidHP = 100;
 let obstacleRotation = 0;
+let asteroidSpawn = false;
+let obstacleAmount = 0;
 
 //Variables to move obstacles positions when using "arrows".
 let movementX = 0;
@@ -24,21 +26,9 @@ for (let i = 0; i < 2000; i++) {
   stars.push(star);
 }
 
-//Obstacles
+//Obstacles list
 let obstacles = [];
-for (let i = 0; i < 6; i++) {
-  const obstacle = {
-    x: Math.floor(Math.random() * 100 - 400),
-    y: Math.floor(Math.random() * height),
-    hp: Math.floor(Math.random() * 100) + 100,
-    scale: Math.random() * 0.2 + 0.1,
-    velocityX: Math.random() * 3 + 2,
-    velocityY: Math.random() * 1 - 1,
-  };
-  obstacles.push(obstacle);
-}
 
-let obstacleVelocity = Math.random() * 5 - 2.5;
 // Aim Crosshair
 function aim(x, y) {
   push();
@@ -94,10 +84,12 @@ function asteroid(xAsteroid, yAsteroid, scaleAsteroid, rotationAsteroid) {
 }
 
 function shipBackground() {
+  push();
   fill(shipBackgroundColor);
   rect(0, height - 140, width, 140);
   triangle(0, 0, 60, height - 140, 0, height);
   triangle(width, 0, width - 60, height - 140, width, height);
+  pop();
 }
 
 function draw() {
@@ -108,25 +100,41 @@ function draw() {
     ellipse(star.x + movementX, star.y + movementY, 2);
   }
 
+  //generates value for obstacle
+  if (obstacleAmount < 10) {
+    const obstacle = {
+      x: Math.floor(Math.random() * 100 - 450),
+      y: Math.floor(Math.random() * (height + 100) - 50),
+      velocityX: Math.random() * 3 + 2,
+      velocityY: Math.random() * 1 - 1,
+      typeOfObstacle: Math.ceil(Math.random() * 10),
+      rotation: Math.random() * 0.02,
+      scale: Math.random() * 0.15 + 0.1,
+    };
+    obstacles.push(obstacle);
+    obstacleAmount++;
+  }
+
+  //Obstacle spawn
   for (let obstacle of obstacles) {
-    if (
-      obstacle.hp > 0 &&
-      obstacle.y > -280 &&
-      obstacle.y < width + 280 &&
-      obstacle.x < width + 280
-    ) {
+    if (obstacle.typeOfObstacle < 6) {
       asteroid(
         obstacle.x + movementX,
         obstacle.y + movementY,
         obstacle.scale,
         obstacleRotation
       );
-      obstacle.x = obstacle.x + obstacle.velocityX;
-      obstacle.y = obstacle.y + obstacle.velocityY;
+    } else if (obstacle.typeOfObstacle > 5) {
+      ellipse(obstacle.x + movementX, obstacle.y + movementY, 50);
     }
+
+    //Moves the obstacles with their velocity generated
+    obstacle.x = obstacle.x + obstacle.velocityX;
+    obstacle.y = obstacle.y + obstacle.velocityY;
+    obstacleRotation = obstacleRotation + obstacle.rotation;
   }
 
-  //Moves screen when using arrows
+  //Moves screen when using arrows / ASDW
   if (
     (positionTrackerX < 300 && keyIsDown(65)) ||
     (positionTrackerX < 300 && keyIsDown(37))
