@@ -188,7 +188,7 @@ function mouseClicked() {
     }
 
     if (obstacle.hp < 1) {
-      obstacles.splice(itemN, 1);
+      obstacles.splice(obstacle, 1);
     }
   }
 }
