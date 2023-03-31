@@ -7,7 +7,6 @@ let shipBackgroundColor = [150, 170, 190];
 let asteroidHP = 100;
 let obstacleRotation = 0;
 let asteroidSpawn = false;
-let obstacleAmount = 0;
 
 //Variables to move obstacles positions when using "arrows".
 let movementX = 0;
@@ -99,18 +98,16 @@ function draw() {
   }
 
   //generates value for obstacle
-  if (obstacleAmount < 10) {
+  if (obstacles.length < 10) {
     const obstacle = {
-      x: Math.floor(Math.random() * 100 - 450),
+      x: Math.floor(Math.random() * 300 - 600),
       y: Math.floor(Math.random() * (height + 100) - 50),
       velocityX: Math.random() * 3 + 2,
       velocityY: Math.random() * 1 - 1,
       typeOfObstacle: Math.ceil(Math.random() * 10),
       rotation: Math.random() * 0.02,
-      scale: Math.random() * 0.15 + 0.1,
     };
     obstacles.push(obstacle);
-    obstacleAmount++;
   }
 
   //Obstacle spawn
@@ -119,7 +116,7 @@ function draw() {
       asteroid(
         obstacle.x + movementX,
         obstacle.y + movementY,
-        obstacle.scale,
+        0.2,
         obstacleRotation
       );
     } else if (obstacle.typeOfObstacle > 5) {
