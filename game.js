@@ -13,8 +13,6 @@ let obstacleAmount = 0;
 let movementX = 0;
 let movementY = 0;
 let movementSpeed = 15;
-let positionTrackerX = 0;
-let positionTrackerY = 0;
 
 //Stars
 let stars = [];
@@ -136,32 +134,28 @@ function draw() {
 
   //Moves screen when using arrows / ASDW
   if (
-    (positionTrackerX < 300 && keyIsDown(65)) ||
-    (positionTrackerX < 300 && keyIsDown(37))
+    (movementX < 300 && keyIsDown(65)) ||
+    (movementX < 300 && keyIsDown(37))
   ) {
     movementX = movementX + movementSpeed;
-    positionTrackerX = positionTrackerX + movementSpeed;
   }
   if (
-    (positionTrackerX > -300 && keyIsDown(68)) ||
-    (positionTrackerX > -300 && keyIsDown(39))
+    (movementX > -300 && keyIsDown(68)) ||
+    (movementX > -300 && keyIsDown(39))
   ) {
     movementX = movementX - movementSpeed;
-    positionTrackerX = positionTrackerX - movementSpeed;
   }
   if (
-    (positionTrackerY < 250 && keyIsDown(87)) ||
-    (positionTrackerY < 250 && keyIsDown(38))
+    (movementY < 250 && keyIsDown(87)) ||
+    (movementY < 250 && keyIsDown(38))
   ) {
     movementY = movementY + movementSpeed;
-    positionTrackerY = positionTrackerY + movementSpeed;
   }
   if (
-    (positionTrackerY > -250 && keyIsDown(83)) ||
-    (positionTrackerY > -250 && keyIsDown(40))
+    (movementY > -250 && keyIsDown(83)) ||
+    (movementY > -250 && keyIsDown(40))
   ) {
     movementY = movementY - movementSpeed;
-    positionTrackerY = positionTrackerY - movementSpeed;
   }
 
   aim(mouseX, mouseY);
