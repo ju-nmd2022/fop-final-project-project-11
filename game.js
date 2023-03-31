@@ -6,7 +6,11 @@ let shipBackgroundColor = [150, 170, 190];
 
 let asteroidHP = 100;
 let obstacleRotation = 0;
-let asteroidSpawn = false;
+
+let timerFPS = 0;
+let timerS = 0;
+
+let aimDamage = 20;
 
 //Variables to move obstacles positions when using "arrows".
 let movementX = 0;
@@ -97,8 +101,15 @@ function draw() {
     ellipse(star.x + movementX, star.y + movementY, 2);
   }
 
+  //timer
+  timerFPS++;
+  if (timerFPS > 29) {
+    timerS++;
+    timerFPS = 0;
+  }
+
   //generates value for obstacle
-  if (obstacles.length < 10) {
+  if (obstacles.length < 5) {
     const obstacle = {
       x: Math.floor(Math.random() * 300 - 600),
       y: Math.floor(Math.random() * (height + 100) - 50),
@@ -106,8 +117,10 @@ function draw() {
       velocityY: Math.random() * 1 - 1,
       typeOfObstacle: Math.ceil(Math.random() * 10),
       rotation: Math.random() * 0.02,
+      hp: 100,
     };
     obstacles.push(obstacle);
+    timerS = 0;
   }
 
   //Obstacle spawn
@@ -127,6 +140,10 @@ function draw() {
     obstacle.x = obstacle.x + obstacle.velocityX;
     obstacle.y = obstacle.y + obstacle.velocityY;
     obstacleRotation = obstacleRotation + obstacle.rotation;
+
+    if (obstacle.x > width + 350) {
+      obstacles.splice(obstacle, 1);
+    }
   }
 
   //Moves screen when using arrows / ASDW
@@ -159,13 +176,19 @@ function draw() {
   shipBackground();
 }
 
-// function mouseClicked() {
-//   if (
-//     mouseX > obstacle.x - 30 &&
-//     mouseX < obstacle.x + 30 &&
-//     mouseY > obstacle.y - 27 &&
-//     mouseY < obstacle.y + 25
-//   ) {
-//     obstacle.hp = obstacle.hp - 20;
-//   }
-// }
+function mouseClicked() {
+  for (let obstacle of obstacles) {
+    if (
+      mouseX > obstacle.x + movementX - 30 &&
+      mouseX < obstacle.x + movementX + 30 &&
+      mouseY > obstacle.y + movementY - 27 &&
+      mouseY < obstacle.y + movementY + 25
+    ) {
+      obstacle.hp = obstacle.hp - aimDamage;
+    }
+
+    if (obstacle.hp < 1) {
+      obstacles.splice(itemN, 1);
+    }
+  }
+}
