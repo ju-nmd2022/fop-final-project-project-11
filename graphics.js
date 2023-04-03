@@ -1,12 +1,9 @@
-//Eve Graphics
-background(255, 255, 255);
+
+
+function eve(evex, evey) {
 fill(255, 255, 255);
 strokeWeight(1.5);
 stroke(0, 0, 0);
-
-let evex = 300;
-let evey = 100;
-
 beginShape();
 vertex(evex - 40, evey + 50);
 bezierVertex(
@@ -68,10 +65,9 @@ bezierVertex(
   evey + 150
 );
 endShape();
+}
 
-//Ufo Graphics
-let ufox = 300;
-let ufoy = 300;
+function ufo(ufox, ufoy){
 fill(130, 0, 0);
 beginShape();
 vertex(ufox - 100, ufoy + 50);
@@ -84,6 +80,7 @@ bezierVertex(
   ufoy + 50
 );
 endShape();
+push();
 fill(230, 0, 0);
 ellipse(ufox, ufoy + 50, 200, 50);
 fill(0, 200, 255);
@@ -99,3 +96,12 @@ ellipse(ufox - 15, ufoy + 64, 10);
 ellipse(ufox + 15, ufoy + 64, 10);
 ellipse(ufox + 80, ufoy + 54, 10);
 ellipse(ufox + 50, ufoy + 60, 10);
+pop();
+}
+
+
+function draw() {
+  background(255, 255, 255);
+  eve(200, 200);
+  ufo(200, 400);
+}
