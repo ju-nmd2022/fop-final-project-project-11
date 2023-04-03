@@ -109,7 +109,7 @@ function draw() {
   }
 
   //generates value for obstacle
-  if (obstacles.length < 5) {
+  if (obstacles.length < 15) {
     const obstacle = {
       x: Math.floor(Math.random() * 300 - 600),
       y: Math.floor(Math.random() * (height + 100) - 50),
@@ -142,7 +142,7 @@ function draw() {
     obstacleRotation = obstacleRotation + obstacle.rotation;
 
     if (obstacle.x > width + 350) {
-      obstacles.splice(obstacle, 1);
+      obstacles.splice(obstacles.indexOf(obstacle), 1);
     }
   }
 
@@ -188,7 +188,7 @@ function mouseClicked() {
     }
 
     if (obstacle.hp < 1) {
-      obstacles.splice(obstacle, 1);
+      obstacles.splice(obstacles.indexOf(obstacle), 1);
     }
   }
 }
