@@ -1,3 +1,5 @@
+document.querySelector("body").style.cursor = "none";
+
 //colors
 let white = [255, 255, 255];
 let black = [0, 0, 0];
@@ -130,7 +132,7 @@ function draw() {
         obstacle.x + movementX,
         obstacle.y + movementY,
         0.2,
-        obstacleRotation
+        obstacle.Rotation
       );
     } else if (obstacle.typeOfObstacle > 5) {
       ellipse(obstacle.x + movementX, obstacle.y + movementY, 50);
