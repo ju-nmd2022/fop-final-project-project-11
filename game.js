@@ -109,7 +109,7 @@ function draw() {
   }
 
   //generates value for obstacle
-  if (obstacles.length < 15) {
+  if (obstacles.length < 5) {
     const obstacle = {
       x: Math.floor(Math.random() * 300 - 600),
       y: Math.floor(Math.random() * (height + 100) - 50),
