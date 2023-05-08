@@ -92,11 +92,10 @@ function asteroid(xAsteroid, yAsteroid, scaleAsteroid, rotationAsteroid) {
 function startButton(x, y) {
   push();
   translate(x, y);
-
   fill(white);
   textFont("Inconsolata");
   textSize(40);
-  text("Press S to Start!", -120, 0);
+  text("Press SPACE to Start!", -170, 0);
   pop();
 }
 
@@ -119,6 +118,10 @@ function draw() {
 
   if (gameState === 1) {
     startButton(windowWidth / 2, windowHeight / 2);
+
+    if (keyIsDown(32)) {
+      gameState = 2;
+    }
   }
 
   if (gameState === 2) {
