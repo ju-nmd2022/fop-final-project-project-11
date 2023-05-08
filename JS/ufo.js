@@ -1,5 +1,5 @@
 export default class Ufo {
-  constructor(x, y) {
+  constructor() {
     this.x = Math.floor(Math.random() * 300 - 600);
     this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
     this.velocityX = Math.random() * 3 + 2;

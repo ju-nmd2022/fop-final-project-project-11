@@ -1,6 +1,5 @@
 import Asteroid from "./asteroid.js";
 import Ufo from "./ufo.js";
-
 document.querySelector("body").style.cursor = "none";
 innerHeight = 600;
 innerWidth = 800;
@@ -94,8 +93,8 @@ function shipBackground() {
   );
   fill(255, 0, 0);
   textSize(50);
-  text(asteroidCounter, 500, 300);
-  text(ufoCounter, 300, 300);
+  text(asteroidCounter, 600, 550);
+  text(ufoCounter, 150, 550);
   pop();
 }
 
@@ -174,6 +173,7 @@ function draw() {
       }
     }
 
+    //Laser graphic
     if (mouseIsPressed) {
       laser(mouseX, mouseY);
     }
