@@ -18,7 +18,7 @@ let aimDamage = 20;
 let movementX = 0;
 let movementY = 0;
 let movementSpeed = 15;
-
+ 
 let gameState = 1;
 
 //Stars
