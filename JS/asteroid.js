@@ -44,6 +44,10 @@ export default class Asteroid {
     ellipse(-100, 0, 20, 10);
     ellipse(20, -100, 20, 10);
     ellipse(30, 100, 30, 15);
+
+    fill(50, 255, 50);
+    textSize(50);
+    text(this.hp, 0, -100);
     pop();
   }
 

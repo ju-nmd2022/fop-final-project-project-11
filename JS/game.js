@@ -16,6 +16,10 @@ let shipBackgroundColor = [150, 170, 190];
 
 let aimDamage = 1;
 
+let asteroidCounter = 0;
+let ufoCounter = 0;
+let boosterCounter = 0;
+
 //Variables to move obstacles positions when using "arrows".
 let movementX = 0;
 let movementY = 0;
@@ -74,6 +78,10 @@ function shipBackground() {
     innerWidth,
     innerHeight
   );
+  fill(255, 0, 0);
+  textSize(50);
+  text(asteroidCounter, 500, 300);
+  text(ufoCounter, 300, 300);
   pop();
 }
 
@@ -95,7 +103,7 @@ function draw() {
 
   if (gameState === 2) {
     //Asteroid generating
-    if (asteroids.length < 6) {
+    if (asteroids.length < 10) {
       let asteroid = new Asteroid();
       asteroids.push(asteroid);
     }
@@ -112,11 +120,14 @@ function draw() {
           mouseY < asteroid.y + movementY + 25
         ) {
           asteroid.hp = asteroid.hp - aimDamage;
-          console.log(asteroid.hp);
         }
       }
       if (asteroid.isDead()) {
         asteroids.splice(asteroids.indexOf(asteroid), 1);
+        if (asteroid.hp < 1) {
+          asteroidCounter++;
+          boosterCounter++;
+        }
       }
     }
 
@@ -131,18 +142,21 @@ function draw() {
       ufo.y = ufo.y + ufo.velocityY;
       if (mouseIsPressed) {
         if (
-          mouseX > ufo.x + movementX - 30 &&
-          mouseX < ufo.x + movementX + 30 &&
-          mouseY > ufo.y + movementY - 27 &&
-          mouseY < ufo.y + movementY + 25
+          mouseX > ufo.x + movementX - 20 &&
+          mouseX < ufo.x + movementX + 20 &&
+          mouseY < ufo.y + movementY + 20 &&
+          mouseY > ufo.y + movementY
         ) {
           ufo.hp = ufo.hp - aimDamage;
-          console.log(ufo.hp);
+          boosterCounter++;
         }
       }
 
       if (ufo.isDead()) {
         ufos.splice(ufos.indexOf(ufo), 1);
+        if (ufo.hp < 1) {
+          ufoCounter++;
+        }
       }
     }
 

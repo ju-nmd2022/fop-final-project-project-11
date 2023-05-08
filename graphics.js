@@ -96,6 +96,7 @@ ellipse(ufox - 15, ufoy + 64, 10);
 ellipse(ufox + 15, ufoy + 64, 10);
 ellipse(ufox + 80, ufoy + 54, 10);
 ellipse(ufox + 50, ufoy + 60, 10);
+rect(ufox, ufoy, 90, 90);
 pop();
 }
 

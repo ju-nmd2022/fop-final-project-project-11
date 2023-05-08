@@ -31,6 +31,10 @@ export default class Ufo {
     ellipse(15, 64, 10);
     ellipse(80, 54, 10);
     ellipse(50, 60, 10);
+
+    fill(50, 255, 50);
+    textSize(50);
+    text(this.hp, 0, -10);
     pop();
   }
 
