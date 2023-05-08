@@ -41,6 +41,20 @@ for (let i = 0; i < 2000; i++) {
 let asteroids = [];
 let ufos = [];
 
+//laser
+function laser(x, y) {
+  push();
+  stroke(255, 0, 0);
+  strokeWeight(3);
+  line(0, 600, x, y);
+  line(800, 600, x, y);
+  stroke(255, 255, 255);
+  strokeWeight(1);
+  line(0, 600, x, y);
+  line(800, 600, x, y);
+
+  pop();
+}
 // Aim Crosshair
 function aim(x, y) {
   push();
@@ -158,6 +172,10 @@ function draw() {
           ufoCounter++;
         }
       }
+    }
+
+    if (mouseIsPressed) {
+      laser(mouseX, mouseY);
     }
 
     //Moves screen when using arrows / ASDW
