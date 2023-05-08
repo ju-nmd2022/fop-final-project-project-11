@@ -1,15 +1,16 @@
-class Asteroid {
+export default class Asteroid {
   constructor(x, y) {
     this.x = Math.floor(Math.random() * 300 - 600);
-    this.y = Math.floor(Math.random() * (height + 100) - 50);
+    this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
     this.velocityX = Math.random() * 3 + 2;
     this.velocityY = Math.random() * 1 - 1;
-    this.rotation = Math.random() * 0.02;
+    this.rotation = 0;
     this.hp = 100;
   }
 
   draw() {
-    translate(this.x, this.y);
+    push();
+    translate(this.x + movementX, this.y + movementY);
     scale(0.2);
     rotate(this.rotation);
 
@@ -43,15 +44,14 @@ class Asteroid {
     ellipse(-100, 0, 20, 10);
     ellipse(20, -100, 20, 10);
     ellipse(30, 100, 30, 15);
+    pop();
   }
-}
 
-let asteroid = new Asteroid(100, 100);
-
-function draw() {
-  background(0, 0, 0);
-  asteroid.draw();
-  asteroid.x = asteroid.x + asteroid.velocityX;
-  asteroid.y = asteroid.y + asteroid.velocityY;
-  asteroid.rotation = asteroid.rotation + 0.1;
+  isDead() {
+    if (this.x > innerWidth + 350 || this.hp < 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
