@@ -19,6 +19,8 @@ let movementX = 0;
 let movementY = 0;
 let movementSpeed = 15;
 
+let gameState = 1;
+
 //Stars
 let stars = [];
 for (let i = 0; i < 2000; i++) {
@@ -86,6 +88,18 @@ function asteroid(xAsteroid, yAsteroid, scaleAsteroid, rotationAsteroid) {
   pop();
 }
 
+//start "button" info
+function startButton(x, y) {
+  push();
+  translate(x, y);
+
+  fill(white);
+  textFont("Inconsolata");
+  textSize(40);
+  text("Press S to Start!", -120, 0);
+  pop();
+}
+
 function shipBackground() {
   push();
   fill(shipBackgroundColor);
@@ -103,79 +117,85 @@ function draw() {
     ellipse(star.x + movementX, star.y + movementY, 2);
   }
 
-  //timer
-  timerFPS++;
-  if (timerFPS > 29) {
-    timerS++;
-    timerFPS = 0;
+  if (gameState === 1) {
+    startButton(windowWidth / 2, windowHeight / 2);
   }
 
-  //generates value for obstacle
-  if (obstacles.length < 5) {
-    const obstacle = {
-      x: Math.floor(Math.random() * 300 - 600),
-      y: Math.floor(Math.random() * (height + 100) - 50),
-      velocityX: Math.random() * 3 + 2,
-      velocityY: Math.random() * 1 - 1,
-      typeOfObstacle: Math.ceil(Math.random() * 10),
-      rotation: Math.random() * 0.02,
-      hp: 100,
-    };
-    obstacles.push(obstacle);
-    timerS = 0;
-  }
-
-  //Obstacle spawn
-  for (let obstacle of obstacles) {
-    if (obstacle.typeOfObstacle < 6) {
-      asteroid(
-        obstacle.x + movementX,
-        obstacle.y + movementY,
-        0.2,
-        obstacle.Rotation
-      );
-    } else if (obstacle.typeOfObstacle > 5) {
-      ellipse(obstacle.x + movementX, obstacle.y + movementY, 50);
+  if (gameState === 2) {
+    //timer
+    timerFPS++;
+    if (timerFPS > 29) {
+      timerS++;
+      timerFPS = 0;
     }
 
-    //Moves the obstacles with their velocity generated
-    obstacle.x = obstacle.x + obstacle.velocityX;
-    obstacle.y = obstacle.y + obstacle.velocityY;
-    obstacleRotation = obstacleRotation + obstacle.rotation;
-
-    if (obstacle.x > width + 350) {
-      obstacles.splice(obstacles.indexOf(obstacle), 1);
+    //generates value for obstacle
+    if (obstacles.length < 5) {
+      const obstacle = {
+        x: Math.floor(Math.random() * 300 - 600),
+        y: Math.floor(Math.random() * (height + 100) - 50),
+        velocityX: Math.random() * 3 + 2,
+        velocityY: Math.random() * 1 - 1,
+        typeOfObstacle: Math.ceil(Math.random() * 10),
+        rotation: Math.random() * 0.02,
+        hp: 100,
+      };
+      obstacles.push(obstacle);
+      timerS = 0;
     }
-  }
 
-  //Moves screen when using arrows / ASDW
-  if (
-    (movementX < 300 && keyIsDown(65)) ||
-    (movementX < 300 && keyIsDown(37))
-  ) {
-    movementX = movementX + movementSpeed;
-  }
-  if (
-    (movementX > -300 && keyIsDown(68)) ||
-    (movementX > -300 && keyIsDown(39))
-  ) {
-    movementX = movementX - movementSpeed;
-  }
-  if (
-    (movementY < 250 && keyIsDown(87)) ||
-    (movementY < 250 && keyIsDown(38))
-  ) {
-    movementY = movementY + movementSpeed;
-  }
-  if (
-    (movementY > -250 && keyIsDown(83)) ||
-    (movementY > -250 && keyIsDown(40))
-  ) {
-    movementY = movementY - movementSpeed;
-  }
+    //Obstacle spawn
+    for (let obstacle of obstacles) {
+      if (obstacle.typeOfObstacle < 6) {
+        asteroid(
+          obstacle.x + movementX,
+          obstacle.y + movementY,
+          0.2,
+          obstacle.Rotation
+        );
+      } else if (obstacle.typeOfObstacle > 5) {
+        ellipse(obstacle.x + movementX, obstacle.y + movementY, 50);
+      }
 
-  aim(mouseX, mouseY);
-  shipBackground();
+      //Moves the obstacles with their velocity generated
+      obstacle.x = obstacle.x + obstacle.velocityX;
+      obstacle.y = obstacle.y + obstacle.velocityY;
+      obstacleRotation = obstacleRotation + obstacle.rotation;
+
+      if (obstacle.x > width + 350) {
+        obstacles.splice(obstacles.indexOf(obstacle), 1);
+      }
+    }
+
+    //Moves screen when using arrows / ASDW
+    if (
+      (movementX < 300 && keyIsDown(65)) ||
+      (movementX < 300 && keyIsDown(37))
+    ) {
+      movementX = movementX + movementSpeed;
+    }
+    if (
+      (movementX > -300 && keyIsDown(68)) ||
+      (movementX > -300 && keyIsDown(39))
+    ) {
+      movementX = movementX - movementSpeed;
+    }
+    if (
+      (movementY < 250 && keyIsDown(87)) ||
+      (movementY < 250 && keyIsDown(38))
+    ) {
+      movementY = movementY + movementSpeed;
+    }
+    if (
+      (movementY > -250 && keyIsDown(83)) ||
+      (movementY > -250 && keyIsDown(40))
+    ) {
+      movementY = movementY - movementSpeed;
+    }
+
+    aim(mouseX, mouseY);
+    shipBackground();
+  }
 }
 
 function mouseClicked() {
