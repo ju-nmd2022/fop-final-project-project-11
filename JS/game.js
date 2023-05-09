@@ -1,5 +1,6 @@
 import Asteroid from "./asteroid.js";
 import Ufo from "./ufo.js";
+
 document.querySelector("body").style.cursor = "none";
 innerHeight = 600;
 innerWidth = 800;
@@ -244,8 +245,8 @@ function draw() {
       movementY = movementY - movementSpeed;
     }
 
-    aim(mouseX, mouseY);
     shipBackground();
+    aim(mouseX, mouseY);
 
     if (keyIsDown(27)) {
       gameState = 3;
