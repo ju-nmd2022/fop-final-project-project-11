@@ -78,8 +78,8 @@ function draw() {
 let particles = [];
 
 function createParticle(x, y) {
-  const v = 0.2 + Math.random();
-  const a = Math.PI * 2 + Math.random() * Math.PI;
+  const v = Math.random();
+  const a = Math.random() * 2 * Math.PI;
   const maxLife = 100 + Math.floor(Math.random() * 100);
   return { x: x, y: y, velocity: v, angle: a, life: 0, maxLife: maxLife };
 }
@@ -88,8 +88,8 @@ function drawParticle(particle) {
   push();
   translate(particle.x, particle.y);
   noStroke();
-  fill(255, 110, 0, 20);
-  ellipse(0, 0, 15);
+  fill(160, 170, 170, 40);
+  ellipse(0, 0, 3);
   pop();
 }
 
@@ -97,7 +97,7 @@ function updateParticle(particle) {
   particle.x = particle.x + Math.cos(particle.angle) * particle.velocity;
   particle.y = particle.y + Math.sin(particle.angle) * particle.velocity;
   particle.velocity = particle.velocity * 1.04;
-  particle.life = particle.life + 4;
+  particle.life = particle.life + 3;
 
   if (particle.life > particle.maxLife) {
     const particleIndex = particles.indexOf(particle);
@@ -115,7 +115,7 @@ function draw() {
   }
 
   if (keyIsDown(32)) {
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 350; i++) {
       let particle = createParticle(400, 300);
       particles.push(particle);
     }
