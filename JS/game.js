@@ -67,6 +67,19 @@ function aim(x, y) {
   pop();
 }
 
+//clear function
+function clearGame() {
+  for (let asteroid of asteroids) {
+    asteroids.splice(asteroids.indexOf(asteroid), 1);
+  }
+  for (let ufo of ufos) {
+    ufos.splice(ufos.indexOf(ufo), 1);
+  }
+
+  asteroidCounter = 0;
+  ufoCounter = 0;
+}
+
 //Leave button in pause menu
 function leaveButton(x, y) {
   push();
@@ -132,6 +145,7 @@ function draw() {
 
   //Menu state
   if (gameState === 1) {
+    clearGame();
     startButton(innerWidth / 2, innerHeight / 2);
 
     if (keyIsDown(32)) {
@@ -246,7 +260,7 @@ function draw() {
     if (keyIsDown(76)) {
       gameState = 1;
     }
-    if (keyIsDown(32)) {
+    if (keyIsDown(67)) {
       gameState = 2;
     }
   }
