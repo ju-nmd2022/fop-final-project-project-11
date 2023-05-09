@@ -65,8 +65,10 @@ function eve(evex, evey) {
   endShape();
 }
 
+function pauseMenu() {}
+
 function draw() {
   background(255, 255, 255);
   eve(200, 200);
-  ufo(200, 400);
+  button(400, 400);
 }

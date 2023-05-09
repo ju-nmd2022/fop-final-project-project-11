@@ -67,7 +67,31 @@ function aim(x, y) {
   pop();
 }
 
-//start "button" info
+//Leave button in pause menu
+function leaveButton(x, y) {
+  push();
+  translate(x, y);
+  fill(255, 255, 255);
+  rect(-180, -40, 360, 80);
+  textSize(40);
+  fill(200, 10, 10);
+  text("Press L to Leave", -150, 15);
+  pop();
+}
+
+//countinue button in pause menu
+function continueButton(x, y) {
+  push();
+  translate(x, y);
+  fill(255, 255, 255);
+  rect(-180, -40, 360, 80);
+  textSize(40);
+  fill(200, 10, 10);
+  text("Press C to Continue", -180, 15);
+  pop();
+}
+
+//start info
 function startButton(x, y) {
   push();
   translate(x, y);
@@ -106,6 +130,7 @@ function draw() {
     ellipse(star.x + movementX, star.y + movementY, 2);
   }
 
+  //Menu state
   if (gameState === 1) {
     startButton(innerWidth / 2, innerHeight / 2);
 
@@ -114,6 +139,7 @@ function draw() {
     }
   }
 
+  //when game is "playing"
   if (gameState === 2) {
     //Asteroid generating
     if (asteroids.length < 10) {
@@ -206,6 +232,23 @@ function draw() {
 
     aim(mouseX, mouseY);
     shipBackground();
+
+    if (keyIsDown(27)) {
+      gameState = 3;
+    }
+  }
+
+  //When game is paused
+  if (gameState === 3) {
+    leaveButton(400, 400);
+    continueButton(400, 300);
+
+    if (keyIsDown(76)) {
+      gameState = 1;
+    }
+    if (keyIsDown(32)) {
+      gameState = 2;
+    }
   }
 }
 
