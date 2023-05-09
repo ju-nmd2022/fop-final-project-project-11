@@ -68,7 +68,56 @@ function eve(evex, evey) {
 function pauseMenu() {}
 
 function draw() {
-  background(255, 255, 255);
+  background(0, 0, 0);
   eve(200, 200);
   button(400, 400);
+}
+
+// explosion
+
+let particles = [];
+
+function createParticle(x, y) {
+  const v = 0.2 + Math.random();
+  const a = Math.PI * 2 + Math.random() * Math.PI;
+  const maxLife = 100 + Math.floor(Math.random() * 100);
+  return { x: x, y: y, velocity: v, angle: a, life: 0, maxLife: maxLife };
+}
+
+function drawParticle(particle) {
+  push();
+  translate(particle.x, particle.y);
+  noStroke();
+  fill(255, 110, 0, 20);
+  ellipse(0, 0, 15);
+  pop();
+}
+
+function updateParticle(particle) {
+  particle.x = particle.x + Math.cos(particle.angle) * particle.velocity;
+  particle.y = particle.y + Math.sin(particle.angle) * particle.velocity;
+  particle.velocity = particle.velocity * 1.04;
+  particle.life = particle.life + 4;
+
+  if (particle.life > particle.maxLife) {
+    const particleIndex = particles.indexOf(particle);
+    particles.splice(particleIndex, 1);
+  }
+}
+
+//activate explosion
+
+function draw() {
+  clear();
+  for (let particle of particles) {
+    drawParticle(particle);
+    updateParticle(particle);
+  }
+
+  if (keyIsDown(32)) {
+    for (let i = 0; i < 80; i++) {
+      let particle = createParticle(400, 300);
+      particles.push(particle);
+    }
+  }
 }
