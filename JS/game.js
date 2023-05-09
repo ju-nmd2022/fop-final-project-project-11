@@ -68,7 +68,7 @@ function aim(x, y) {
 }
 
 //clear function
-function clearGame() {
+function resetGame() {
   for (let asteroid of asteroids) {
     asteroids.splice(asteroids.indexOf(asteroid), 1);
   }
@@ -145,7 +145,7 @@ function draw() {
 
   //Menu state
   if (gameState === 1) {
-    clearGame();
+    resetGame();
     startButton(innerWidth / 2, innerHeight / 2);
 
     if (keyIsDown(32)) {
