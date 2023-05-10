@@ -1,5 +1,6 @@
 import Asteroid from "./asteroid.js";
 import Ufo from "./ufo.js";
+import Eve from "./eve.js";
 
 document.querySelector("body").style.cursor = "none";
 innerHeight = 600;
@@ -40,6 +41,7 @@ for (let i = 0; i < 2000; i++) {
 //Obstacles list
 let asteroids = [];
 let ufos = [];
+let eves = [];
 
 //laser
 function laser(x, y) {
@@ -214,6 +216,31 @@ function draw() {
       }
     }
 
+    //Eve generating
+    if (eves.length < 2) {
+      let eve = new Eve();
+      eves.push(eve);
+    }
+    for (let eve of eves) {
+      eve.draw();
+      eve.x = eve.x + eve.velocityX;
+      eve.y = eve.y + eve.velocityY;
+      if (mouseIsPressed) {
+        if (
+          mouseX > eve.x + movementX - 20 &&
+          mouseX < eve.x + movementX + 20 &&
+          mouseY < eve.y + movementY + 20 &&
+          mouseY > eve.y + movementY
+        ) {
+          eve.hp = eve.hp - aimDamage;
+        }
+      }
+
+      if (eve.isDead()) {
+        eves.splice(eves.indexOf(eve), 1);
+      }
+    }
+
     //Laser graphic
     if (mouseIsPressed) {
       laser(mouseX, mouseY);
@@ -246,7 +273,6 @@ function draw() {
     }
 
     shipBackground();
-    aim(mouseX, mouseY);
 
     if (keyIsDown(27)) {
       gameState = 3;
@@ -265,6 +291,7 @@ function draw() {
       gameState = 2;
     }
   }
+  aim(mouseX, mouseY);
 }
 
 window.draw = draw;
