@@ -188,7 +188,7 @@ function draw() {
     }
 
     //Ufo generating
-    if (ufos.length < 3) {
+    if (ufos.length < 5) {
       let ufo = new Ufo();
       ufos.push(ufo);
     }
@@ -217,7 +217,7 @@ function draw() {
     }
 
     //Eve generating
-    if (eves.length < 2) {
+    if (eves.length < 3) {
       let eve = new Eve();
       eves.push(eve);
     }
