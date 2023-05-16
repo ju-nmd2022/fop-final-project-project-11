@@ -1,6 +1,8 @@
 import Asteroid from "./asteroid.js";
 import Ufo from "./ufo.js";
 import Eve from "./eve.js";
+import Ship from "./shipGraphics.js";
+import UfoExplosion from "./explosionUFO.js";
 
 document.querySelector("body").style.cursor = "none";
 innerHeight = 600;
@@ -13,12 +15,11 @@ window.setup = setup;
 //colors
 let white = [255, 255, 255];
 let black = [0, 0, 0];
-let shipBackgroundColor = [150, 170, 190];
 
 let aimDamage = 1;
-
 let asteroidCounter = 0;
 let ufoCounter = 0;
+let eveCounter = 0;
 let boosterCounter = 0;
 
 //Variables to move obstacles positions when using "arrows".
@@ -27,6 +28,7 @@ window.movementY = 0;
 let movementSpeed = 15;
 
 let gameState = 1;
+let shipGraphics = new Ship();
 
 //Stars
 let stars = [];
@@ -42,6 +44,7 @@ for (let i = 0; i < 2000; i++) {
 let asteroids = [];
 let ufos = [];
 let eves = [];
+let explosions = [];
 
 //laser
 function laser(x, y) {
@@ -70,7 +73,7 @@ function aim(x, y) {
   pop();
 }
 
-//clear function
+//reset all values function
 function resetGame() {
   for (let asteroid of asteroids) {
     asteroids.splice(asteroids.indexOf(asteroid), 1);
@@ -78,9 +81,15 @@ function resetGame() {
   for (let ufo of ufos) {
     ufos.splice(ufos.indexOf(ufo), 1);
   }
+  for (let eve of eves) {
+    eves.splice(eves.indexOf(eve), 1);
+  }
 
   asteroidCounter = 0;
   ufoCounter = 0;
+  eveCounter = 0;
+  window.movementX = 0;
+  window.movementY = 0;
 }
 
 //Leave button in pause menu
@@ -115,26 +124,6 @@ function startButton(x, y) {
   textFont("Inconsolata");
   textSize(40);
   text("Press SPACE to Start!", -170, 0);
-  pop();
-}
-
-function shipBackground() {
-  push();
-  fill(shipBackgroundColor);
-  rect(0, innerHeight - 140, innerWidth, 140);
-  triangle(0, 0, 60, innerHeight - 140, 0, innerHeight);
-  triangle(
-    innerWidth,
-    0,
-    innerWidth - 60,
-    innerHeight - 140,
-    innerWidth,
-    innerHeight
-  );
-  fill(255, 0, 0);
-  textSize(50);
-  text(asteroidCounter, 600, 550);
-  text(ufoCounter, 150, 550);
   pop();
 }
 
@@ -238,6 +227,7 @@ function draw() {
 
       if (eve.isDead()) {
         eves.splice(eves.indexOf(eve), 1);
+        gameState = 1;
       }
     }
 
@@ -270,9 +260,19 @@ function draw() {
       (window.movementY > -250 && keyIsDown(40))
     ) {
       window.movementY = window.movementY - movementSpeed;
+      let explosion = new UfoExplosion(200, 200);
+      explosions.push(explosion);
+
+      for (let explosion of explosions) {
+        explosion.draw();
+        explosion.update();
+        if (explosion.isDead()) {
+          explosions.splice(explosions.indexOf(explosion), 1);
+        }
+      }
     }
 
-    shipBackground();
+    shipGraphics.draw();
 
     if (keyIsDown(27)) {
       gameState = 3;

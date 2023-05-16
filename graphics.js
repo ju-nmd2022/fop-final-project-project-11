@@ -7,7 +7,6 @@ function draw() {
 }
 
 // explosion
-
 let particles = [];
 let particles2 = [];
 
