@@ -11,7 +11,7 @@ export default class Asteroid {
 
   draw() {
     push();
-    translate(this.x + movementX, this.y + movementY);
+    translate(this.x + window.movementX, this.y + window.movementY);
     scale(0.2);
     rotate(this.rotation);
 

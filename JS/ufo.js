@@ -9,7 +9,7 @@ export default class Ufo {
 
   draw() {
     push();
-    translate(this.x + movementX, this.y + movementY);
+    translate(this.x + window.movementX, this.y + window.movementY);
     scale(0.2);
     fill(130, 0, 0);
     beginShape();

@@ -9,7 +9,7 @@ export default class Eve {
 
   draw() {
     push();
-    translate(this.x + movementX, this.y + movementY);
+    translate(this.x + window.movementX, this.y + window.movementY);
     scale(0.2);
     fill(255, 255, 255);
     strokeWeight(1.5);

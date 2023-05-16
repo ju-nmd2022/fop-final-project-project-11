@@ -22,8 +22,8 @@ let ufoCounter = 0;
 let boosterCounter = 0;
 
 //Variables to move obstacles positions when using "arrows".
-let movementX = 0;
-let movementY = 0;
+window.movementX = 0;
+window.movementY = 0;
 let movementSpeed = 15;
 
 let gameState = 1;
@@ -143,7 +143,7 @@ function draw() {
   background(black);
   for (let star of stars) {
     fill(white);
-    ellipse(star.x + movementX, star.y + movementY, 2);
+    ellipse(star.x + window.movementX, star.y + window.movementY, 2);
   }
 
   //Menu state
@@ -170,10 +170,10 @@ function draw() {
       asteroid.rotation = asteroid.rotation + 0.1;
       if (mouseIsPressed) {
         if (
-          mouseX > asteroid.x + movementX - 30 &&
-          mouseX < asteroid.x + movementX + 30 &&
-          mouseY > asteroid.y + movementY - 27 &&
-          mouseY < asteroid.y + movementY + 25
+          mouseX > asteroid.x + window.movementX - 30 &&
+          mouseX < asteroid.x + window.movementX + 30 &&
+          mouseY > asteroid.y + window.movementY - 27 &&
+          mouseY < asteroid.y + window.movementY + 25
         ) {
           asteroid.hp = asteroid.hp - aimDamage;
         }
@@ -198,10 +198,10 @@ function draw() {
       ufo.y = ufo.y + ufo.velocityY;
       if (mouseIsPressed) {
         if (
-          mouseX > ufo.x + movementX - 20 &&
-          mouseX < ufo.x + movementX + 20 &&
-          mouseY < ufo.y + movementY + 20 &&
-          mouseY > ufo.y + movementY
+          mouseX > ufo.x + window.movementX - 20 &&
+          mouseX < ufo.x + window.movementX + 20 &&
+          mouseY < ufo.y + window.movementY + 20 &&
+          mouseY > ufo.y + window.movementY
         ) {
           ufo.hp = ufo.hp - aimDamage;
           boosterCounter++;
@@ -227,10 +227,10 @@ function draw() {
       eve.y = eve.y + eve.velocityY;
       if (mouseIsPressed) {
         if (
-          mouseX > eve.x + movementX - 20 &&
-          mouseX < eve.x + movementX + 20 &&
-          mouseY < eve.y + movementY + 20 &&
-          mouseY > eve.y + movementY
+          mouseX > eve.x + window.movementX - 20 &&
+          mouseX < eve.x + window.movementX + 20 &&
+          mouseY < eve.y + window.movementY + 20 &&
+          mouseY > eve.y + window.movementY
         ) {
           eve.hp = eve.hp - aimDamage;
         }
@@ -248,28 +248,28 @@ function draw() {
 
     //Moves screen when using arrows / ASDW
     if (
-      (movementX < 300 && keyIsDown(65)) ||
-      (movementX < 300 && keyIsDown(37))
+      (window.movementX < 300 && keyIsDown(65)) ||
+      (window.movementX < 300 && keyIsDown(37))
     ) {
-      movementX = movementX + movementSpeed;
+      window.movementX = window.movementX + movementSpeed;
     }
     if (
-      (movementX > -300 && keyIsDown(68)) ||
-      (movementX > -300 && keyIsDown(39))
+      (window.movementX > -300 && keyIsDown(68)) ||
+      (window.movementX > -300 && keyIsDown(39))
     ) {
-      movementX = movementX - movementSpeed;
+      window.movementX = window.movementX - movementSpeed;
     }
     if (
-      (movementY < 250 && keyIsDown(87)) ||
-      (movementY < 250 && keyIsDown(38))
+      (window.movementY < 250 && keyIsDown(87)) ||
+      (window.movementY < 250 && keyIsDown(38))
     ) {
-      movementY = movementY + movementSpeed;
+      window.movementY = window.movementY + movementSpeed;
     }
     if (
-      (movementY > -250 && keyIsDown(83)) ||
-      (movementY > -250 && keyIsDown(40))
+      (window.movementY > -250 && keyIsDown(83)) ||
+      (window.movementY > -250 && keyIsDown(40))
     ) {
-      movementY = movementY - movementSpeed;
+      window.movementY = window.movementY - movementSpeed;
     }
 
     shipBackground();
