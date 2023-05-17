@@ -3,6 +3,7 @@ import Ufo from "./ufo.js";
 import Eve from "./eve.js";
 import Ship from "./shipGraphics.js";
 import UfoExplosion from "./explosionUFO.js";
+import Joystick from "./joystick.js";
 
 document.querySelector("body").style.cursor = "none";
 innerHeight = 600;
@@ -11,6 +12,8 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
 }
 window.setup = setup;
+
+window.shooting = false;
 
 //colors
 let white = [255, 255, 255];
@@ -29,6 +32,8 @@ let movementSpeed = 15;
 
 let gameState = 1;
 let shipGraphics = new Ship();
+let joyStick1 = new Joystick(-330, 460, -1);
+let joyStick2 = new Joystick(450, 460, 1);
 
 //Stars
 let stars = [];
@@ -44,7 +49,7 @@ for (let i = 0; i < 2000; i++) {
 let asteroids = [];
 let ufos = [];
 let eves = [];
-let explosions = [];
+// let explosions = [];
 
 //laser
 function laser(x, y) {
@@ -234,6 +239,9 @@ function draw() {
     //Laser graphic
     if (mouseIsPressed) {
       laser(mouseX, mouseY);
+      window.shooting = true;
+    } else {
+      window.shooting = false;
     }
 
     //Moves screen when using arrows / ASDW
@@ -263,6 +271,8 @@ function draw() {
     }
 
     shipGraphics.draw();
+    joyStick1.draw();
+    joyStick2.draw();
 
     if (keyIsDown(27)) {
       gameState = 3;
@@ -286,13 +296,13 @@ function draw() {
 
 window.draw = draw;
 
-let explosion = new UfoExplosion(200, 200);
-explosions.push(explosion);
+// let explosion = new UfoExplosion(200, 200);
+// explosions.push(explosion);
 
-for (let explosion of explosions) {
-  explosion.draw();
-  explosion.update();
-  if (explosion.isDead()) {
-    explosions.splice(explosions.indexOf(explosion), 1);
-  }
-}
+// for (let explosion of explosions) {
+//   explosion.draw();
+//   explosion.update();
+//   if (explosion.isDead()) {
+//     explosions.splice(explosions.indexOf(explosion), 1);
+//   }
+// }

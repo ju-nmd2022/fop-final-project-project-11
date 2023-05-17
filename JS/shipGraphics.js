@@ -2,6 +2,8 @@ export default class Ship {
   constructor() {
     this.x = 0;
     this.y = 0;
+    this.xJoystick1 = 300;
+    this.yJoystick1 = 460;
   }
 
   draw() {
@@ -24,14 +26,4 @@ export default class Ship {
     text(ufoCounter, 150, 550);
     pop();
   }
-}
-
-function setup() {
-  createCanvas(600, 400);
-}
-
-let ship = new Ship();
-
-function draw() {
-  ship.draw();
 }

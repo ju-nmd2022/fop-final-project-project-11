@@ -25,5 +25,54 @@ export default class Joystick {
     fill(255, 0, 0);
     ellipse(18, 10, 12, 12);
     pop();
+
+    if (window.shooting === false) {
+      push();
+      scale(this.r, 1);
+      translate(this.x - 10, this.y + 25);
+      noStroke();
+      fill(166, 124, 82);
+      beginShape();
+      vertex(50, 65);
+      bezierVertex(30, 30, 45, 35, 50, 25);
+      bezierVertex(52, 20, 50, 10, 50, 10);
+      bezierVertex(45, 0, 40, 10, 12, 2);
+      bezierVertex(0, 7, 5, 12, 10, 15);
+      bezierVertex(20, 20, 20, 35, 30, 70);
+      endShape();
+      noStroke();
+      fill(200, 200, 200);
+      rect(25, 55, 25, 100, 5);
+      endShape();
+      pop();
+    } else {
+      push();
+      scale(this.r, 1);
+      noStroke();
+      fill(166, 124, 82);
+      translate(this.x + 10, this.y);
+
+      beginShape();
+      vertex(30, 90);
+      bezierVertex(10, 55, 25, 60, 30, 50);
+      bezierVertex(32, 45, 30, 35, 30, 35);
+      bezierVertex(25, 25, 20, 35, 14, 27);
+      bezierVertex(10, 20, 10, 25, 13, 5);
+      bezierVertex(7, 0, 7, 0, 4, 5);
+      bezierVertex(0, 35, 0, 60, 10, 85);
+      endShape();
+
+      noStroke();
+      fill(200, 200, 200);
+      rect(6, 80, 25, 100, 5);
+      fill(255, 255, 255, 100);
+      beginShape();
+      vertex(4, 11);
+      vertex(11, 11);
+      vertex(11, 5);
+      bezierVertex(8, 3, 7, 3, 5, 5);
+      endShape();
+      pop();
+    }
   }
 }
