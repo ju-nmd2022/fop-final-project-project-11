@@ -222,12 +222,12 @@ function draw() {
           mouseY > eve.y + window.movementY
         ) {
           eve.hp = eve.hp - aimDamage;
+          gameState = 1;
         }
       }
 
       if (eve.isDead()) {
         eves.splice(eves.indexOf(eve), 1);
-        gameState = 1;
       }
     }
 
