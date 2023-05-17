@@ -26,6 +26,10 @@ export default class Ship {
   }
 }
 
+function setup() {
+  createCanvas(600, 400);
+}
+
 let ship = new Ship();
 
 function draw() {

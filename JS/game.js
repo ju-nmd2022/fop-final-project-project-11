@@ -260,16 +260,6 @@ function draw() {
       (window.movementY > -250 && keyIsDown(40))
     ) {
       window.movementY = window.movementY - movementSpeed;
-      let explosion = new UfoExplosion(200, 200);
-      explosions.push(explosion);
-
-      for (let explosion of explosions) {
-        explosion.draw();
-        explosion.update();
-        if (explosion.isDead()) {
-          explosions.splice(explosions.indexOf(explosion), 1);
-        }
-      }
     }
 
     shipGraphics.draw();
@@ -295,3 +285,14 @@ function draw() {
 }
 
 window.draw = draw;
+
+let explosion = new UfoExplosion(200, 200);
+explosions.push(explosion);
+
+for (let explosion of explosions) {
+  explosion.draw();
+  explosion.update();
+  if (explosion.isDead()) {
+    explosions.splice(explosions.indexOf(explosion), 1);
+  }
+}
