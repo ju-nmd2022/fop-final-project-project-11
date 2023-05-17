@@ -22,8 +22,8 @@ export default class Ship {
     );
     fill(255, 0, 0);
     textSize(50);
-    text(asteroidCounter, 600, 550);
-    text(ufoCounter, 150, 550);
+    text(window.asteroidCounter, 600, 550);
+    text(window.ufoCounter, 150, 550);
     pop();
   }
 }

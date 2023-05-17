@@ -5,7 +5,10 @@ import Ship from "./shipGraphics.js";
 import UfoExplosion from "./explosionUFO.js";
 import Joystick from "./joystick.js";
 
+//Removes the mouse
 document.querySelector("body").style.cursor = "none";
+
+//Canvas setup
 innerHeight = 600;
 innerWidth = 800;
 function setup() {
@@ -13,16 +16,11 @@ function setup() {
 }
 window.setup = setup;
 
-window.shooting = false;
-
-//colors
-let white = [255, 255, 255];
-let black = [0, 0, 0];
-
+//Values
 let aimDamage = 1;
-let asteroidCounter = 0;
-let ufoCounter = 0;
-let eveCounter = 0;
+window.asteroidCounter = 0;
+window.ufoCounter = 0;
+window.eveCounter = 0;
 let boosterCounter = 0;
 
 //Variables to move obstacles positions when using "arrows".
@@ -30,10 +28,14 @@ window.movementX = 0;
 window.movementY = 0;
 let movementSpeed = 15;
 
-let gameState = 1;
+//Joystick / hand graphics
+window.shooting = false;
 let shipGraphics = new Ship();
 let joyStick1 = new Joystick(-330, 460, -1);
 let joyStick2 = new Joystick(450, 460, 1);
+
+//GameState Start
+let gameState = 1;
 
 //Stars
 let stars = [];
@@ -70,7 +72,7 @@ function aim(x, y) {
   push();
   translate(x, y);
 
-  stroke(white);
+  stroke(255, 255, 255);
   line(0, 2, 0, 10);
   line(2, 0, 10, 0);
   line(0, -2, 0, -10);
@@ -125,7 +127,7 @@ function continueButton(x, y) {
 function startButton(x, y) {
   push();
   translate(x, y);
-  fill(white);
+  fill(255, 255, 255);
   textFont("Inconsolata");
   textSize(40);
   text("Press SPACE to Start!", -170, 0);
@@ -134,9 +136,9 @@ function startButton(x, y) {
 
 function draw() {
   //Spacebackground with stars
-  background(black);
+  background(0, 0, 0);
   for (let star of stars) {
-    fill(white);
+    fill(255, 255, 255);
     ellipse(star.x + window.movementX, star.y + window.movementY, 2);
   }
 
@@ -175,7 +177,7 @@ function draw() {
       if (asteroid.isDead()) {
         asteroids.splice(asteroids.indexOf(asteroid), 1);
         if (asteroid.hp < 1) {
-          asteroidCounter++;
+          window.asteroidCounter++;
           boosterCounter++;
         }
       }
@@ -205,7 +207,7 @@ function draw() {
       if (ufo.isDead()) {
         ufos.splice(ufos.indexOf(ufo), 1);
         if (ufo.hp < 1) {
-          ufoCounter++;
+          window.ufoCounter++;
         }
       }
     }
