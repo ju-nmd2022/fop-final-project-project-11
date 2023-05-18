@@ -4,6 +4,7 @@ import Eve from "./eve.js";
 import Ship from "./shipGraphics.js";
 import UfoExplosion from "./explosionUFO.js";
 import Joystick from "./joystick.js";
+import PauseMenu from "./pauseMenu.js";
 
 //Removes the mouse
 document.querySelector("body").style.cursor = "none";
@@ -16,6 +17,8 @@ function setup() {
 }
 window.setup = setup;
 
+let pauseMenu = new PauseMenu(innerWidth / 2, innerHeight / 2);
+
 //Values
 let aimDamage = 1;
 window.asteroidCounter = 0;
@@ -26,13 +29,13 @@ let boosterCounter = 0;
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
-let movementSpeed = 15;
+let movementSpeed = 8;
 
 //Joystick / hand graphics
 window.shooting = false;
 let shipGraphics = new Ship();
-let joyStick1 = new Joystick(-innerWidth / 2 + 80, 460, -1);
-let joyStick2 = new Joystick(innerWidth / 2 + 50, 460, 1);
+let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 50, -1);
+let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 50, 1);
 
 //GameState Start
 let gameState = 1;
@@ -47,7 +50,7 @@ for (let i = 0; i < 2000; i++) {
   stars.push(star);
 }
 
-//Obstacles list
+//all lists
 let asteroids = [];
 let ufos = [];
 let eves = [];
@@ -97,30 +100,6 @@ function resetGame() {
   eveCounter = 0;
   window.movementX = 0;
   window.movementY = 0;
-}
-
-//Leave button in pause menu
-function leaveButton(x, y) {
-  push();
-  translate(x, y);
-  fill(255, 255, 255);
-  rect(-180, -40, 360, 80);
-  textSize(40);
-  fill(200, 10, 10);
-  text("Press L to Leave", -150, 15);
-  pop();
-}
-
-//countinue button in pause menu
-function continueButton(x, y) {
-  push();
-  translate(x, y);
-  fill(255, 255, 255);
-  rect(-180, -40, 360, 80);
-  textSize(40);
-  fill(200, 10, 10);
-  text("Press C to Continue", -180, 15);
-  pop();
 }
 
 //start info
@@ -293,8 +272,7 @@ function draw() {
 
   //When game is paused
   if (gameState === 3) {
-    leaveButton(400, 400);
-    continueButton(400, 300);
+    pauseMenu.draw();
 
     if (keyIsDown(76)) {
       gameState = 1;
@@ -303,18 +281,9 @@ function draw() {
       gameState = 2;
     }
   }
+
+  //aim
   aim(mouseX, mouseY);
 }
 
 window.draw = draw;
-
-// let explosion = new UfoExplosion(200, 200);
-// explosions.push(explosion);
-
-// for (let explosion of explosions) {
-//   explosion.draw();
-//   explosion.update();
-//   if (explosion.isDead()) {
-//     explosions.splice(explosions.indexOf(explosion), 1);
-//   }
-// }
