@@ -9,7 +9,7 @@ export default class Ship {
   draw() {
     push();
     translate(this.x, this.y);
-    fill(150, 170, 190);
+    fill(100, 110, 110);
     rect(0, innerHeight - 140, innerWidth, 140);
     triangle(0, 0, 60, innerHeight - 140, 0, innerHeight);
     triangle(

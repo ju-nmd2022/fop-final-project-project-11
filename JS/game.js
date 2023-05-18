@@ -31,8 +31,8 @@ let movementSpeed = 15;
 //Joystick / hand graphics
 window.shooting = false;
 let shipGraphics = new Ship();
-let joyStick1 = new Joystick(-330, 460, -1);
-let joyStick2 = new Joystick(450, 460, 1);
+let joyStick1 = new Joystick(-innerWidth / 2 + 80, 460, -1);
+let joyStick2 = new Joystick(innerWidth / 2 + 50, 460, 1);
 
 //GameState Start
 let gameState = 1;
@@ -51,7 +51,7 @@ for (let i = 0; i < 2000; i++) {
 let asteroids = [];
 let ufos = [];
 let eves = [];
-// let explosions = [];
+let explosions = [];
 
 //laser
 function laser(x, y) {
@@ -201,6 +201,8 @@ function draw() {
         ) {
           ufo.hp = ufo.hp - aimDamage;
           boosterCounter++;
+          let explosion = new UfoExplosion(mouseX, mouseY);
+          explosions.push(explosion);
         }
       }
 
@@ -244,6 +246,14 @@ function draw() {
       window.shooting = true;
     } else {
       window.shooting = false;
+    }
+
+    for (let explosion of explosions) {
+      explosion.draw();
+      explosion.update();
+      if (explosion.isDead()) {
+        explosions.splice(explosions.indexOf(explosion), 1);
+      }
     }
 
     //Moves screen when using arrows / ASDW
