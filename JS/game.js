@@ -10,8 +10,6 @@ import PauseMenu from "./pauseMenu.js";
 document.querySelector("body").style.cursor = "none";
 
 //Canvas setup
-innerHeight = 600;
-innerWidth = 800;
 function setup() {
   createCanvas(innerWidth, innerHeight);
 }
@@ -34,8 +32,8 @@ let movementSpeed = 8;
 //Joystick / hand graphics
 window.shooting = false;
 let shipGraphics = new Ship();
-let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 50, -1);
-let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 50, 1);
+let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 130, -1);
+let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 130, 1);
 
 //GameState Start
 let gameState = 1;
@@ -61,12 +59,12 @@ function laser(x, y) {
   push();
   stroke(255, 0, 0);
   strokeWeight(3);
-  line(0, 600, x, y);
-  line(800, 600, x, y);
+  line(0, innerHeight, x, y);
+  line(innerWidth, innerHeight, x, y);
   stroke(255, 255, 255);
   strokeWeight(1);
-  line(0, 600, x, y);
-  line(800, 600, x, y);
+  line(0, innerHeight, x, y);
+  line(innerWidth, innerHeight, x, y);
 
   pop();
 }
