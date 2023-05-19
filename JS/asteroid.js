@@ -1,7 +1,7 @@
 export default class Asteroid {
   constructor() {
     this.x = Math.floor(Math.random() * 300 - 600);
-    this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
+    this.y = Math.floor(Math.random() * (innerHeight + 200) - 100);
     this.velocityX = Math.random() * 3 + 2;
     this.velocityY = Math.random() * 1 - 1;
     this.scale = Math.random();

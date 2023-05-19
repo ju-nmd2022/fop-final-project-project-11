@@ -1,8 +1,8 @@
 export default class Ufo {
   constructor() {
-    this.x = Math.floor(Math.random() * 300 - 600);
+    this.x = innerWidth + Math.floor(Math.random() * 300);
     this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
-    this.velocityX = Math.random() * 3 + 2;
+    this.velocityX = -Math.random() * 3 - 2;
     this.velocityY = Math.random() * 1 - 1;
     this.hp = 200;
   }
@@ -39,7 +39,7 @@ export default class Ufo {
   }
 
   isDead() {
-    if (this.x > innerWidth + 350 || this.hp < 1) {
+    if (this.x < -350 || this.hp < 1) {
       return true;
     } else {
       return false;
