@@ -26,7 +26,7 @@ window.eveCounter = 0;
 let boosterCounter = 0;
 
 window.asteroidMission = 10;
-window.ufoMission = 10;
+window.ufoMission = 5;
 
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
@@ -77,7 +77,6 @@ function laser(x, y) {
 function aim(x, y) {
   push();
   translate(x, y);
-  fill(255, 255, 255);
   stroke(255, 255, 255);
   line(0, 2, 0, 10);
   line(2, 0, 10, 0);
@@ -186,7 +185,7 @@ function draw() {
     }
 
     //Eve generating
-    if (eves.length < 3) {
+    if (eves.length < 10) {
       let eve = new Eve();
       eves.push(eve);
     }

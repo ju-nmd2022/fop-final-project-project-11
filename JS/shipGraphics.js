@@ -66,6 +66,7 @@ export default class Ship {
     ellipse(30, 100, 30, 15);
     pop();
 
+    push();
     //ufo push();
     translate(205, innerHeight - 90);
     scale(0.15);
