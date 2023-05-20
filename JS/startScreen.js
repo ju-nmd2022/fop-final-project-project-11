@@ -9,22 +9,6 @@ export default class StartScreen {
     translate(this.x, this.y);
     fill(50, 50, 50);
     rect(-400, -350, 800, 700);
-
-    strokeWeight(1.5);
-    stroke(5, 5, 5);
-    textSize(20);
-
-    fill(255, 255, 255);
-    rect(-120, 150, 240, 40);
-    rect(-120, -20, 40, 40);
-    textSize(30);
-    text("PRESS", -52, 120);
-    text("TO START", -71, 250);
-    fill(0, 0, 0);
-    textSize(20);
-    text("SPACE", -33, 178);
-    text("L", -107, 8);
-
     strokeWeight(0);
     fill(235, 235, 235);
     //Long "rectangles" Left side
@@ -56,6 +40,52 @@ export default class StartScreen {
     rect(320, -140, 20, 80, 20);
     rect(320, -240, 20, 80, 20);
     rect(320, -340, 20, 80, 20);
+
+    if (window.startState === 1) {
+      strokeWeight(1.5);
+      stroke(5, 5, 5);
+      textSize(20);
+
+      fill(255, 255, 255);
+      textSize(24);
+      text("How to play?", -50, -190);
+      rect(-110, -218, 40, 40);
+      fill(0, 0, 0);
+      text("H", -100, -190);
+      fill(255, 255, 255);
+      textSize(24);
+      text("Select Mission", -50, -100);
+      rect(-110, -128, 40, 40);
+      fill(0, 0, 0);
+      text("M", -100, -100);
+
+      //Press Space
+      fill(255, 255, 255);
+      textSize(30);
+      text("PRESS", -52, 120);
+      text("TO START", -71, 250);
+      rect(-120, 150, 240, 40);
+      fill(0, 0, 0);
+      textSize(20);
+      text("SPACE", -33, 178);
+    } else if (window.startState === 2) {
+      fill(255, 255, 255);
+      rect(90, -290, 120, 40);
+      fill(0, 0, 0);
+      triangle(100, -270, 120, -285, 120, -255);
+      stroke(0, 0, 0);
+      strokeWeight(4);
+      line(105, -270, 200, -270);
+
+      fill(50, 50, 50);
+
+      rect(10, 130, 200, 150);
+      rect(-210, 130, 200, 150);
+      rect(10, -40, 200, 150);
+      rect(-210, -40, 200, 150);
+      rect(10, -210, 200, 150);
+      rect(-210, -210, 200, 150);
+    }
     pop();
   }
 }

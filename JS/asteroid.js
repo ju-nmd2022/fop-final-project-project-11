@@ -1,6 +1,6 @@
 export default class Asteroid {
   constructor() {
-    this.x = Math.floor(Math.random() * 300 - 600);
+    this.x = Math.floor(Math.random() * 600 - 1000);
     this.y = Math.floor(Math.random() * (innerHeight + 200) - 100);
     this.velocityX = Math.random() * 3 + 2;
     this.velocityY = Math.random() * 1 - 1;
@@ -47,12 +47,19 @@ export default class Asteroid {
     ellipse(30, 100, 30, 15);
     pop();
     push();
-    translate(this.x + window.movementX, this.y + window.movementY);
-    fill(255, 255, 255, 150);
-    rect(-10, -50, 30, 30);
-    fill(50, 255, 50);
-    textSize(10);
-    text(this.hp, 0, -35);
+    translate(this.x + window.movementX - 25, this.y + window.movementY);
+    if (this.hp < 25) {
+      stroke(255, 50, 50);
+    } else if (this.hp < 50) {
+      stroke(220, 120, 40);
+    } else if (this.hp < 75) {
+      stroke(250, 220, 40);
+    } else {
+      stroke(50, 255, 50);
+    }
+    strokeWeight(3);
+    scale(0.5);
+    line(0, -74, this.hp, -74);
     pop();
   }
 

@@ -1,9 +1,9 @@
 export default class Eve {
   constructor() {
-    this.x = Math.floor(Math.random() * 300 - 600);
-    this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
-    this.velocityX = Math.random() * 3 + 2;
-    this.velocityY = Math.random() * 1 - 1;
+    this.x = Math.floor(Math.random() * (innerWidth + 600) - 300);
+    this.y = -300 - Math.floor(Math.random() * 600);
+    this.velocityY = Math.random() * 3 + 2;
+    this.velocityX = Math.random() * 1 - 1;
     this.hp = 1;
   }
 
@@ -54,15 +54,11 @@ export default class Eve {
     vertex(43, 52);
     bezierVertex(45, 100, 50, 90, 27, 150);
     endShape();
-
-    fill(250, 55, 50);
-    textSize(50);
-    text(this.hp, 0, -7);
     pop();
   }
 
   isDead() {
-    if (this.x > innerWidth + 350 || this.hp < 1) {
+    if (this.y > innerHeight + 300 || this.hp < 1) {
       return true;
     } else {
       return false;

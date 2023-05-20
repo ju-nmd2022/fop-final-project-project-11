@@ -23,13 +23,22 @@ export default class Ship {
     fill(0, 0, 0);
     textSize(50);
     rect(100, innerHeight - 115, 200, 90);
-    fill(0, 255, 0);
     textSize(15);
+    if (window.asteroidCounter < window.asteroidMission) {
+      fill(255, 50, 50);
+    } else {
+      fill(50, 255, 50);
+    }
     text(
       window.asteroidCounter + "/" + window.asteroidMission,
       120,
       innerHeight - 45
     );
+    if (window.ufoCounter < window.ufoMission) {
+      fill(255, 50, 50);
+    } else {
+      fill(50, 255, 50);
+    }
     text(window.ufoCounter + "/" + window.ufoMission, 190, innerHeight - 45);
 
     //asteroid
@@ -68,7 +77,7 @@ export default class Ship {
 
     push();
     //ufo push();
-    translate(205, innerHeight - 90);
+    translate(201, innerHeight - 90);
     scale(0.15);
     fill(130, 0, 0);
     beginShape();
@@ -91,7 +100,11 @@ export default class Ship {
     ellipse(80, 54, 10);
     ellipse(50, 60, 10);
 
-    fill(50, 255, 50);
+    if (window.ufoCounter < window.ufoMission) {
+      fill(255, 50, 50);
+    } else {
+      fill(50, 255, 50);
+    }
     textSize(50);
     text(this.hp, 0, -10);
     pop();

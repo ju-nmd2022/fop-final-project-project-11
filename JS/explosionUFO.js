@@ -10,9 +10,9 @@ export default class UfoExplosion {
 
   draw() {
     push();
-    translate(this.x, this.y);
+    translate(this.x + window.movementX, this.y + window.movementY);
     noStroke();
-    fill(255, 0, 0, 40);
+    fill(255, 0, 0, 80);
     ellipse(0, 0, 3);
     pop();
   }

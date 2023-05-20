@@ -1,6 +1,6 @@
 export default class Ufo {
   constructor() {
-    this.x = innerWidth + Math.floor(Math.random() * 300) + 300;
+    this.x = innerWidth + Math.floor(Math.random() * 600) + 300;
     this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
     this.velocityX = -Math.random() * 3 - 2;
     this.velocityY = Math.random() * 1 - 1;
@@ -31,10 +31,21 @@ export default class Ufo {
     ellipse(15, 64, 10);
     ellipse(80, 54, 10);
     ellipse(50, 60, 10);
-
-    fill(50, 255, 50);
-    textSize(50);
-    text(this.hp, 0, -10);
+    pop();
+    push();
+    translate(this.x + window.movementX - 25, this.y + window.movementY);
+    if (this.hp < 25) {
+      stroke(255, 50, 50);
+    } else if (this.hp < 75) {
+      stroke(220, 120, 40);
+    } else if (this.hp < 125) {
+      stroke(250, 220, 40);
+    } else {
+      stroke(50, 255, 50);
+    }
+    strokeWeight(3);
+    scale(0.25);
+    line(0, -54, this.hp, -54);
     pop();
   }
 

@@ -3,6 +3,7 @@ import Ufo from "./ufo.js";
 import Eve from "./eve.js";
 import Ship from "./shipGraphics.js";
 import UfoExplosion from "./explosionUFO.js";
+import AsteroidExplosion from "./explosionAsteroid.js";
 import Joystick from "./joystick.js";
 import PauseMenu from "./pauseMenu.js";
 import StartScreen from "./startScreen.js";
@@ -25,8 +26,8 @@ window.ufoCounter = 0;
 window.eveCounter = 0;
 let boosterCounter = 0;
 
-window.asteroidMission = 10;
-window.ufoMission = 5;
+window.asteroidMission = 3;
+window.ufoMission = 2;
 
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
@@ -42,6 +43,7 @@ let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 100, 1);
 
 //GameState Start
 let gameState = 1;
+window.startState = 1;
 
 //Stars
 let stars = [];
@@ -117,6 +119,12 @@ function draw() {
     resetGame();
     start.draw();
 
+    if (keyIsDown(77)) {
+      window.startState = 2;
+    }
+    if (keyIsDown(8)) {
+      window.startState = 1;
+    }
     if (keyIsDown(32)) {
       gameState = 2;
     }
@@ -142,6 +150,8 @@ function draw() {
           mouseY < asteroid.y + window.movementY + 25
         ) {
           asteroid.hp = asteroid.hp - aimDamage;
+          let explosion = new AsteroidExplosion(asteroid.x, asteroid.y);
+          explosions.push(explosion);
         }
       }
       if (asteroid.isDead()) {
@@ -171,7 +181,7 @@ function draw() {
         ) {
           ufo.hp = ufo.hp - aimDamage;
           boosterCounter++;
-          let explosion = new UfoExplosion(mouseX, mouseY);
+          let explosion = new UfoExplosion(ufo.x, ufo.y);
           explosions.push(explosion);
         }
       }
@@ -185,7 +195,7 @@ function draw() {
     }
 
     //Eve generating
-    if (eves.length < 10) {
+    if (eves.length < 15) {
       let eve = new Eve();
       eves.push(eve);
     }
@@ -259,7 +269,10 @@ function draw() {
     if (keyIsDown(27)) {
       gameState = 3;
     }
-    if (window.asteroidCounter >= window.asteroidMission) {
+    if (
+      window.asteroidCounter >= window.asteroidMission &&
+      window.ufoCounter >= window.ufoMission
+    ) {
       gameState = 1;
     }
   }
