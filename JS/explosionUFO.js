@@ -4,7 +4,7 @@ export default class UfoExplosion {
     this.y = y;
     this.v = Math.random();
     this.a = Math.random() * 2 * Math.PI;
-    this.maxLife = 20 + Math.floor(Math.random() * 100);
+    this.maxLife = 100 + Math.floor(Math.random() * 100);
     this.life = 0;
   }
 

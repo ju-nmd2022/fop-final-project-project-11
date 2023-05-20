@@ -5,6 +5,7 @@ import Ship from "./shipGraphics.js";
 import UfoExplosion from "./explosionUFO.js";
 import Joystick from "./joystick.js";
 import PauseMenu from "./pauseMenu.js";
+import StartScreen from "./startScreen.js";
 
 //Removes the mouse
 document.querySelector("body").style.cursor = "none";
@@ -24,6 +25,9 @@ window.ufoCounter = 0;
 window.eveCounter = 0;
 let boosterCounter = 0;
 
+window.asteroidMission = 10;
+window.ufoMission = 10;
+
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
@@ -31,9 +35,10 @@ let movementSpeed = 8;
 
 //Joystick / hand graphics
 window.shooting = false;
+let start = new StartScreen();
 let shipGraphics = new Ship();
-let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 130, -1);
-let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 130, 1);
+let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 100, -1);
+let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 100, 1);
 
 //GameState Start
 let gameState = 1;
@@ -72,7 +77,7 @@ function laser(x, y) {
 function aim(x, y) {
   push();
   translate(x, y);
-
+  fill(255, 255, 255);
   stroke(255, 255, 255);
   line(0, 2, 0, 10);
   line(2, 0, 10, 0);
@@ -100,17 +105,6 @@ function resetGame() {
   window.movementY = 0;
 }
 
-//start info
-function startButton(x, y) {
-  push();
-  translate(x, y);
-  fill(255, 255, 255);
-  textFont("Inconsolata");
-  textSize(40);
-  text("Press SPACE to Start!", -170, 0);
-  pop();
-}
-
 function draw() {
   //Spacebackground with stars
   background(0, 0, 0);
@@ -122,7 +116,7 @@ function draw() {
   //Menu state
   if (gameState === 1) {
     resetGame();
-    startButton(innerWidth / 2, innerHeight / 2);
+    start.draw();
 
     if (keyIsDown(32)) {
       gameState = 2;
@@ -266,6 +260,9 @@ function draw() {
     if (keyIsDown(27)) {
       gameState = 3;
     }
+    if (window.asteroidCounter >= window.asteroidMission) {
+      gameState = 1;
+    }
   }
 
   //When game is paused
@@ -278,6 +275,14 @@ function draw() {
     if (keyIsDown(67)) {
       gameState = 2;
     }
+  }
+
+  //when you win
+  if (gameState === 4) {
+  }
+
+  //when you fail a mission
+  if (gameState === 5) {
   }
 
   //aim
