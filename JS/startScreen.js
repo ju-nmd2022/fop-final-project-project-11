@@ -53,11 +53,15 @@ export default class StartScreen {
       fill(0, 0, 0);
       text("H", -100, -190);
       fill(255, 255, 255);
-      textSize(24);
-      text("Select Mission", -50, -100);
-      rect(-110, -128, 40, 40);
+      text("Select Mission", -50, -130);
+      rect(-110, -158, 40, 40);
       fill(0, 0, 0);
-      text("M", -100, -100);
+      text("M", -100, -130);
+      fill(255, 255, 255);
+      text("Achievements", -50, -70);
+      rect(-110, -98, 40, 40);
+      fill(0, 0, 0);
+      text("A", -98, -70);
 
       //Press Space
       fill(255, 255, 255);
@@ -85,6 +89,22 @@ export default class StartScreen {
       rect(-210, -40, 200, 150);
       rect(10, -210, 200, 150);
       rect(-210, -210, 200, 150);
+    } else if (window.startState === 3) {
+      fill(255, 255, 255);
+      rect(90, -290, 120, 40);
+      fill(0, 0, 0);
+      triangle(100, -270, 120, -285, 120, -255);
+      stroke(0, 0, 0);
+      strokeWeight(4);
+      line(105, -270, 200, -270);
+    } else if (window.startState === 4) {
+      fill(255, 255, 255);
+      rect(90, -290, 120, 40);
+      fill(0, 0, 0);
+      triangle(100, -270, 120, -285, 120, -255);
+      stroke(0, 0, 0);
+      strokeWeight(4);
+      line(105, -270, 200, -270);
     }
     pop();
   }

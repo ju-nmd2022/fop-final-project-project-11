@@ -76,6 +76,8 @@ export default class Joystick {
     }
 
     push();
+    fill(50, 50, 50);
+    rect(innerWidth / 2 - 12, innerHeight - 13, 24, -104);
     fill(0, 0, 0);
     rect(innerWidth / 2 - 10, innerHeight - 15, 20, -100);
     if (window.overHeated === true) {

@@ -108,5 +108,31 @@ export default class Ship {
     textSize(50);
     text(this.hp, 0, -10);
     pop();
+
+    push();
+    fill(50, 50, 50);
+    rect(innerWidth / 2 + 223, innerHeight - 77, 104, 14);
+    fill(0, 200, 200);
+    rect(innerWidth / 2 + 225, innerHeight - 75, window.boostCounter, 10);
+    textSize(24);
+    fill(50, 50, 50);
+    text("Boost", innerWidth / 2 + 243, innerHeight - 90);
+
+    if (window.boostReady) {
+      fill(50, 50, 50);
+      rect(innerWidth / 2 + 240, innerHeight - 45, 70, 25);
+      fill(50, 200, 50);
+      rect(innerWidth / 2 + 242, innerHeight - 43, 66, 21);
+      fill(255, 255, 255);
+      textSize(10);
+      text("ACTIVATE", innerWidth / 2 + 252, innerHeight - 29);
+    } else {
+      fill(200, 50, 50);
+      rect(innerWidth / 2 + 242, innerHeight - 43, 66, 21);
+      fill(255, 255, 255);
+      textSize(10);
+      text("ACTIVATE", innerWidth / 2 + 252, innerHeight - 29);
+    }
+    pop();
   }
 }

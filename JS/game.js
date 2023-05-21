@@ -39,7 +39,7 @@ window.shooting = false;
 let start = new StartScreen();
 let shipGraphics = new Ship();
 let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 100, -1);
-let joyStick2 = new Joystick(innerWidth / 2 + 60, innerHeight - 100, 1);
+let joyStick2 = new Joystick(innerWidth / 2 + 63, innerHeight - 100, 1);
 
 //GameState Start
 let gameState = 1;
@@ -48,6 +48,9 @@ window.startState = 1;
 window.heater = 0;
 window.overHeated = false;
 let cooldown = 0;
+
+window.boostCounter = 0;
+window.boostReady = false;
 
 //Stars
 let stars = [];
@@ -108,6 +111,9 @@ function resetGame() {
   eveCounter = 0;
   window.movementX = 0;
   window.movementY = 0;
+  window.boostCounter = 0;
+  window.boostReady = false;
+  aimDamage = 1;
 }
 
 function draw() {
@@ -125,6 +131,12 @@ function draw() {
 
     if (keyIsDown(77)) {
       window.startState = 2;
+    }
+    if (keyIsDown(72)) {
+      window.startState = 3;
+    }
+    if (keyIsDown(65)) {
+      window.startState = 4;
     }
     if (keyIsDown(8)) {
       window.startState = 1;
@@ -236,14 +248,13 @@ function draw() {
       } else {
         window.overHeated = true;
       }
-      console.log(window.heater);
     } else {
       window.shooting = false;
       if (window.heater > 0) {
         window.heater--;
       }
     }
-
+    //If the leaser is overheated, give cooldown
     if (window.overHeated) {
       if (cooldown < 100) {
         cooldown++;
@@ -253,6 +264,19 @@ function draw() {
         window.overHeated = false;
         cooldown = 0;
       }
+    }
+
+    //Loading the booster
+    if (window.boostCounter < 100) {
+      window.boostCounter = window.boostCounter + 0.1;
+    } else {
+      window.boostReady = true;
+    }
+
+    if (window.boostReady && keyIsDown(66)) {
+      window.boostCounter = 0;
+      window.boostReady = false;
+      aimDamage = 15;
     }
 
     for (let explosion of explosions) {
