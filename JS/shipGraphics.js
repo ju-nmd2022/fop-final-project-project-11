@@ -133,6 +133,11 @@ export default class Ship {
       textSize(10);
       text("ACTIVATE", innerWidth / 2 + 252, innerHeight - 29);
     }
+    rect(innerWidth / 2 + 215, innerHeight - 43, 20, 20);
+    rect(innerWidth / 2 + 315, innerHeight - 43, 20, 20);
+    fill(0, 0, 0);
+    text("B", innerWidth / 2 + 221, innerHeight - 30);
+    text("B", innerWidth / 2 + 321, innerHeight - 30);
     pop();
   }
 }

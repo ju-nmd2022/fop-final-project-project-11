@@ -24,7 +24,6 @@ let aimDamage = 1;
 window.asteroidCounter = 0;
 window.ufoCounter = 0;
 window.eveCounter = 0;
-let boosterCounter = 0;
 
 window.asteroidMission = 3;
 window.ufoMission = 2;
@@ -51,6 +50,7 @@ let cooldown = 0;
 
 window.boostCounter = 0;
 window.boostReady = false;
+window.boostTimer = 0;
 
 //Stars
 let stars = [];
@@ -67,11 +67,12 @@ let asteroids = [];
 let ufos = [];
 let eves = [];
 let explosions = [];
+let laserColor = [255, 0, 0];
 
 //laser
 function laser(x, y) {
   push();
-  stroke(255, 0, 0);
+  stroke(laserColor);
   strokeWeight(3);
   line(0, innerHeight, x, y);
   line(innerWidth, innerHeight, x, y);
@@ -113,6 +114,7 @@ function resetGame() {
   window.movementY = 0;
   window.boostCounter = 0;
   window.boostReady = false;
+  window.boostTimer = 0;
   aimDamage = 1;
 }
 
@@ -175,7 +177,7 @@ function draw() {
         asteroids.splice(asteroids.indexOf(asteroid), 1);
         if (asteroid.hp < 1) {
           window.asteroidCounter++;
-          boosterCounter++;
+          window.boostCounter = window.boostCounter + 6;
         }
       }
     }
@@ -198,7 +200,6 @@ function draw() {
           window.overHeated === false
         ) {
           ufo.hp = ufo.hp - aimDamage;
-          boosterCounter++;
           let explosion = new UfoExplosion(ufo.x, ufo.y);
           explosions.push(explosion);
         }
@@ -208,6 +209,7 @@ function draw() {
         ufos.splice(ufos.indexOf(ufo), 1);
         if (ufo.hp < 1) {
           window.ufoCounter++;
+          window.boostCounter = window.boostCounter + 2;
         }
       }
     }
@@ -273,10 +275,20 @@ function draw() {
       window.boostReady = true;
     }
 
+    //When you activate booster with B
     if (window.boostReady && keyIsDown(66)) {
       window.boostCounter = 0;
       window.boostReady = false;
+      window.boostTimer = 75;
+      laserColor = [230, 185, 0];
       aimDamage = 15;
+    }
+
+    if (window.boostTimer > 0) {
+      window.boostTimer--;
+    } else {
+      aimDamage = 1;
+      laserColor = [255, 0, 0];
     }
 
     for (let explosion of explosions) {
