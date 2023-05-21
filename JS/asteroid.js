@@ -57,7 +57,7 @@ export default class Asteroid {
     } else {
       stroke(50, 255, 50);
     }
-    strokeWeight(3);
+    strokeWeight(2.5);
     scale(0.5);
     line(0, -74, this.hp, -74);
     pop();

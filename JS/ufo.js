@@ -43,7 +43,7 @@ export default class Ufo {
     } else {
       stroke(50, 255, 50);
     }
-    strokeWeight(3);
+    strokeWeight(3.5);
     scale(0.25);
     line(0, -54, this.hp, -54);
     pop();

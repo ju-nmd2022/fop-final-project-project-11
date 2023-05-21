@@ -74,5 +74,20 @@ export default class Joystick {
       endShape();
       pop();
     }
+
+    push();
+    fill(0, 0, 0);
+    rect(innerWidth / 2 - 10, innerHeight - 15, 20, -100);
+    if (window.overHeated === true) {
+      fill(255, 0, 0);
+    } else if (window.heater > 75) {
+      fill(220, 120, 40);
+    } else if (window.heater > 50) {
+      fill(250, 220, 40);
+    } else {
+      fill(50, 255, 50);
+    }
+    rect(innerWidth / 2 - 10, innerHeight - 15, 20, -window.heater);
+    pop();
   }
 }

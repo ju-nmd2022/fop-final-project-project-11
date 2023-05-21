@@ -39,11 +39,15 @@ window.shooting = false;
 let start = new StartScreen();
 let shipGraphics = new Ship();
 let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 100, -1);
-let joyStick2 = new Joystick(innerWidth / 2 + 50, innerHeight - 100, 1);
+let joyStick2 = new Joystick(innerWidth / 2 + 60, innerHeight - 100, 1);
 
 //GameState Start
 let gameState = 1;
 window.startState = 1;
+
+window.heater = 0;
+window.overHeated = false;
+let cooldown = 0;
 
 //Stars
 let stars = [];
@@ -147,7 +151,8 @@ function draw() {
           mouseX > asteroid.x + window.movementX - 30 &&
           mouseX < asteroid.x + window.movementX + 30 &&
           mouseY > asteroid.y + window.movementY - 27 &&
-          mouseY < asteroid.y + window.movementY + 25
+          mouseY < asteroid.y + window.movementY + 25 &&
+          window.overHeated === false
         ) {
           asteroid.hp = asteroid.hp - aimDamage;
           let explosion = new AsteroidExplosion(asteroid.x, asteroid.y);
@@ -177,7 +182,8 @@ function draw() {
           mouseX > ufo.x + window.movementX - 20 &&
           mouseX < ufo.x + window.movementX + 20 &&
           mouseY < ufo.y + window.movementY + 20 &&
-          mouseY > ufo.y + window.movementY
+          mouseY > ufo.y + window.movementY &&
+          window.overHeated === false
         ) {
           ufo.hp = ufo.hp - aimDamage;
           boosterCounter++;
@@ -208,7 +214,8 @@ function draw() {
           mouseX > eve.x + window.movementX - 20 &&
           mouseX < eve.x + window.movementX + 20 &&
           mouseY < eve.y + window.movementY + 20 &&
-          mouseY > eve.y + window.movementY
+          mouseY > eve.y + window.movementY &&
+          window.overHeated === false
         ) {
           eve.hp = eve.hp - aimDamage;
           gameState = 1;
@@ -221,11 +228,31 @@ function draw() {
     }
 
     //Laser graphic
-    if (mouseIsPressed) {
+    if (mouseIsPressed && window.overHeated === false) {
       laser(mouseX, mouseY);
       window.shooting = true;
+      if (window.heater < 100) {
+        window.heater++;
+      } else {
+        window.overHeated = true;
+      }
+      console.log(window.heater);
     } else {
       window.shooting = false;
+      if (window.heater > 0) {
+        window.heater--;
+      }
+    }
+
+    if (window.overHeated) {
+      if (cooldown < 100) {
+        cooldown++;
+      }
+
+      if (cooldown === 100) {
+        window.overHeated = false;
+        cooldown = 0;
+      }
     }
 
     for (let explosion of explosions) {

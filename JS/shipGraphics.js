@@ -31,7 +31,7 @@ export default class Ship {
     }
     text(
       window.asteroidCounter + "/" + window.asteroidMission,
-      120,
+      122,
       innerHeight - 45
     );
     if (window.ufoCounter < window.ufoMission) {
