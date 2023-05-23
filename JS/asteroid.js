@@ -48,6 +48,8 @@ export default class Asteroid {
     pop();
     push();
     translate(this.x + window.movementX - 25, this.y + window.movementY);
+
+    //change the color of the hp bar depending on how much hp is left
     if (this.hp < 25) {
       stroke(255, 50, 50);
     } else if (this.hp < 50) {
@@ -57,7 +59,7 @@ export default class Asteroid {
     } else {
       stroke(50, 255, 50);
     }
-    strokeWeight(2.5);
+    strokeWeight(2);
     scale(0.5);
     line(0, -74, this.hp, -74);
     pop();

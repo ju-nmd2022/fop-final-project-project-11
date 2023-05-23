@@ -34,6 +34,8 @@ export default class Ufo {
     pop();
     push();
     translate(this.x + window.movementX - 25, this.y + window.movementY);
+
+    //change the color of the hp bar depending on how much hp is left
     if (this.hp < 25) {
       stroke(255, 50, 50);
     } else if (this.hp < 75) {

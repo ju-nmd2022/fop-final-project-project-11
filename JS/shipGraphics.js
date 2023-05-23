@@ -9,20 +9,33 @@ export default class Ship {
     translate(this.x, this.y);
     fill(100, 110, 110);
     rect(0, innerHeight - 140, innerWidth, 140);
-    triangle(0, 0, 60, innerHeight - 140, 0, innerHeight);
-    triangle(
-      innerWidth,
-      0,
-      innerWidth - 60,
-      innerHeight - 140,
-      innerWidth,
-      innerHeight
-    );
+    rect(0, 0, innerWidth, 100);
+    beginShape();
+    vertex(-50, innerHeight);
+    vertex(0, innerHeight);
+    vertex(60, innerHeight - 140);
+    vertex(10, innerHeight / 2);
+    vertex(60, 100);
+    vertex(0, 0);
+    vertex(-50, 0);
+    endShape();
+    beginShape();
+    vertex(innerWidth + 50, innerHeight);
+    vertex(innerWidth, innerHeight);
+    vertex(innerWidth - 60, innerHeight - 140);
+    vertex(innerWidth - 10, innerHeight / 2);
+    vertex(innerWidth - 60, 100);
+    vertex(innerWidth, 0);
+    vertex(innerWidth + 50, 0);
+    endShape();
     fill(30, 30, 30);
-    rect(95, innerHeight - 120, 210, 100);
+    rect(innerWidth / 2 - 425, innerHeight - 120, 210, 100);
     fill(0, 0, 0);
     textSize(50);
-    rect(100, innerHeight - 115, 200, 90);
+    rect(innerWidth / 2 - 420, innerHeight - 115, 200, 90);
+
+    //changes the text between green or red depending if the mission is completed
+    //or not for the specific object
     textSize(15);
     if (window.asteroidCounter < window.asteroidMission) {
       fill(255, 50, 50);
@@ -31,7 +44,7 @@ export default class Ship {
     }
     text(
       window.asteroidCounter + "/" + window.asteroidMission,
-      122,
+      innerWidth / 2 - 398,
       innerHeight - 45
     );
     if (window.ufoCounter < window.ufoMission) {
@@ -39,10 +52,25 @@ export default class Ship {
     } else {
       fill(50, 255, 50);
     }
-    text(window.ufoCounter + "/" + window.ufoMission, 190, innerHeight - 45);
+    text(
+      window.ufoCounter + "/" + window.ufoMission,
+      innerWidth / 2 - 330,
+      innerHeight - 45
+    );
 
-    //asteroid
-    translate(135, innerHeight - 85);
+    if (window.falconCounter < window.falconMission) {
+      fill(255, 50, 50);
+    } else {
+      fill(50, 255, 50);
+    }
+    text(
+      window.falconCounter + "/" + window.falconMission,
+      innerWidth / 2 - 262,
+      innerHeight - 45
+    );
+
+    //asteroid drawing for the "progress board"
+    translate(innerWidth / 2 - 385, innerHeight - 85);
     scale(0.1);
     fill(150, 150, 150);
     beginShape();
@@ -64,7 +92,6 @@ export default class Ship {
     rotate(-0.3);
     ellipse(70, 80, 50, 25);
     pop();
-
     ellipse(-70, -60, 50, 25);
     ellipse(-40, 30, 60, 35);
     ellipse(-70, 70, 20, 10);
@@ -75,9 +102,9 @@ export default class Ship {
     ellipse(30, 100, 30, 15);
     pop();
 
+    //Ufo drawing for the "progress board"
     push();
-    //ufo push();
-    translate(201, innerHeight - 90);
+    translate(innerWidth / 2 - 319, innerHeight - 90);
     scale(0.15);
     fill(130, 0, 0);
     beginShape();
@@ -99,16 +126,9 @@ export default class Ship {
     ellipse(15, 64, 10);
     ellipse(80, 54, 10);
     ellipse(50, 60, 10);
-
-    if (window.ufoCounter < window.ufoMission) {
-      fill(255, 50, 50);
-    } else {
-      fill(50, 255, 50);
-    }
-    textSize(50);
-    text(this.hp, 0, -10);
     pop();
 
+    //The Boost section (ACTIVATE BUTTON etc.)
     push();
     fill(50, 50, 50);
     rect(innerWidth / 2 + 223, innerHeight - 77, 104, 14);
@@ -117,22 +137,21 @@ export default class Ship {
     textSize(24);
     fill(50, 50, 50);
     text("Boost", innerWidth / 2 + 243, innerHeight - 90);
+    fill(50, 50, 50);
+    rect(innerWidth / 2 + 240, innerHeight - 45, 70, 25);
 
+    //If the boost is ready to be activated, make the activate button green
     if (window.boostReady) {
-      fill(50, 50, 50);
-      rect(innerWidth / 2 + 240, innerHeight - 45, 70, 25);
       fill(50, 200, 50);
-      rect(innerWidth / 2 + 242, innerHeight - 43, 66, 21);
-      fill(255, 255, 255);
-      textSize(10);
-      text("ACTIVATE", innerWidth / 2 + 252, innerHeight - 29);
-    } else {
-      fill(200, 50, 50);
-      rect(innerWidth / 2 + 242, innerHeight - 43, 66, 21);
-      fill(255, 255, 255);
-      textSize(10);
-      text("ACTIVATE", innerWidth / 2 + 252, innerHeight - 29);
     }
+    //But if not, red activate button
+    else {
+      fill(200, 50, 50);
+    }
+    rect(innerWidth / 2 + 242, innerHeight - 43, 66, 21);
+    fill(255, 255, 255);
+    textSize(10);
+    text("ACTIVATE", innerWidth / 2 + 252, innerHeight - 29);
     rect(innerWidth / 2 + 215, innerHeight - 43, 20, 20);
     rect(innerWidth / 2 + 315, innerHeight - 43, 20, 20);
     fill(0, 0, 0);
