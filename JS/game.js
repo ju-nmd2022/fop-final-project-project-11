@@ -62,6 +62,8 @@ window.boostTimer = 0;
 window.timerS = 120;
 window.timer = 0;
 
+window.mission = 1;
+
 //Stars
 let stars = [];
 for (let i = 0; i < 2000; i++) {
@@ -164,6 +166,39 @@ function draw() {
     }
     if (keyIsDown(32)) {
       gameState = 2;
+    }
+
+    if (window.mission === 1) {
+      window.asteroidMission = 10;
+      window.ufoMission = 0;
+      window.falconMission = 0;
+      window.timerS = 120;
+    }
+    if (window.mission === 2) {
+      window.asteroidMission = 8;
+      window.ufoMission = 4;
+      window.falconMission = 0;
+      window.timerS = 120;
+    }
+    if (window.mission === 3) {
+      window.asteroidMission = 5;
+      window.ufoMission = 20;
+      window.falconMission = 0;
+      window.timerS = 120;
+    }
+    if (window.mission === 4) {
+      window.asteroidMission = 7;
+      window.ufoMission = 10;
+      window.falconMission = 4;
+      window.timerS = 120;
+    }
+    if (window.mission === 5) {
+      window.asteroidMission = 10;
+      window.ufoMission = 5;
+      window.falconMission = 20;
+      window.timerS = 120;
+    }
+    if (window.mission === 6) {
     }
   }
 
