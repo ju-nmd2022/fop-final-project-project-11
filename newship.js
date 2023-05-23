@@ -1,49 +1,103 @@
-function falcon(x, y) {
+function grayBackground(x, y) {
   push();
-  scale(0.2);
   translate(x, y);
-  noStroke();
-  fill(100, 170, 255, 50);
-  rect(-50, 20, 100, 100);
-  fill(100, 170, 255);
-  ellipse(0, 14, 180);
-  fill(160, 160, 160);
-  quad(-97, -20, -50, -150, -20, -150, -20, 0);
-  quad(97, -20, 50, -150, 20, -150, 20, 0);
-  rect(-17, -50, 34, -60);
-  ellipse(0, 0, 200);
-  stroke(1);
-  line(0, 0, -75, 66);
-  line(0, 0, 75, 66);
-  line(-19, 0, -19, -110);
-  line(19, 0, 19, -110);
   fill(50, 50, 50);
-  ellipse(-30, 60, 13);
-  ellipse(0, 65, 13);
-  ellipse(30, 60, 13);
-  ellipse(-15, 45, 13);
-  ellipse(15, 45, 13);
+  rect(-400, -350, 800, 700);
+  strokeWeight(0);
+  fill(235, 235, 235);
+  //Long "rectangles" Left side
+  rect(-380, 10, 20, 330, 20);
+  rect(-380, -10, 20, -330, 20);
+  rect(-300, 10, 20, 330, 20);
+  rect(-300, -10, 20, -330, 20);
+
+  //Short rectangles Left side
+  rect(-340, 260, 20, 80, 20);
+  rect(-340, 160, 20, 80, 20);
+  rect(-340, 60, 20, 80, 20);
+  rect(-340, -40, 20, 80, 20);
+  rect(-340, -140, 20, 80, 20);
+  rect(-340, -240, 20, 80, 20);
+  rect(-340, -340, 20, 80, 20);
+
+  //Long "rectangles" Right side
+  rect(360, 10, 20, 330, 20);
+  rect(360, -10, 20, -330, 20);
+  rect(280, 10, 20, 330, 20);
+  rect(280, -10, 20, -330, 20);
+
+  //Short rectangles Right side
+  rect(320, 260, 20, 80, 20);
+  rect(320, 160, 20, 80, 20);
+  rect(320, 60, 20, 80, 20);
+  rect(320, -40, 20, 80, 20);
+  rect(320, -140, 20, 80, 20);
+  rect(320, -240, 20, 80, 20);
+  rect(320, -340, 20, 80, 20);
+  pop();
+}
+
+function jimDraw(x, y) {
   push();
-  fill(200, 70, 70);
-  rect(-60, 0, 20, 8);
-  rotate(0.5);
-  rect(-60, 0, 20, 8);
-  rotate(1.1);
-  rect(-120, 22, 25, 10);
-  rect(-120, 22, 25, 10);
+  translate(x, y);
+  fill(255, 255, 255);
+  rect(90, -290, 120, 40);
+  fill(0, 0, 0);
+  triangle(100, -270, 120, -285, 120, -255);
+  stroke(0, 0, 0);
+  strokeWeight(4);
+  line(105, -270, 200, -270);
+
+  push();
+  fill(200, 200, 200);
+  stroke(0, 0, 0);
+  strokeWeight(6);
+  rect(-230, -230, 100, 100, 5);
+  rect(-230, -80, 100, 100, 5);
+  rect(-230, 70, 100, 100, 5);
   pop();
-  fill(30, 30, 30);
-  ellipse(95, -70, 28);
+
+  push();
+  beginShape();
+  vertex(-200, -180);
+  vertex(-160, -180);
+  endShape();
+
+  beginShape();
+  vertex(-180, -200);
+  vertex(-180, -160);
+  endShape();
+  pop();
+
+  push();
+  noStroke();
   fill(160, 160, 160);
-  quad(0, -10, 0, 20, 100, -35, 85, -60);
-  quad(80, -58, 100, -35, 110, -70, 80, -70);
-  ellipse(0, 0, 50);
+  rect(-183, -183, 5, 5);
   pop();
-  fill(250, 0, 0);
-  rect(20, 10, 42, 53);
+
+  push();
+  rect(-185, -50, 10, 10);
+  rect(-185, -33, 10, 10);
+  rect(-167, -33, 10, 10);
+  rect(-203, -33, 10, 10);
+  pop();
+
+  push();
+  noFill();
+  rect(-187, 90, 15, 60);
+  fill(0, 0, 0);
+  rect(-187, 123, 15, 24);
+  pop();
+
+  push();
+  Text;
+  pop();
+
+  pop();
 }
 
 function draw() {
   background(0, 0, 0);
-  falcon(200, 200);
+  grayBackground(innerWidth / 2, innerHeight / 2);
+  jimDraw(innerWidth / 2, innerHeight / 2);
 }
