@@ -59,6 +59,9 @@ window.boostCounter = 0;
 window.boostReady = false;
 window.boostTimer = 0;
 
+window.timerS = 120;
+window.timer = 0;
+
 //Stars
 let stars = [];
 for (let i = 0; i < 2000; i++) {
@@ -136,7 +139,7 @@ function draw() {
   for (let star of stars) {
     fill(255, 255, 255);
     ellipse(star.x + window.movementXstar, star.y + window.movementY, 2);
-    // star.x = star.x + 1;
+    star.x = star.x + 1;
     if (star.x > innerWidth + 300) {
       star.x = -300;
     }
@@ -171,17 +174,20 @@ function draw() {
       let asteroid = new Asteroid();
       asteroids.push(asteroid);
     }
+
+    //every each asteroid's moving, change hp and splice if destroyed
     for (let asteroid of asteroids) {
       asteroid.draw();
       asteroid.x = asteroid.x + asteroid.velocityX;
       asteroid.y = asteroid.y + asteroid.velocityY;
       asteroid.rotation = asteroid.rotation + 0.1;
+
       if (mouseIsPressed) {
         if (
-          mouseX > asteroid.x + window.movementX - 30 &&
-          mouseX < asteroid.x + window.movementX + 30 &&
-          mouseY > asteroid.y + window.movementY - 27 &&
-          mouseY < asteroid.y + window.movementY + 25 &&
+          mouseX > asteroid.x + window.movementX - 30 * asteroid.scale &&
+          mouseX < asteroid.x + window.movementX + 30 * asteroid.scale &&
+          mouseY > asteroid.y + window.movementY - 27 * asteroid.scale &&
+          mouseY < asteroid.y + window.movementY + 25 * asteroid.scale &&
           window.overHeated === false
         ) {
           asteroid.hp = asteroid.hp - aimDamage;
@@ -189,6 +195,7 @@ function draw() {
           explosions.push(explosion);
         }
       }
+
       if (asteroid.isDead()) {
         asteroids.splice(asteroids.indexOf(asteroid), 1);
         if (asteroid.hp < 1) {
@@ -202,15 +209,16 @@ function draw() {
       let ufo = new Ufo();
       ufos.push(ufo);
     }
+    //every each ufo's moving, change hp and splice if destroyed
     for (let ufo of ufos) {
       ufo.draw();
       ufo.x = ufo.x + ufo.velocityX;
       ufo.y = ufo.y + ufo.velocityY;
       if (mouseIsPressed) {
         if (
-          mouseX > ufo.x + window.movementX - 20 &&
-          mouseX < ufo.x + window.movementX + 20 &&
-          mouseY < ufo.y + window.movementY + 20 &&
+          mouseX > ufo.x + window.movementX - 20 * ufo.scale &&
+          mouseX < ufo.x + window.movementX + 20 * ufo.scale &&
+          mouseY < ufo.y + window.movementY + 20 * ufo.scale &&
           mouseY > ufo.y + window.movementY &&
           window.overHeated === false
         ) {
@@ -233,6 +241,7 @@ function draw() {
       let eve = new Eve();
       eves.push(eve);
     }
+    //every each eve's moving, change hp and splice if destroyed
     for (let eve of eves) {
       eve.draw();
       eve.x = eve.x + eve.velocityX;
@@ -260,6 +269,8 @@ function draw() {
       let falcon = new Falcon();
       falcons.push(falcon);
     }
+
+    //every each falcon's moving, change hp and splice if destroyed
     for (let falcon of falcons) {
       falcon.draw();
       falcon.y = falcon.y + falcon.velocityY;
@@ -310,14 +321,14 @@ function draw() {
       }
     }
 
-    //Loading the booster
+    //Loading the booster and makes it "ready at end of timer"
     if (window.boostCounter < 100) {
       window.boostCounter = window.boostCounter + 0.1;
     } else {
       window.boostReady = true;
     }
 
-    //When you activate booster with B
+    //When you activate booster with B and change some values
     if (window.boostReady && keyIsDown(66)) {
       window.boostCounter = 0;
       window.boostReady = false;
@@ -326,6 +337,7 @@ function draw() {
       aimDamage = 15;
     }
 
+    //the time the boost will be active and reset values at end
     if (window.boostTimer > 0) {
       window.boostTimer--;
     } else {
@@ -333,6 +345,7 @@ function draw() {
       laserColor = [255, 0, 0];
     }
 
+    //explosion's particles moving and "splice if dead"
     for (let explosion of explosions) {
       explosion.draw();
       explosion.update();
@@ -341,7 +354,8 @@ function draw() {
       }
     }
 
-    //Moves screen when using arrows / ASDW
+    //Moves screen when using arrows or ASDW and makes sure you cant
+    // go further than "allowed"
     if (
       (window.movementX < 300 && keyIsDown(65)) ||
       (window.movementX < 300 && keyIsDown(37))
@@ -369,13 +383,17 @@ function draw() {
       window.movementY = window.movementY - movementSpeedY;
     }
 
+    //Draws ship from other JS
     shipGraphics.draw();
     joyStick1.draw();
     joyStick2.draw();
 
+    //Changes the state to pause
     if (keyIsDown(27)) {
       gameState = 3;
     }
+
+    //Change gamestate if mission is completed
     if (
       window.asteroidCounter >= window.asteroidMission &&
       window.ufoCounter >= window.ufoMission &&
@@ -384,25 +402,16 @@ function draw() {
       gameState = 1;
     }
 
-    if (
-      (keyIsDown(65) && window.movementX > 299) ||
-      (keyIsDown(37) && window.movementX > 299)
-    ) {
-      push();
-      noStroke();
-      fill(255, 0, 0);
-      rect(0, 0, 5, innerHeight);
-      pop();
+    //Timer, converting timer to 1 timerS every sec (60 tics)
+    window.timer++;
+    if (window.timer >= 60) {
+      window.timer = 0;
+      window.timerS--;
     }
-    if (
-      (keyIsDown(68) && window.movementX < -299) ||
-      (keyIsDown(39) && window.movementX < -299)
-    ) {
-      push();
-      noStroke();
-      fill(255, 0, 0);
-      rect(innerWidth, 0, -5, innerHeight);
-      pop();
+
+    //If timer runs out, change gamestate
+    if (window.timerS < 1) {
+      gameState = 1;
     }
   }
 

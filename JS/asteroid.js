@@ -4,7 +4,7 @@ export default class Asteroid {
     this.y = Math.floor(Math.random() * (innerHeight + 200) - 100);
     this.velocityX = Math.random() * 3 + 2;
     this.velocityY = Math.random() * 1 - 1;
-    this.scale = Math.random();
+    this.scale = this.velocityX * 0.2;
     this.rotation = 0;
     this.hp = 100;
   }
@@ -12,6 +12,7 @@ export default class Asteroid {
   draw() {
     push();
     translate(this.x + window.movementX, this.y + window.movementY);
+    scale(this.scale);
     scale(0.2);
     rotate(this.rotation);
 
@@ -48,7 +49,6 @@ export default class Asteroid {
     pop();
     push();
     translate(this.x + window.movementX - 25, this.y + window.movementY);
-
     //change the color of the hp bar depending on how much hp is left
     if (this.hp < 25) {
       stroke(255, 50, 50);
@@ -61,7 +61,7 @@ export default class Asteroid {
     }
     strokeWeight(2);
     scale(0.5);
-    line(0, -74, this.hp, -74);
+    line(0, -74 * this.scale, this.hp, -74 * this.scale);
     pop();
   }
 

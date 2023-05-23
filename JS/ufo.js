@@ -4,12 +4,14 @@ export default class Ufo {
     this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
     this.velocityX = -Math.random() * 3 - 2;
     this.velocityY = Math.random() * 1 - 1;
+    this.scale = this.velocityX * -0.25;
     this.hp = 200;
   }
 
   draw() {
     push();
     translate(this.x + window.movementX, this.y + window.movementY);
+    scale(this.scale);
     scale(0.2);
     fill(130, 0, 0);
     beginShape();
@@ -47,7 +49,7 @@ export default class Ufo {
     }
     strokeWeight(3.5);
     scale(0.25);
-    line(0, -54, this.hp, -54);
+    line(0, -54 * this.scale, this.hp, -54 * this.scale);
     pop();
   }
 

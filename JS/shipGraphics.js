@@ -158,5 +158,27 @@ export default class Ship {
     text("B", innerWidth / 2 + 221, innerHeight - 30);
     text("B", innerWidth / 2 + 321, innerHeight - 30);
     pop();
+
+    push();
+    translate(innerWidth / 2, 0);
+    noStroke();
+    fill(100, 110, 110);
+    rect(-102, 38, 204, 104);
+    fill(0, 0, 0);
+    rect(-100, 40, 200, 100);
+    if (window.timerS < 10) {
+      fill(255, 0, 0);
+    } else if (window.timerS < 20) {
+      fill(220, 120, 40);
+    } else if (window.timerS < 60) {
+      fill(250, 220, 40);
+    } else {
+      fill(50, 255, 50);
+    }
+    textSize(50);
+    textAlign(CENTER);
+    text(window.timerS + "s", 0, 110);
+
+    pop();
   }
 }
