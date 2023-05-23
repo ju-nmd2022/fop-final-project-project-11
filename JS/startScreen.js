@@ -57,11 +57,6 @@ export default class StartScreen {
       rect(-110, -158, 40, 40);
       fill(0, 0, 0);
       text("M", -100, -130);
-      fill(255, 255, 255);
-      text("Achievements", -50, -70);
-      rect(-110, -98, 40, 40);
-      fill(0, 0, 0);
-      text("A", -98, -70);
 
       //Press Space
       fill(255, 255, 255);

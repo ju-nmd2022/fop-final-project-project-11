@@ -1,6 +1,7 @@
 import Asteroid from "./asteroid.js";
 import Ufo from "./ufo.js";
 import Eve from "./eve.js";
+import Falcon from "./falcon.js";
 import Ship from "./shipGraphics.js";
 import UfoExplosion from "./explosionUFO.js";
 import AsteroidExplosion from "./explosionAsteroid.js";
@@ -24,14 +25,18 @@ let aimDamage = 1;
 window.asteroidCounter = 0;
 window.ufoCounter = 0;
 window.eveCounter = 0;
+window.falconCounter = 0;
 
 window.asteroidMission = 3;
 window.ufoMission = 2;
+window.falconMission = 1;
 
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
-let movementSpeed = 8;
+window.movementXstar = 0;
+let movementSpeedX = 8;
+let movementSpeedY = 8;
 
 //Joystick / hand graphics
 window.shooting = false;
@@ -44,10 +49,12 @@ let joyStick2 = new Joystick(innerWidth / 2 + 63, innerHeight - 100, 1);
 let gameState = 1;
 window.startState = 1;
 
+//Variables for the heater
 window.heater = 0;
 window.overHeated = false;
 let cooldown = 0;
 
+//Variables for the boost
 window.boostCounter = 0;
 window.boostReady = false;
 window.boostTimer = 0;
@@ -66,6 +73,7 @@ for (let i = 0; i < 2000; i++) {
 let asteroids = [];
 let ufos = [];
 let eves = [];
+let falcons = [];
 let explosions = [];
 let laserColor = [255, 0, 0];
 
@@ -106,10 +114,14 @@ function resetGame() {
   for (let eve of eves) {
     eves.splice(eves.indexOf(eve), 1);
   }
+  for (let falcon of falcons) {
+    falcons.splice(falcons.indexOf(falcon), 1);
+  }
 
-  asteroidCounter = 0;
-  ufoCounter = 0;
-  eveCounter = 0;
+  window.asteroidCounter = 0;
+  window.ufoCounter = 0;
+  window.eveCounter = 0;
+  window.falconCounter = 0;
   window.movementX = 0;
   window.movementY = 0;
   window.boostCounter = 0;
@@ -123,7 +135,11 @@ function draw() {
   background(0, 0, 0);
   for (let star of stars) {
     fill(255, 255, 255);
-    ellipse(star.x + window.movementX, star.y + window.movementY, 2);
+    ellipse(star.x + window.movementXstar, star.y + window.movementY, 2);
+    // star.x = star.x + 1;
+    if (star.x > innerWidth + 300) {
+      star.x = -300;
+    }
   }
 
   //Menu state
@@ -177,7 +193,6 @@ function draw() {
         asteroids.splice(asteroids.indexOf(asteroid), 1);
         if (asteroid.hp < 1) {
           window.asteroidCounter++;
-          window.boostCounter = window.boostCounter + 6;
         }
       }
     }
@@ -209,13 +224,12 @@ function draw() {
         ufos.splice(ufos.indexOf(ufo), 1);
         if (ufo.hp < 1) {
           window.ufoCounter++;
-          window.boostCounter = window.boostCounter + 2;
         }
       }
     }
 
     //Eve generating
-    if (eves.length < 15) {
+    if (eves.length < 5) {
       let eve = new Eve();
       eves.push(eve);
     }
@@ -238,6 +252,34 @@ function draw() {
 
       if (eve.isDead()) {
         eves.splice(eves.indexOf(eve), 1);
+      }
+    }
+
+    //Falcon generating
+    if (falcons.length < 2) {
+      let falcon = new Falcon();
+      falcons.push(falcon);
+    }
+    for (let falcon of falcons) {
+      falcon.draw();
+      falcon.y = falcon.y + falcon.velocityY;
+      if (mouseIsPressed) {
+        if (
+          mouseX > falcon.x + window.movementX - 20 &&
+          mouseX < falcon.x + window.movementX + 20 &&
+          mouseY > falcon.y + window.movementY - 30 &&
+          mouseY < falcon.y + window.movementY + 20 &&
+          window.overHeated === false
+        ) {
+          falcon.hp = falcon.hp - aimDamage;
+        }
+      }
+
+      if (falcon.isDead()) {
+        falcons.splice(falcons.indexOf(falcon), 1);
+        if (falcon.hp < 1) {
+          window.falconCounter++;
+        }
       }
     }
 
@@ -279,7 +321,7 @@ function draw() {
     if (window.boostReady && keyIsDown(66)) {
       window.boostCounter = 0;
       window.boostReady = false;
-      window.boostTimer = 75;
+      window.boostTimer = 100;
       laserColor = [230, 185, 0];
       aimDamage = 15;
     }
@@ -304,25 +346,27 @@ function draw() {
       (window.movementX < 300 && keyIsDown(65)) ||
       (window.movementX < 300 && keyIsDown(37))
     ) {
-      window.movementX = window.movementX + movementSpeed;
+      window.movementX = window.movementX + movementSpeedX;
+      window.movementXstar = window.movementXstar + movementSpeedX;
     }
     if (
       (window.movementX > -300 && keyIsDown(68)) ||
       (window.movementX > -300 && keyIsDown(39))
     ) {
-      window.movementX = window.movementX - movementSpeed;
+      window.movementX = window.movementX - movementSpeedX;
+      window.movementXstar = window.movementXstar - movementSpeedX;
     }
     if (
       (window.movementY < 250 && keyIsDown(87)) ||
       (window.movementY < 250 && keyIsDown(38))
     ) {
-      window.movementY = window.movementY + movementSpeed;
+      window.movementY = window.movementY + movementSpeedY;
     }
     if (
       (window.movementY > -250 && keyIsDown(83)) ||
       (window.movementY > -250 && keyIsDown(40))
     ) {
-      window.movementY = window.movementY - movementSpeed;
+      window.movementY = window.movementY - movementSpeedY;
     }
 
     shipGraphics.draw();
@@ -334,9 +378,31 @@ function draw() {
     }
     if (
       window.asteroidCounter >= window.asteroidMission &&
-      window.ufoCounter >= window.ufoMission
+      window.ufoCounter >= window.ufoMission &&
+      window.falconCounter >= window.falconCounter
     ) {
       gameState = 1;
+    }
+
+    if (
+      (keyIsDown(65) && window.movementX > 299) ||
+      (keyIsDown(37) && window.movementX > 299)
+    ) {
+      push();
+      noStroke();
+      fill(255, 0, 0);
+      rect(0, 0, 5, innerHeight);
+      pop();
+    }
+    if (
+      (keyIsDown(68) && window.movementX < -299) ||
+      (keyIsDown(39) && window.movementX < -299)
+    ) {
+      push();
+      noStroke();
+      fill(255, 0, 0);
+      rect(innerWidth, 0, -5, innerHeight);
+      pop();
     }
   }
 
