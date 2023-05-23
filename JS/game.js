@@ -63,6 +63,12 @@ window.timerS = 120;
 window.timer = 0;
 
 window.mission = 1;
+window.mission1Completed = false;
+window.mission2Completed = false;
+window.mission3Completed = false;
+window.mission4Completed = false;
+window.mission5Completed = false;
+window.mission6Completed = false;
 
 //Stars
 let stars = [];
@@ -157,9 +163,6 @@ function draw() {
     }
     if (keyIsDown(72)) {
       window.startState = 3;
-    }
-    if (keyIsDown(65)) {
-      window.startState = 4;
     }
     if (keyIsDown(8)) {
       window.startState = 1;

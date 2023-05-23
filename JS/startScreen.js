@@ -42,6 +42,7 @@ export default class StartScreen {
     rect(320, -340, 20, 80, 20);
 
     if (window.startState === 1) {
+      push();
       strokeWeight(1.5);
       stroke(5, 5, 5);
       textSize(20);
@@ -67,7 +68,9 @@ export default class StartScreen {
       fill(0, 0, 0);
       textSize(20);
       text("SPACE", -33, 178);
+      pop();
     } else if (window.startState === 2) {
+      push();
       fill(255, 255, 255);
       rect(90, -290, 120, 40);
       fill(0, 0, 0);
@@ -76,15 +79,54 @@ export default class StartScreen {
       strokeWeight(4);
       line(105, -270, 200, -270);
 
-      fill(50, 50, 50);
+      fill(150, 150, 150);
 
+      if (window.mission5Completed) {
+        fill(150, 150, 150);
+      } else {
+        fill(10, 10, 10);
+      }
       rect(10, 130, 200, 150);
+      if (window.mission4Completed) {
+        fill(150, 150, 150);
+      } else {
+        fill(10, 10, 10);
+      }
       rect(-210, 130, 200, 150);
+      if (window.mission3Completed) {
+        fill(150, 150, 150);
+      } else {
+        fill(10, 10, 10);
+      }
       rect(10, -40, 200, 150);
+      if (window.mission2Completed) {
+        fill(150, 150, 150);
+      } else {
+        fill(10, 10, 10);
+      }
       rect(-210, -40, 200, 150);
+      if (window.mission1Completed) {
+        fill(150, 150, 150);
+      } else {
+        fill(10, 10, 10);
+      }
       rect(10, -210, 200, 150);
+      fill(150, 150, 150);
       rect(-210, -210, 200, 150);
+
+      noStroke();
+      fill(0, 0, 0);
+      textSize(20);
+      textAlign(CENTER);
+      text("Mission 1", -145, -175);
+      text("Mission 2", 75, -175);
+      text("Mission 3", -145, -5);
+      text("Mission 4", 75, -5);
+      text("Mission 5", -145, 165);
+      text("Mission 6", 75, 165);
+      pop();
     } else if (window.startState === 3) {
+      push();
       fill(255, 255, 255);
       rect(90, -290, 120, 40);
       fill(0, 0, 0);
@@ -92,14 +134,81 @@ export default class StartScreen {
       stroke(0, 0, 0);
       strokeWeight(4);
       line(105, -270, 200, -270);
-    } else if (window.startState === 4) {
-      fill(255, 255, 255);
-      rect(90, -290, 120, 40);
-      fill(0, 0, 0);
-      triangle(100, -270, 120, -285, 120, -255);
+
+      scale(0.8);
+
+      push();
+      fill(200, 200, 200);
       stroke(0, 0, 0);
-      strokeWeight(4);
-      line(105, -270, 200, -270);
+      strokeWeight(6);
+      rect(-230, -230, 100, 100, 5);
+      rect(-230, -80, 100, 100, 5);
+      rect(-230, 70, 100, 100, 5);
+      pop();
+
+      beginShape();
+      vertex(-200, -180);
+      vertex(-160, -180);
+      endShape();
+
+      beginShape();
+      vertex(-180, -200);
+      vertex(-180, -160);
+      endShape();
+
+      push();
+      noStroke();
+      fill(200, 200, 200);
+      rect(-183, -183, 5, 5);
+      pop();
+
+      rect(-185, -50, 10, 10);
+      rect(-185, -33, 10, 10);
+      rect(-167, -33, 10, 10);
+      rect(-203, -33, 10, 10);
+
+      noFill();
+      rect(-187, 90, 15, 60);
+      fill(0, 0, 0);
+      rect(-187, 123, 15, 24);
+
+      push();
+      strokeWeight(0.3);
+      stroke(255, 255, 255);
+      fill(255, 255, 255);
+      textSize(20);
+      text("Shoot", -110, -205);
+      text("Move", -110, -60);
+      text("Boost", -110, 90);
+      pop();
+
+      push();
+      strokeWeight(0);
+      fill(255, 255, 255);
+      textSize(14);
+      text(
+        "Use your mouse/mousepad to move your aim around.\nPress and hold mouse1 to shoot your laser cannon.\nWatch out for overheating the cannon and DON'T shoot Eve!",
+        -110,
+        -183
+      );
+      text(
+        "Move around in space using either the W A S D \nor arrow keys.",
+        -110,
+        -37
+      );
+      text(
+        "To the right of your hands in the cockpit, there is a\nprogress bar for the boost. When ready,\npress the B key to activate boost and get increased damage.",
+        -110,
+        110
+      );
+      pop();
+
+      stroke(255, 255, 255);
+      strokeWeight(0);
+      fill(255, 255, 255);
+      textSize(14);
+      text("Complete your mission to move on to further levels!", -110, 210);
+      pop();
     }
     pop();
   }

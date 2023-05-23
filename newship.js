@@ -106,7 +106,7 @@ function jimDraw(x, y) {
   fill(255, 255, 255);
   textSize(14);
   text(
-    "Use your mouse/mousepad to move your aim around.\nPress and hold mouse1 to shoot your laser cannon.\nWatch out for overheating the cannon and Eve!",
+    "Use your mouse/mousepad to move your aim around.\nPress and hold mouse1 to shoot your laser cannon.\nWatch out for overheating the cannon and DON'T shoot Eve!",
     -110,
     -183
   );
@@ -116,7 +116,7 @@ function jimDraw(x, y) {
     -37
   );
   text(
-    "To the left of your hands in the cockpit, there is a\nprogress bar for the boost. When ready,\npress the B key to activate boost and get increased damage.",
+    "To the right of your hands in the cockpit, there is a\nprogress bar for the boost. When ready,\npress the B key to activate boost and get increased damage.",
     -110,
     110
   );
