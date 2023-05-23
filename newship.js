@@ -48,6 +48,8 @@ function jimDraw(x, y) {
   strokeWeight(4);
   line(105, -270, 200, -270);
 
+  scale(0.8);
+
   push();
   fill(200, 200, 200);
   stroke(0, 0, 0);
@@ -71,7 +73,7 @@ function jimDraw(x, y) {
 
   push();
   noStroke();
-  fill(160, 160, 160);
+  fill(200, 200, 200);
   rect(-183, -183, 5, 5);
   pop();
 
@@ -90,9 +92,43 @@ function jimDraw(x, y) {
   pop();
 
   push();
-  Text;
+  strokeWeight(0.3);
+  stroke(255, 255, 255);
+  fill(255, 255, 255);
+  textSize(20);
+  text("Shoot", -110, -205);
+  text("Move", -110, -60);
+  text("Boost", -110, 90);
   pop();
 
+  push();
+  strokeWeight(0);
+  fill(255, 255, 255);
+  textSize(14);
+  text(
+    "Use your mouse/mousepad to move your aim around.\nPress and hold mouse1 to shoot your laser cannon.\nWatch out for overheating the cannon and Eve!",
+    -110,
+    -183
+  );
+  text(
+    "Move around in space using either the W A S D \nor arrow keys.",
+    -110,
+    -37
+  );
+  text(
+    "To the left of your hands in the cockpit, there is a\nprogress bar for the boost. When ready,\npress the B key to activate boost and get increased damage.",
+    -110,
+    110
+  );
+  pop();
+
+  push();
+  stroke(255, 255, 255);
+  strokeWeight(0);
+  fill(255, 255, 255);
+  textSize(14);
+  text("Complete your mission to move on to further levels!", -110, 210);
+  pop();
   pop();
 }
 
