@@ -79,39 +79,78 @@ export default class StartScreen {
       strokeWeight(4);
       line(105, -270, 200, -270);
 
-      fill(150, 150, 150);
-
+      //Mission 6 box
       if (window.mission5Completed) {
         fill(150, 150, 150);
       } else {
         fill(10, 10, 10);
       }
+      if (window.mission === 6) {
+        stroke(50, 180, 50);
+      } else {
+        stroke(0, 0, 0);
+      }
       rect(10, 130, 200, 150);
+
+      //Mission 5 box
       if (window.mission4Completed) {
         fill(150, 150, 150);
       } else {
         fill(10, 10, 10);
       }
+      if (window.mission === 5) {
+        stroke(50, 180, 50);
+      } else {
+        stroke(0, 0, 0);
+      }
       rect(-210, 130, 200, 150);
+
+      //Mission 4 box
       if (window.mission3Completed) {
         fill(150, 150, 150);
       } else {
         fill(10, 10, 10);
       }
+      if (window.mission === 4) {
+        stroke(50, 180, 50);
+      } else {
+        stroke(0, 0, 0);
+      }
       rect(10, -40, 200, 150);
+
+      //Mission 3 box
       if (window.mission2Completed) {
         fill(150, 150, 150);
       } else {
         fill(10, 10, 10);
       }
+      if (window.mission === 3) {
+        stroke(50, 180, 50);
+      } else {
+        stroke(0, 0, 0);
+      }
       rect(-210, -40, 200, 150);
+
+      //Mission 2 box
       if (window.mission1Completed) {
         fill(150, 150, 150);
       } else {
         fill(10, 10, 10);
       }
+      if (window.mission === 2) {
+        stroke(50, 180, 50);
+      } else {
+        stroke(0, 0, 0);
+      }
       rect(10, -210, 200, 150);
+
+      //Mission1  box
       fill(150, 150, 150);
+      if (window.mission === 1) {
+        stroke(50, 180, 50);
+      } else {
+        stroke(0, 0, 0);
+      }
       rect(-210, -210, 200, 150);
 
       noStroke();
@@ -223,9 +262,8 @@ export default class StartScreen {
       strokeWeight(2);
       textSize(20);
       text("Obstacles destroyed: " + window.obstaclesDestroyed, 0, -30);
-      text("Boost used: 2", 0, 0);
+      text("Boost used: " + window.boostUsedCounter, 0, 0);
       text("Time: 2s", 0, 30);
-      text("Best Time: 1s", 0, 60);
       strokeWeight(6);
       textSize(30);
       text("Press ENTER to Leave", 0, 200);

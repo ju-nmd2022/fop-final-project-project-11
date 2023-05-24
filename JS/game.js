@@ -27,6 +27,7 @@ window.ufoCounter = 0;
 window.eveCounter = 0;
 window.falconCounter = 0;
 window.obstaclesDestroyed = 0;
+window.boostUsedCounter = 0;
 
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
@@ -108,6 +109,7 @@ function laser(x, y) {
 
   pop();
 }
+
 // Aim Crosshair
 function aim(x, y) {
   push();
@@ -184,6 +186,20 @@ function draw() {
       if (keyIsDown(8)) {
         window.startState = 1;
       }
+
+      if (keyIsDown(49)) {
+        window.mission = 1;
+      } else if (keyIsDown(50) && window.mission1Completed) {
+        window.mission = 2;
+      } else if (keyIsDown(51) && window.mission2Completed) {
+        window.mission = 3;
+      } else if (keyIsDown(52) && window.mission3Completed) {
+        window.mission = 4;
+      } else if (keyIsDown(53) && window.mission4Completed) {
+        window.mission = 5;
+      } else if (keyIsDown(54) && window.mission5Completed) {
+        window.mission = 6;
+      }
     }
     //Functions for startscreen "How to play" (state 3)
     if (keyIsDown(8) && window.startState === 3) {
@@ -234,10 +250,12 @@ function draw() {
   if (gameState === 2) {
     //Asteroid generating
     if (asteroids.length < 10) {
-      let asteroid = new Asteroid();
+      let asteroid = new Asteroid(
+        Math.floor(Math.random() * 600 - 900),
+        Math.floor(Math.random() * (innerHeight + 200) - 100)
+      );
       asteroids.push(asteroid);
     }
-
     //every each asteroid's moving, change hp and splice if destroyed
     for (let asteroid of asteroids) {
       asteroid.draw();
@@ -394,10 +412,12 @@ function draw() {
     //When you activate booster with B and change some values
     if (window.boostReady && keyIsDown(66)) {
       window.boostCounter = 0;
-      window.boostReady = false;
       window.boostTimer = 100;
       laserColor = [230, 185, 0];
       aimDamage = 15;
+      window.boostUsedCounter++;
+      console.log(window.boostUsedCounter);
+      window.boostReady = false;
     }
 
     //the time the boost will be active and reset values at end
@@ -456,7 +476,7 @@ function draw() {
       gameState = 3;
     }
 
-    //Change gamestate if mission is completed
+    //Change values and states if mission is completed
     if (
       window.asteroidCounter >= window.asteroidMission &&
       window.ufoCounter >= window.ufoMission &&
@@ -473,6 +493,21 @@ function draw() {
       endTimer++;
       if (endTimer > 40) {
         gameState = 1;
+      }
+
+      //Makes mission completed
+      if (window.mission === 1) {
+        window.mission1Completed = true;
+      } else if (window.mission === 2) {
+        window.mission2Completed = true;
+      } else if (window.mission === 3) {
+        window.mission3Completed = true;
+      } else if (window.mission === 4) {
+        window.mission4Completed = true;
+      } else if (window.mission === 5) {
+        window.mission5Completed = true;
+      } else if (window.mission === 6) {
+        window.mission6Completed = true;
       }
     }
 
