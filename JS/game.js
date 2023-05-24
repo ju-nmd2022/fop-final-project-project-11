@@ -85,7 +85,6 @@ let eves = [];
 let falcons = [];
 let explosions = [];
 let laserColor = [255, 0, 0];
-
 window.startScreenColor = [50, 50, 50];
 window.rectanglesColor = [235, 235, 235];
 
@@ -102,7 +101,6 @@ function laser(x, y) {
 
   pop();
 }
-
 function aim(x, y) {
   push();
   translate(x, y);
@@ -130,6 +128,20 @@ function resetGame() {
   }
   for (let explosion of explosions) {
     explosions.splice(explosions.indexOf(explosion), 1);
+  }
+
+  if (window.mission === 1) {
+    window.timerS = 60;
+  } else if (window.mission === 2) {
+    window.timerS = 80;
+  } else if (window.mission === 3) {
+    window.timerS = 120;
+  } else if (window.mission === 4) {
+    window.timerS = 150;
+  } else if (window.mission === 5) {
+    window.timerS = 180;
+  } else if (window.mission === 6) {
+    window.timerS = 210;
   }
 
   //Reset variables
@@ -441,7 +453,6 @@ function draw() {
     ) {
       window.movementY = window.movementY - movementSpeedY;
     }
-
     //Draws ship from other JS
     shipGraphics.draw();
     joyStick1.draw();
