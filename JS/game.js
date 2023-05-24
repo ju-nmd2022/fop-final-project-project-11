@@ -8,13 +8,17 @@ import AsteroidExplosion from "./explosionAsteroid.js";
 import Joystick from "./joystick.js";
 import PauseMenu from "./pauseMenu.js";
 import StartScreen from "./startScreen.js";
+import ProgressBoard from "./progressBoard.js";
 
 //Removes the mouse
 document.querySelector("body").style.cursor = "none";
 
+innerHeight = innerHeight - 50;
+innerWidth = innerWidth - 50;
+
 //Canvas setup
 function setup() {
-  createCanvas(innerWidth - 30, innerHeight - 30);
+  createCanvas(innerWidth, innerHeight);
 }
 window.setup = setup;
 
@@ -42,10 +46,16 @@ let start = new StartScreen();
 let shipGraphics = new Ship();
 let joyStick1 = new Joystick(-innerWidth / 2 + 65, innerHeight - 100, -1);
 let joyStick2 = new Joystick(innerWidth / 2 + 63, innerHeight - 100, 1);
+let progressBoard = new ProgressBoard(innerWidth / 2 - 420, innerHeight - 115);
+let progressBoardPause = new ProgressBoard(
+  innerWidth / 2 - 100,
+  innerHeight / 2 - 150
+);
 
 //GameState Start
 let gameState = 1;
 window.startState = 1;
+window.reason = 1;
 
 //Variables for the heater
 window.heater = 0;
@@ -326,6 +336,10 @@ function draw() {
           window.overHeated === false
         ) {
           eve.hp = eve.hp - aimDamage;
+          window.startState = 5;
+          window.startScreenColor = [150, 50, 50];
+          window.rectanglesColor = [85, 5, 5];
+          window.reason = 2;
           gameState = 1;
         }
       }
@@ -457,6 +471,7 @@ function draw() {
     shipGraphics.draw();
     joyStick1.draw();
     joyStick2.draw();
+    progressBoard.draw();
 
     //if mission is completed
     if (
@@ -541,6 +556,7 @@ function draw() {
       window.startState = 5;
       window.startScreenColor = [150, 50, 50];
       window.rectanglesColor = [85, 5, 5];
+      window.reason = 1;
       gameState = 1;
     }
 
@@ -558,6 +574,7 @@ function draw() {
     if (keyIsDown(67)) {
       gameState = 2;
     }
+    progressBoardPause.draw();
   }
   aim(mouseX, mouseY);
 }

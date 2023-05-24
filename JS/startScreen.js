@@ -323,6 +323,11 @@ export default class StartScreen {
       strokeWeight(6);
       textSize(25);
       text("REASON:", 0, -70);
+      if (window.reason === 1) {
+        text("OUT OF TIME!", 0, 0);
+      } else if (window.reason === 2) {
+        text("YOU SHOT EVE!", 0, 0);
+      }
       strokeWeight(6);
       textSize(30);
       text("Press ENTER to Leave", 0, 200);

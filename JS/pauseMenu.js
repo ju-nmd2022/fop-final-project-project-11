@@ -13,10 +13,12 @@ export default class PauseMenu {
     fill(20, 20, 20);
     strokeWeight(2);
     stroke(5, 5, 5);
-    rect(-200, -250, 380, 300);
     fill(0, 205, 0);
     textSize(20);
-    text("Current Progress:", -200, -260);
+    push();
+    textAlign(CENTER);
+    text("Current Progress:", 0, -180);
+    pop();
 
     fill(255, 255, 255);
     rect(-120, 100, 40, 40);
