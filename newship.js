@@ -1,10 +1,10 @@
 function grayBackground(x, y) {
   push();
   translate(x, y);
-  fill(50, 50, 50);
+  fill(50, 150, 50);
   rect(-400, -350, 800, 700);
   strokeWeight(0);
-  fill(235, 235, 235);
+  fill(5, 85, 5);
   //Long "rectangles" Left side
   rect(-380, 10, 20, 330, 20);
   rect(-380, -10, 20, -330, 20);
@@ -40,95 +40,24 @@ function grayBackground(x, y) {
 function jimDraw(x, y) {
   push();
   translate(x, y);
+  textAlign(CENTER);
+  textSize(40);
+  stroke(1);
+  strokeWeight(10);
   fill(255, 255, 255);
-  rect(90, -290, 120, 40);
-  fill(0, 0, 0);
-  triangle(100, -270, 120, -285, 120, -255);
-  stroke(0, 0, 0);
-  strokeWeight(4);
-  line(105, -270, 200, -270);
-
-  scale(0.8);
-
-  push();
-  fill(200, 200, 200);
-  stroke(0, 0, 0);
+  text("MISSION COMPLETED", 0, -150);
   strokeWeight(6);
-  rect(-230, -230, 100, 100, 5);
-  rect(-230, -80, 100, 100, 5);
-  rect(-230, 70, 100, 100, 5);
-  pop();
-
-  push();
-  beginShape();
-  vertex(-200, -180);
-  vertex(-160, -180);
-  endShape();
-
-  beginShape();
-  vertex(-180, -200);
-  vertex(-180, -160);
-  endShape();
-  pop();
-
-  push();
-  noStroke();
-  fill(200, 200, 200);
-  rect(-183, -183, 5, 5);
-  pop();
-
-  push();
-  rect(-185, -50, 10, 10);
-  rect(-185, -33, 10, 10);
-  rect(-167, -33, 10, 10);
-  rect(-203, -33, 10, 10);
-  pop();
-
-  push();
-  noFill();
-  rect(-187, 90, 15, 60);
-  fill(0, 0, 0);
-  rect(-187, 123, 15, 24);
-  pop();
-
-  push();
-  strokeWeight(0.3);
-  stroke(255, 255, 255);
-  fill(255, 255, 255);
+  textSize(25);
+  text("Statistics:", 0, -70);
+  strokeWeight(2);
   textSize(20);
-  text("Shoot", -110, -205);
-  text("Move", -110, -60);
-  text("Boost", -110, 90);
-  pop();
-
-  push();
-  strokeWeight(0);
-  fill(255, 255, 255);
-  textSize(14);
-  text(
-    "Use your mouse/mousepad to move your aim around.\nPress and hold mouse1 to shoot your laser cannon.\nWatch out for overheating the cannon and DON'T shoot Eve!",
-    -110,
-    -183
-  );
-  text(
-    "Move around in space using either the W A S D \nor arrow keys.",
-    -110,
-    -37
-  );
-  text(
-    "To the right of your hands in the cockpit, there is a\nprogress bar for the boost. When ready,\npress the B key to activate boost and get increased damage.",
-    -110,
-    110
-  );
-  pop();
-
-  push();
-  stroke(255, 255, 255);
-  strokeWeight(0);
-  fill(255, 255, 255);
-  textSize(14);
-  text("Complete your mission to move on to further levels!", -110, 210);
-  pop();
+  text("Obstacles destroyed: 10", 0, -30);
+  text("Boost used: 2", 0, 0);
+  text("Time: 2s", 0, 30);
+  text("Best Time: 1s", 0, 60);
+  strokeWeight(6);
+  textSize(30);
+  text("Press Space to Leave", 0, 200);
   pop();
 }
 

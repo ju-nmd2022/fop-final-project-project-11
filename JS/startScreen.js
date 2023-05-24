@@ -7,10 +7,10 @@ export default class StartScreen {
   draw() {
     push();
     translate(this.x, this.y);
-    fill(50, 50, 50);
+    fill(window.startScreenColor);
     rect(-400, -350, 800, 700);
     strokeWeight(0);
-    fill(235, 235, 235);
+    fill(window.rectanglesColor);
     //Long "rectangles" Left side
     rect(-380, 10, 20, 330, 20);
     rect(-380, -10, 20, -330, 20);
@@ -208,6 +208,42 @@ export default class StartScreen {
       fill(255, 255, 255);
       textSize(14);
       text("Complete your mission to move on to further levels!", -110, 210);
+      pop();
+    } else if (window.startState === 4) {
+      push();
+      textAlign(CENTER);
+      textSize(40);
+      stroke(1);
+      strokeWeight(10);
+      fill(255, 255, 255);
+      text("MISSION COMPLETED", 0, -150);
+      strokeWeight(6);
+      textSize(25);
+      text("Statistics:", 0, -70);
+      strokeWeight(2);
+      textSize(20);
+      text("Obstacles destroyed: " + window.obstaclesDestroyed, 0, -30);
+      text("Boost used: 2", 0, 0);
+      text("Time: 2s", 0, 30);
+      text("Best Time: 1s", 0, 60);
+      strokeWeight(6);
+      textSize(30);
+      text("Press ENTER to Leave", 0, 200);
+      pop();
+    } else if (window.startState === 5) {
+      push();
+      textAlign(CENTER);
+      textSize(40);
+      stroke(1);
+      strokeWeight(10);
+      fill(255, 255, 255);
+      text("MISSION FAILED", 0, -150);
+      strokeWeight(6);
+      textSize(25);
+      text("REASON:", 0, -70);
+      strokeWeight(6);
+      textSize(30);
+      text("Press ENTER to Leave", 0, 200);
       pop();
     }
     pop();

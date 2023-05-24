@@ -26,10 +26,7 @@ window.asteroidCounter = 0;
 window.ufoCounter = 0;
 window.eveCounter = 0;
 window.falconCounter = 0;
-
-window.asteroidMission = 3;
-window.ufoMission = 2;
-window.falconMission = 1;
+window.obstaclesDestroyed = 0;
 
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
@@ -59,9 +56,12 @@ window.boostCounter = 0;
 window.boostReady = false;
 window.boostTimer = 0;
 
-window.timerS = 120;
+//Timer variables
+window.timerS = 60;
 window.timer = 0;
+let endTimer = 0;
 
+//Mission related variables
 window.mission = 1;
 window.mission1Completed = false;
 window.mission2Completed = false;
@@ -69,6 +69,9 @@ window.mission3Completed = false;
 window.mission4Completed = false;
 window.mission5Completed = false;
 window.mission6Completed = false;
+window.asteroidMission = 3;
+window.ufoMission = 2;
+window.falconMission = 1;
 
 //Stars
 let stars = [];
@@ -87,6 +90,9 @@ let eves = [];
 let falcons = [];
 let explosions = [];
 let laserColor = [255, 0, 0];
+
+window.startScreenColor = [50, 50, 50];
+window.rectanglesColor = [235, 235, 235];
 
 //laser
 function laser(x, y) {
@@ -135,10 +141,12 @@ function resetGame() {
   window.falconCounter = 0;
   window.movementX = 0;
   window.movementY = 0;
+  window.movementXstar = 0;
   window.boostCounter = 0;
   window.boostReady = false;
   window.boostTimer = 0;
   aimDamage = 1;
+  endTimer = 0;
 }
 
 function draw() {
@@ -158,50 +166,67 @@ function draw() {
     resetGame();
     start.draw();
 
-    if (keyIsDown(77)) {
-      window.startState = 2;
+    //functions for startscreen 1 (first screen)
+    if (window.startState === 1) {
+      if (keyIsDown(32)) {
+        gameState = 2;
+        window.obstaclesDestroyed = 0;
+      }
+      if (keyIsDown(77)) {
+        window.startState = 2;
+      }
+      if (keyIsDown(72)) {
+        window.startState = 3;
+      }
     }
-    if (keyIsDown(72)) {
-      window.startState = 3;
+    //Functions for startscreen "select mission" (state 2)
+    if (window.startState === 2) {
+      if (keyIsDown(8)) {
+        window.startState = 1;
+      }
     }
-    if (keyIsDown(8)) {
+    //Functions for startscreen "How to play" (state 3)
+    if (keyIsDown(8) && window.startState === 3) {
       window.startState = 1;
     }
-    if (keyIsDown(32)) {
-      gameState = 2;
+
+    //function for winscreen and loosescreen (state 4 & 5)
+    if (
+      (window.startState === 4 && keyIsDown(13)) ||
+      (window.startState === 5 && keyIsDown(13))
+    ) {
+      window.startScreenColor = [50, 50, 50];
+      window.rectanglesColor = [235, 235, 235];
+      window.startState = 1;
     }
 
+    //All values for selected mission
     if (window.mission === 1) {
-      window.asteroidMission = 10;
+      window.asteroidMission = 1;
       window.ufoMission = 0;
       window.falconMission = 0;
-      window.timerS = 120;
-    }
-    if (window.mission === 2) {
+      window.timerS = 60;
+    } else if (window.mission === 2) {
       window.asteroidMission = 8;
       window.ufoMission = 4;
       window.falconMission = 0;
       window.timerS = 120;
-    }
-    if (window.mission === 3) {
+    } else if (window.mission === 3) {
       window.asteroidMission = 5;
       window.ufoMission = 20;
       window.falconMission = 0;
       window.timerS = 120;
-    }
-    if (window.mission === 4) {
+    } else if (window.mission === 4) {
       window.asteroidMission = 7;
       window.ufoMission = 10;
       window.falconMission = 4;
       window.timerS = 120;
-    }
-    if (window.mission === 5) {
+    } else if (window.mission === 5) {
       window.asteroidMission = 10;
       window.ufoMission = 5;
       window.falconMission = 20;
       window.timerS = 120;
-    }
-    if (window.mission === 6) {
+    } else if (window.mission === 6) {
     }
   }
 
@@ -437,7 +462,18 @@ function draw() {
       window.ufoCounter >= window.ufoMission &&
       window.falconCounter >= window.falconCounter
     ) {
-      gameState = 1;
+      window.startState = 4;
+      window.startScreenColor = [50, 150, 50];
+      window.rectanglesColor = [5, 85, 5];
+      //Overheat so you cant shoot eves when completed
+      window.overHeated = true;
+      window.obstaclesDestroyed =
+        window.asteroidCounter + window.ufoCounter + window.falconCounter;
+      //end timer is used to delay the end a little bit
+      endTimer++;
+      if (endTimer > 40) {
+        gameState = 1;
+      }
     }
 
     //Timer, converting timer to 1 timerS every sec (60 tics)
@@ -449,6 +485,9 @@ function draw() {
 
     //If timer runs out, change gamestate
     if (window.timerS < 1) {
+      window.startState = 5;
+      window.startScreenColor = [150, 50, 50];
+      window.rectanglesColor = [85, 5, 5];
       gameState = 1;
     }
   }
@@ -463,14 +502,6 @@ function draw() {
     if (keyIsDown(67)) {
       gameState = 2;
     }
-  }
-
-  //when you win
-  if (gameState === 4) {
-  }
-
-  //when you fail a mission
-  if (gameState === 5) {
   }
 
   //aim
