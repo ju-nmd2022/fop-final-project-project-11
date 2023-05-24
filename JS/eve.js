@@ -55,6 +55,9 @@ export default class Eve {
     bezierVertex(45, 100, 50, 90, 27, 150);
     endShape();
     pop();
+
+    this.x = this.x + this.velocityX;
+    this.y = this.y + this.velocityY;
   }
 
   isDead() {

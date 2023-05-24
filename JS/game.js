@@ -14,7 +14,7 @@ document.querySelector("body").style.cursor = "none";
 
 //Canvas setup
 function setup() {
-  createCanvas(innerWidth, innerHeight);
+  createCanvas(innerWidth - 30, innerHeight - 30);
 }
 window.setup = setup;
 
@@ -64,15 +64,9 @@ let endTimer = 0;
 
 //Mission related variables
 window.mission = 1;
-window.mission1Completed = false;
-window.mission2Completed = false;
-window.mission3Completed = false;
-window.mission4Completed = false;
-window.mission5Completed = false;
-window.mission6Completed = false;
-window.asteroidMission = 3;
-window.ufoMission = 2;
-window.falconMission = 1;
+window.asteroidMission = 10;
+window.ufoMission = 0;
+window.falconMission = 0;
 
 //Stars
 let stars = [];
@@ -95,7 +89,6 @@ let laserColor = [255, 0, 0];
 window.startScreenColor = [50, 50, 50];
 window.rectanglesColor = [235, 235, 235];
 
-//laser
 function laser(x, y) {
   push();
   stroke(laserColor);
@@ -110,7 +103,6 @@ function laser(x, y) {
   pop();
 }
 
-// Aim Crosshair
 function aim(x, y) {
   push();
   translate(x, y);
@@ -122,8 +114,8 @@ function aim(x, y) {
   pop();
 }
 
-//reset all values function
 function resetGame() {
+  //Splice all lists (empty the field)
   for (let asteroid of asteroids) {
     asteroids.splice(asteroids.indexOf(asteroid), 1);
   }
@@ -136,7 +128,11 @@ function resetGame() {
   for (let falcon of falcons) {
     falcons.splice(falcons.indexOf(falcon), 1);
   }
+  for (let explosion of explosions) {
+    explosions.splice(explosions.indexOf(explosion), 1);
+  }
 
+  //Reset variables
   window.asteroidCounter = 0;
   window.ufoCounter = 0;
   window.eveCounter = 0;
@@ -147,6 +143,9 @@ function resetGame() {
   window.boostCounter = 0;
   window.boostReady = false;
   window.boostTimer = 0;
+  window.heater = 0;
+  window.overHeated = false;
+  cooldown = 0;
   aimDamage = 1;
   endTimer = 0;
 }
@@ -189,14 +188,34 @@ function draw() {
 
       if (keyIsDown(49)) {
         window.mission = 1;
+        window.asteroidMission = 10;
+        window.ufoMission = 0;
+        window.falconMission = 0;
+        window.timerS = 60;
       } else if (keyIsDown(50) && window.mission1Completed) {
         window.mission = 2;
+        window.asteroidMission = 8;
+        window.ufoMission = 4;
+        window.falconMission = 0;
+        window.timerS = 80;
       } else if (keyIsDown(51) && window.mission2Completed) {
         window.mission = 3;
+        window.asteroidMission = 5;
+        window.ufoMission = 10;
+        window.falconMission = 0;
+        window.timerS = 120;
       } else if (keyIsDown(52) && window.mission3Completed) {
         window.mission = 4;
+        window.asteroidMission = 8;
+        window.ufoMission = 10;
+        window.falconMission = 2;
+        window.timerS = 150;
       } else if (keyIsDown(53) && window.mission4Completed) {
         window.mission = 5;
+        window.asteroidMission = 10;
+        window.ufoMission = 5;
+        window.falconMission = 20;
+        window.timerS = 180;
       } else if (keyIsDown(54) && window.mission5Completed) {
         window.mission = 6;
       }
@@ -215,54 +234,18 @@ function draw() {
       window.rectanglesColor = [235, 235, 235];
       window.startState = 1;
     }
-
-    //All values for selected mission
-    if (window.mission === 1) {
-      window.asteroidMission = 1;
-      window.ufoMission = 0;
-      window.falconMission = 0;
-      window.timerS = 60;
-    } else if (window.mission === 2) {
-      window.asteroidMission = 8;
-      window.ufoMission = 4;
-      window.falconMission = 0;
-      window.timerS = 120;
-    } else if (window.mission === 3) {
-      window.asteroidMission = 5;
-      window.ufoMission = 20;
-      window.falconMission = 0;
-      window.timerS = 120;
-    } else if (window.mission === 4) {
-      window.asteroidMission = 7;
-      window.ufoMission = 10;
-      window.falconMission = 4;
-      window.timerS = 120;
-    } else if (window.mission === 5) {
-      window.asteroidMission = 10;
-      window.ufoMission = 5;
-      window.falconMission = 20;
-      window.timerS = 120;
-    } else if (window.mission === 6) {
-    }
   }
 
   //when game is "playing"
   if (gameState === 2) {
     //Asteroid generating
     if (asteroids.length < 10) {
-      let asteroid = new Asteroid(
-        Math.floor(Math.random() * 600 - 900),
-        Math.floor(Math.random() * (innerHeight + 200) - 100)
-      );
+      let asteroid = new Asteroid();
       asteroids.push(asteroid);
     }
     //every each asteroid's moving, change hp and splice if destroyed
     for (let asteroid of asteroids) {
       asteroid.draw();
-      asteroid.x = asteroid.x + asteroid.velocityX;
-      asteroid.y = asteroid.y + asteroid.velocityY;
-      asteroid.rotation = asteroid.rotation + 0.1;
-
       if (mouseIsPressed) {
         if (
           mouseX > asteroid.x + window.movementX - 30 * asteroid.scale &&
@@ -290,11 +273,8 @@ function draw() {
       let ufo = new Ufo();
       ufos.push(ufo);
     }
-    //every each ufo's moving, change hp and splice if destroyed
     for (let ufo of ufos) {
       ufo.draw();
-      ufo.x = ufo.x + ufo.velocityX;
-      ufo.y = ufo.y + ufo.velocityY;
       if (mouseIsPressed) {
         if (
           mouseX > ufo.x + window.movementX - 20 * ufo.scale &&
@@ -325,8 +305,6 @@ function draw() {
     //every each eve's moving, change hp and splice if destroyed
     for (let eve of eves) {
       eve.draw();
-      eve.x = eve.x + eve.velocityX;
-      eve.y = eve.y + eve.velocityY;
       if (mouseIsPressed) {
         if (
           mouseX > eve.x + window.movementX - 20 &&
@@ -339,7 +317,6 @@ function draw() {
           gameState = 1;
         }
       }
-
       if (eve.isDead()) {
         eves.splice(eves.indexOf(eve), 1);
       }
@@ -437,8 +414,7 @@ function draw() {
       }
     }
 
-    //Moves screen when using arrows or ASDW and makes sure you cant
-    // go further than "allowed"
+    //Moves screen when using arrows or ASDW
     if (
       (window.movementX < 300 && keyIsDown(65)) ||
       (window.movementX < 300 && keyIsDown(37))
@@ -471,12 +447,7 @@ function draw() {
     joyStick1.draw();
     joyStick2.draw();
 
-    //Changes the state to pause
-    if (keyIsDown(27)) {
-      gameState = 3;
-    }
-
-    //Change values and states if mission is completed
+    //if mission is completed
     if (
       window.asteroidCounter >= window.asteroidMission &&
       window.ufoCounter >= window.ufoMission &&
@@ -485,52 +456,91 @@ function draw() {
       window.startState = 4;
       window.startScreenColor = [50, 150, 50];
       window.rectanglesColor = [5, 85, 5];
-      //Overheat so you cant shoot eves when completed
       window.overHeated = true;
       window.obstaclesDestroyed =
         window.asteroidCounter + window.ufoCounter + window.falconCounter;
-      //end timer is used to delay the end a little bit
       endTimer++;
-      if (endTimer > 40) {
+      if (endTimer > 20) {
         gameState = 1;
       }
-
-      //Makes mission completed
       if (window.mission === 1) {
         window.mission1Completed = true;
+        window.timerCompleted1 = 60 - window.timerS;
+        if (
+          window.timerCompleted1 < window.timerBestCompleted1 ||
+          window.timerBestCompleted1 === undefined
+        ) {
+          window.timerBestCompleted1 = window.timerCompleted1;
+        }
       } else if (window.mission === 2) {
         window.mission2Completed = true;
+        window.timerCompleted1 = 80 - window.timerS;
+        if (
+          window.timerCompleted2 < window.timerBestCompleted2 ||
+          window.timerBestCompleted2 === undefined
+        ) {
+          window.timerBestCompleted2 = window.timerCompleted2;
+        }
       } else if (window.mission === 3) {
         window.mission3Completed = true;
+        window.timerCompleted1 = 120 - window.timerS;
+        if (
+          window.timerCompleted3 < window.timerBestCompleted3 ||
+          window.timerBestCompleted3 === undefined
+        ) {
+          window.timerBestCompleted3 = window.timerCompleted3;
+        }
       } else if (window.mission === 4) {
         window.mission4Completed = true;
+        window.timerCompleted1 = 150 - window.timerS;
+        if (
+          window.timerCompleted4 < window.timerBestCompleted4 ||
+          window.timerBestCompleted4 === undefined
+        ) {
+          window.timerBestCompleted4 = window.timerCompleted4;
+        }
       } else if (window.mission === 5) {
         window.mission5Completed = true;
+        window.timerCompleted1 = 180 - window.timerS;
+        if (
+          window.timerCompleted5 < window.timerBestCompleted5 ||
+          window.timerBestCompleted5 === undefined
+        ) {
+          window.timerBestCompleted5 = window.timerCompleted5;
+        }
       } else if (window.mission === 6) {
         window.mission6Completed = true;
+        window.timerCompleted1 = 210 - window.timerS;
+        if (
+          window.timerCompleted6 < window.timerBestCompleted6 ||
+          window.timerBestCompleted6 === undefined
+        ) {
+          window.timerBestCompleted6 = window.timerCompleted6;
+        }
       }
     }
 
-    //Timer, converting timer to 1 timerS every sec (60 tics)
+    //Timer (End if time is out, converting to s)
     window.timer++;
     if (window.timer >= 60) {
       window.timer = 0;
       window.timerS--;
     }
-
-    //If timer runs out, change gamestate
     if (window.timerS < 1) {
       window.startState = 5;
       window.startScreenColor = [150, 50, 50];
       window.rectanglesColor = [85, 5, 5];
       gameState = 1;
     }
-  }
 
+    //Changes the state to pause
+    if (keyIsDown(27)) {
+      gameState = 3;
+    }
+  }
   //When game is paused
   if (gameState === 3) {
     pauseMenu.draw();
-
     if (keyIsDown(76)) {
       gameState = 1;
     }
@@ -538,9 +548,6 @@ function draw() {
       gameState = 2;
     }
   }
-
-  //aim
   aim(mouseX, mouseY);
 }
-
 window.draw = draw;

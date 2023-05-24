@@ -156,13 +156,57 @@ export default class StartScreen {
       noStroke();
       fill(0, 0, 0);
       textSize(20);
-      textAlign(CENTER);
-      text("Mission 1", -145, -175);
-      text("Mission 2", 75, -175);
-      text("Mission 3", -145, -5);
-      text("Mission 4", 75, -5);
-      text("Mission 5", -145, 165);
-      text("Mission 6", 75, 165);
+      text("Mission 1", -200, -175);
+      text("Mission 2", 25, -175);
+      text("Mission 3", -200, -5);
+      text("Mission 4", 25, -5);
+      text("Mission 5", -200, 165);
+      text("Mission 6", 25, 165);
+      textSize(10);
+      text("THE PHANTOM MENACE", -200, -160);
+      text("ATTACK OF THE CLONES", 25, -160);
+      text("REVENGE OF THE SITH", -200, 10);
+      text("A NEW HOPE", 25, 10);
+      text("THE EMPIRE STRIKES BACK", -200, 180);
+      text("THE RETURN OF THE JEDI", 25, 180);
+
+      //Makes the mission not completed or shows the best and last time
+      if (window.timerBestCompleted1 === undefined) {
+        text("NOT COMPLETED YET", -200, -100);
+      } else {
+        text("Last Time: " + window.timerCompleted1 + "s", -200, -105);
+        text("Best Time: " + window.timerBestCompleted1 + "s", -200, -90);
+      }
+      if (window.timerBestCompleted2 === undefined) {
+        text("NOT COMPLETED YET", 25, -100);
+      } else {
+        text("Last Time: " + window.timerCompleted2 + "s", 25, -105);
+        text("Best Time: " + window.timerBestCompleted2 + "s", 25, -90);
+      }
+      if (window.timerBestCompleted3 === undefined) {
+        text("NOT COMPLETED YET", -200, 70);
+      } else {
+        text("Last Time: " + window.timerCompleted3 + "s", -200, 65);
+        text("Best Time: " + window.timerBestCompleted3 + "s", -200, 80);
+      }
+      if (window.timerBestCompleted4 === undefined) {
+        text("NOT COMPLETED YET", 25, 70);
+      } else {
+        text("Last Time: " + window.timerCompleted4 + "s", 25, 65);
+        text("Best Time: " + window.timerBestCompleted4 + "s", 25, 80);
+      }
+      if (window.timerBestCompleted5 === undefined) {
+        text("NOT COMPLETED YET", -200, 240);
+      } else {
+        text("Last Time: " + window.timerCompleted5 + "s", -200, 235);
+        text("Best Time: " + window.timerBestCompleted5 + "s", -200, 250);
+      }
+      if (window.timerBestCompleted6 === undefined) {
+        text("NOT COMPLETED YET", 25, 240);
+      } else {
+        text("Last Time: " + window.timerCompleted6 + "s", 25, 235);
+        text("Best Time: " + window.timerBestCompleted6 + "s", 25, 250);
+      }
       pop();
     } else if (window.startState === 3) {
       push();

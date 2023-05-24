@@ -51,6 +51,9 @@ export default class Ufo {
     scale(0.25);
     line(0, -54 * this.scale, this.hp, -54 * this.scale);
     pop();
+
+    this.x = this.x + this.velocityX;
+    this.y = this.y + this.velocityY;
   }
 
   isDead() {

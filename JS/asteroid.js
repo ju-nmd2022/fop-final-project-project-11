@@ -1,7 +1,7 @@
 export default class Asteroid {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor() {
+    this.x = Math.floor(Math.random() * 600 - 900);
+    this.y = Math.floor(Math.random() * (innerHeight + 200) - 100);
     this.velocityX = Math.random() * 3 + 2;
     this.velocityY = Math.random() * 1 - 1;
     this.scale = this.velocityX * 0.2;
@@ -63,6 +63,10 @@ export default class Asteroid {
     scale(0.5);
     line(0, -74 * this.scale, this.hp, -74 * this.scale);
     pop();
+
+    this.x = this.x + this.velocityX;
+    this.y = this.y + this.velocityY;
+    this.rotation = this.rotation + 0.1;
   }
 
   isDead() {

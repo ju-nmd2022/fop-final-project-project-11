@@ -31,12 +31,12 @@ export default class Ship {
     fill(30, 30, 30);
     rect(innerWidth / 2 - 425, innerHeight - 120, 210, 100);
     fill(0, 0, 0);
-    textSize(50);
     rect(innerWidth / 2 - 420, innerHeight - 115, 200, 90);
 
     //changes the text between green or red depending if the mission is completed
     //or not for the specific object
     textSize(15);
+    textAlign(CENTER);
     if (window.asteroidCounter < window.asteroidMission) {
       fill(255, 50, 50);
     } else {
@@ -44,7 +44,7 @@ export default class Ship {
     }
     text(
       window.asteroidCounter + "/" + window.asteroidMission,
-      innerWidth / 2 - 398,
+      innerWidth / 2 - 370,
       innerHeight - 45
     );
     if (window.ufoCounter < window.ufoMission) {
@@ -54,7 +54,7 @@ export default class Ship {
     }
     text(
       window.ufoCounter + "/" + window.ufoMission,
-      innerWidth / 2 - 330,
+      innerWidth / 2 - 320,
       innerHeight - 45
     );
 
@@ -65,12 +65,12 @@ export default class Ship {
     }
     text(
       window.falconCounter + "/" + window.falconMission,
-      innerWidth / 2 - 262,
+      innerWidth / 2 - 270,
       innerHeight - 45
     );
 
     //asteroid drawing for the "progress board"
-    translate(innerWidth / 2 - 385, innerHeight - 85);
+    translate(innerWidth / 2 - 370, innerHeight - 83);
     scale(0.1);
     fill(150, 150, 150);
     beginShape();
@@ -126,6 +126,48 @@ export default class Ship {
     ellipse(15, 64, 10);
     ellipse(80, 54, 10);
     ellipse(50, 60, 10);
+    pop();
+
+    //millenium falcon drawing for the "progress board"
+    push();
+    translate(innerWidth / 2 - 270, innerHeight - 80);
+    scale(0.12);
+    noStroke();
+    fill(100, 170, 255, 50);
+    rect(-50, 20, 100, 100);
+    fill(100, 170, 255);
+    ellipse(0, 14, 180);
+    fill(160, 160, 160);
+    quad(-97, -20, -50, -150, -20, -150, -20, 0);
+    quad(97, -20, 50, -150, 20, -150, 20, 0);
+    rect(-17, -50, 34, -60);
+    ellipse(0, 0, 200);
+    stroke(1);
+    line(0, 0, -75, 66);
+    line(0, 0, 75, 66);
+    line(-19, 0, -19, -110);
+    line(19, 0, 19, -110);
+    fill(50, 50, 50);
+    ellipse(-30, 60, 13);
+    ellipse(0, 65, 13);
+    ellipse(30, 60, 13);
+    ellipse(-15, 45, 13);
+    ellipse(15, 45, 13);
+    push();
+    fill(200, 70, 70);
+    rect(-60, 0, 20, 8);
+    rotate(0.5);
+    rect(-60, 0, 20, 8);
+    rotate(1.1);
+    rect(-120, 22, 25, 10);
+    rect(-120, 22, 25, 10);
+    pop();
+    fill(30, 30, 30);
+    ellipse(95, -70, 28);
+    fill(160, 160, 160);
+    quad(0, -10, 0, 20, 100, -35, 85, -60);
+    quad(80, -58, 100, -35, 110, -70, 80, -70);
+    ellipse(0, 0, 50);
     pop();
 
     //The Boost section (ACTIVATE BUTTON etc.)
