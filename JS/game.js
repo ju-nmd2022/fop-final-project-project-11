@@ -3,8 +3,8 @@ import Ufo from "./ufo.js";
 import Eve from "./eve.js";
 import Falcon from "./falcon.js";
 import Ship from "./shipGraphics.js";
-import UfoExplosion from "./explosionUFO.js";
-import AsteroidExplosion from "./explosionAsteroid.js";
+import RedExplosion from "./explosionRed.js";
+import GrayExplosion from "./explosionGray.js";
 import Joystick from "./joystick.js";
 import PauseMenu from "./pauseMenu.js";
 import StartScreen from "./startScreen.js";
@@ -13,12 +13,14 @@ import ProgressBoard from "./progressBoard.js";
 //Removes the mouse
 document.querySelector("body").style.cursor = "none";
 
+//To make the screen a little bit smaller without having to change all in code
 innerHeight = innerHeight - 50;
 innerWidth = innerWidth - 50;
 
 //Canvas setup
 function setup() {
-  createCanvas(innerWidth, innerHeight);
+  const canvas = createCanvas(innerWidth, innerHeight);
+  canvas.parent("midScreen");
 }
 window.setup = setup;
 
@@ -277,7 +279,7 @@ function draw() {
           window.overHeated === false
         ) {
           asteroid.hp = asteroid.hp - aimDamage;
-          let explosion = new AsteroidExplosion(asteroid.x, asteroid.y);
+          let explosion = new GrayExplosion(asteroid.x, asteroid.y);
           explosions.push(explosion);
         }
       }
@@ -286,6 +288,10 @@ function draw() {
         asteroids.splice(asteroids.indexOf(asteroid), 1);
         if (asteroid.hp < 1) {
           window.asteroidCounter++;
+          for (let i = 0; i < 250; i++) {
+            let explosion = new GrayExplosion(asteroid.x + 5, asteroid.y);
+            explosions.push(explosion);
+          }
         }
       }
     }
@@ -306,7 +312,7 @@ function draw() {
           window.overHeated === false
         ) {
           ufo.hp = ufo.hp - aimDamage;
-          let explosion = new UfoExplosion(ufo.x, ufo.y);
+          let explosion = new RedExplosion(ufo.x, ufo.y);
           explosions.push(explosion);
         }
       }
@@ -315,6 +321,10 @@ function draw() {
         ufos.splice(ufos.indexOf(ufo), 1);
         if (ufo.hp < 1) {
           window.ufoCounter++;
+          for (let i = 0; i < 250; i++) {
+            let explosion = new RedExplosion(ufo.x - 5, ufo.y);
+            explosions.push(explosion);
+          }
         }
       }
     }
@@ -335,7 +345,6 @@ function draw() {
           mouseY > eve.y + window.movementY &&
           window.overHeated === false
         ) {
-          eve.hp = eve.hp - aimDamage;
           window.startState = 5;
           window.startScreenColor = [150, 50, 50];
           window.rectanglesColor = [85, 5, 5];
@@ -353,7 +362,6 @@ function draw() {
       let falcon = new Falcon();
       falcons.push(falcon);
     }
-
     //every each falcon's moving, change hp and splice if destroyed
     for (let falcon of falcons) {
       falcon.draw();
@@ -367,6 +375,8 @@ function draw() {
           window.overHeated === false
         ) {
           falcon.hp = falcon.hp - aimDamage;
+          let explosion = new GrayExplosion(falcon.x, falcon.y);
+          explosions.push(explosion);
         }
       }
 
@@ -374,6 +384,10 @@ function draw() {
         falcons.splice(falcons.indexOf(falcon), 1);
         if (falcon.hp < 1) {
           window.falconCounter++;
+          for (let i = 0; i < 250; i++) {
+            let explosion = new GrayExplosion(falcon.x, falcon.y - 5);
+            explosions.push(explosion);
+          }
         }
       }
     }

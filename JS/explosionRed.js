@@ -1,10 +1,10 @@
-export default class UfoExplosion {
+export default class RedExplosion {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.v = Math.random();
     this.a = Math.random() * 2 * Math.PI;
-    this.maxLife = 100 + Math.floor(Math.random() * 100);
+    this.maxLife = 50 + Math.floor(Math.random() * 100);
     this.life = 0;
   }
 

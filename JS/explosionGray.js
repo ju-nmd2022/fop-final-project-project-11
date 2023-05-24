@@ -1,10 +1,10 @@
-export default class AsteroidExplosion {
+export default class GrayExplosion {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.v = Math.random();
     this.a = Math.random() * 2 * Math.PI;
-    this.maxLife = 100 + Math.floor(Math.random() * 100);
+    this.maxLife = 70 + Math.floor(Math.random() * 100);
     this.life = 0;
   }
 
@@ -12,7 +12,7 @@ export default class AsteroidExplosion {
     push();
     translate(this.x + window.movementX, this.y + window.movementY);
     noStroke();
-    fill(100, 100, 100, 200);
+    fill(150, 150, 150, 200);
     ellipse(0, 0, 3);
     pop();
   }

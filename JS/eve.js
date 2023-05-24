@@ -4,7 +4,6 @@ export default class Eve {
     this.y = -300 - Math.floor(Math.random() * 600);
     this.velocityY = Math.random() * 3 + 2;
     this.velocityX = Math.random() * 1 - 1;
-    this.hp = 1;
   }
 
   draw() {
@@ -61,7 +60,7 @@ export default class Eve {
   }
 
   isDead() {
-    if (this.y > innerHeight + 300 || this.hp < 1) {
+    if (this.y > innerHeight + 300) {
       return true;
     } else {
       return false;
