@@ -136,5 +136,6 @@ export default class ProgressBoard {
     ellipse(0, 0, 50);
     pop();
     pop();
+    pop();
   }
 }

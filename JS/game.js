@@ -24,6 +24,20 @@ function setup() {
 }
 window.setup = setup;
 
+let mission1CompletedJSON;
+let mission2CompletedJSON;
+let mission3CompletedJSON;
+let mission4CompletedJSON;
+let mission5CompletedJSON;
+let mission6CompletedJSON;
+
+let mission1BestTimeJSON;
+let mission2BestTimeJSON;
+let mission3BestTimeJSON;
+let mission4BestTimeJSON;
+let mission5BestTimeJSON;
+let mission6BestTimeJSON;
+
 let pauseMenu = new PauseMenu(innerWidth / 2, innerHeight / 2);
 
 //Values
@@ -512,6 +526,7 @@ function draw() {
         ) {
           window.timerBestCompleted1 = window.timerCompleted1;
         }
+        saveToStorage();
       } else if (window.mission === 2) {
         window.mission2Completed = true;
         window.timerCompleted1 = 80 - window.timerS;
@@ -521,6 +536,7 @@ function draw() {
         ) {
           window.timerBestCompleted2 = window.timerCompleted2;
         }
+        saveToStorage();
       } else if (window.mission === 3) {
         window.mission3Completed = true;
         window.timerCompleted1 = 120 - window.timerS;
@@ -530,6 +546,7 @@ function draw() {
         ) {
           window.timerBestCompleted3 = window.timerCompleted3;
         }
+        saveToStorage();
       } else if (window.mission === 4) {
         window.mission4Completed = true;
         window.timerCompleted1 = 150 - window.timerS;
@@ -539,6 +556,7 @@ function draw() {
         ) {
           window.timerBestCompleted4 = window.timerCompleted4;
         }
+        saveToStorage();
       } else if (window.mission === 5) {
         window.mission5Completed = true;
         window.timerCompleted1 = 180 - window.timerS;
@@ -548,6 +566,7 @@ function draw() {
         ) {
           window.timerBestCompleted5 = window.timerCompleted5;
         }
+        saveToStorage();
       } else if (window.mission === 6) {
         window.mission6Completed = true;
         window.timerCompleted1 = 210 - window.timerS;
@@ -557,6 +576,7 @@ function draw() {
         ) {
           window.timerBestCompleted6 = window.timerCompleted6;
         }
+        saveToStorage();
       }
     }
 
@@ -592,4 +612,76 @@ function draw() {
   }
   aim(mouseX, mouseY);
 }
+
 window.draw = draw;
+
+//Local storage save function
+function saveToStorage() {
+  //all mission completed
+  mission1CompletedJSON = JSON.stringify(window.mission1Completed);
+  mission2CompletedJSON = JSON.stringify(window.mission2Completed);
+  mission3CompletedJSON = JSON.stringify(window.mission3Completed);
+  mission4CompletedJSON = JSON.stringify(window.mission41Completed);
+  mission5CompletedJSON = JSON.stringify(window.mission5Completed);
+  mission6CompletedJSON = JSON.stringify(window.mission6Completed);
+  localStorage.mission1Completed = mission1CompletedJSON;
+  localStorage.mission2Completed = mission2CompletedJSON;
+  localStorage.mission3Completed = mission3CompletedJSON;
+  localStorage.mission4Completed = mission4CompletedJSON;
+  localStorage.mission5Completed = mission5CompletedJSON;
+  localStorage.mission6Completed = mission6CompletedJSON;
+
+  //best times
+  mission1BestTimeJSON = JSON.stringify(window.timerBestCompleted1);
+  mission2BestTimeJSON = JSON.stringify(window.timerBestCompleted2);
+  mission3BestTimeJSON = JSON.stringify(window.timerBestCompleted3);
+  mission4BestTimeJSON = JSON.stringify(window.timerBestCompleted4);
+  mission5BestTimeJSON = JSON.stringify(window.timerBestCompleted5);
+  mission6BestTimeJSON = JSON.stringify(window.timerBestCompleted6);
+  localStorage.mission1BestTime = mission1BestTimeJSON;
+  localStorage.mission2BestTime = mission2BestTimeJSON;
+  localStorage.mission3BestTime = mission3BestTimeJSON;
+  localStorage.mission4BestTime = mission4BestTimeJSON;
+  localStorage.mission5BestTime = mission5BestTimeJSON;
+  localStorage.mission6BestTime = mission6BestTimeJSON;
+}
+
+//Loads in the values from local (if any)
+if (localStorage.mission1Completed) {
+  window.mission1Completed = JSON.parse(localStorage.mission1Completed);
+}
+if (localStorage.mission2Completed) {
+  window.mission2Completed = JSON.parse(localStorage.mission2Completed);
+}
+if (localStorage.mission3Completed) {
+  window.mission3Completed = JSON.parse(localStorage.mission3Completed);
+}
+if (localStorage.mission4Completed) {
+  window.mission4Completed = JSON.parse(localStorage.mission4Completed);
+}
+if (localStorage.mission5Completed) {
+  window.mission5Completed = JSON.parse(localStorage.mission5Completed);
+}
+if (localStorage.mission6Completed) {
+  window.mission6Completed = JSON.parse(localStorage.mission6Completed);
+}
+
+//loads in best time from local (If any)
+if (localStorage.mission1BestTime) {
+  window.timerBestCompleted1 = JSON.parse(localStorage.mission1BestTime);
+}
+if (localStorage.mission2BestTime) {
+  window.timerBestCompleted2 = JSON.parse(localStorage.mission2BestTime);
+}
+if (localStorage.mission3BestTime) {
+  window.timerBestCompleted3 = JSON.parse(localStorage.mission3BestTime);
+}
+if (localStorage.mission4BestTime) {
+  window.timerBestCompleted4 = JSON.parse(localStorage.mission4BestTime);
+}
+if (localStorage.mission5BestTime) {
+  window.timerBestCompleted5 = JSON.parse(localStorage.mission5BestTime);
+}
+if (localStorage.mission6BestTime) {
+  window.timerBestCompleted6 = JSON.parse(localStorage.mission6BestTime);
+}

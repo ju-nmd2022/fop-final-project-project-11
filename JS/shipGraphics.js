@@ -81,5 +81,6 @@ export default class Ship {
     text(window.timerS + "s", 0, 110);
 
     pop();
+    pop();
   }
 }
