@@ -2,9 +2,9 @@ export default class Ufo {
   constructor() {
     this.x = innerWidth + Math.floor(Math.random() * 600) + 300;
     this.y = Math.floor(Math.random() * (innerHeight + 100) - 50);
-    this.velocityX = -Math.random() * 3 - 2;
+    this.velocityX = -Math.random() * 3 - 1;
     this.velocityY = Math.random() * 1 - 1;
-    this.scale = this.velocityX * -0.25;
+    this.scale = this.velocityX * -0.35;
     this.hp = 200;
   }
 

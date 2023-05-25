@@ -2,7 +2,7 @@ export default class Falcon {
   constructor() {
     this.x = Math.floor(Math.random() * (innerWidth + 600) - 300);
     this.y = innerHeight + 300 + Math.random(500);
-    this.velocityY = Math.random() * -4 - 6;
+    this.velocityY = Math.random() * -4 - 4;
     this.hp = 50;
   }
 
