@@ -232,14 +232,14 @@ function draw() {
         window.timerS = 60;
       } else if (keyIsDown(50) && window.mission1Completed) {
         window.mission = 2;
-        window.asteroidMission = 2;
+        window.asteroidMission = 4;
         window.ufoMission = 2;
         window.falconMission = 0;
         window.timerS = 80;
       } else if (keyIsDown(51) && window.mission2Completed) {
         window.mission = 3;
-        window.asteroidMission = 4;
-        window.ufoMission = 4;
+        window.asteroidMission = 0;
+        window.ufoMission = 6;
         window.falconMission = 0;
         window.timerS = 120;
       } else if (keyIsDown(52) && window.mission3Completed) {
@@ -250,16 +250,15 @@ function draw() {
         window.timerS = 150;
       } else if (keyIsDown(53) && window.mission4Completed) {
         window.mission = 5;
-        window.asteroidMission = 3;
-        window.ufoMission = 5;
-        window.falconMission = 3;
+        window.asteroidMission = 4;
+        window.ufoMission = 0;
+        window.falconMission = 10;
         window.timerS = 180;
       } else if (keyIsDown(54) && window.mission5Completed) {
-        window.mission = 5;
-        window.asteroidMission = 4;
-        window.ufoMission = 5;
-        window.falconMission = 6;
         window.mission = 6;
+        window.asteroidMission = 4;
+        window.ufoMission = 6;
+        window.falconMission = 8;
         window.timerS = 210;
       }
     }
@@ -350,7 +349,7 @@ function draw() {
     }
 
     //Eve generating
-    if (eves.length < 5) {
+    if (eves.length < 2 * window.mission) {
       let eve = new Eve();
       eves.push(eve);
     }
