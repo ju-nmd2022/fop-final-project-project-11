@@ -224,7 +224,6 @@ function draw() {
       if (keyIsDown(8)) {
         window.startState = 1;
       }
-
       if (keyIsDown(49)) {
         window.mission = 1;
         window.asteroidMission = 5;
@@ -256,7 +255,12 @@ function draw() {
         window.falconMission = 3;
         window.timerS = 180;
       } else if (keyIsDown(54) && window.mission5Completed) {
+        window.mission = 5;
+        window.asteroidMission = 4;
+        window.ufoMission = 5;
+        window.falconMission = 6;
         window.mission = 6;
+        window.timerS = 210;
       }
     }
     //Functions for startscreen "How to play" (state 3)
@@ -627,7 +631,7 @@ function saveToStorage() {
   mission1CompletedJSON = JSON.stringify(window.mission1Completed);
   mission2CompletedJSON = JSON.stringify(window.mission2Completed);
   mission3CompletedJSON = JSON.stringify(window.mission3Completed);
-  mission4CompletedJSON = JSON.stringify(window.mission41Completed);
+  mission4CompletedJSON = JSON.stringify(window.mission4Completed);
   mission5CompletedJSON = JSON.stringify(window.mission5Completed);
   mission6CompletedJSON = JSON.stringify(window.mission6Completed);
   localStorage.mission1Completed = mission1CompletedJSON;
