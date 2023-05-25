@@ -49,6 +49,8 @@ window.falconCounter = 0;
 window.obstaclesDestroyed = 0;
 window.boostUsedCounter = 0;
 
+let song;
+
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
@@ -563,7 +565,7 @@ function draw() {
         saveToStorage();
       } else if (window.mission === 5) {
         window.mission5Completed = true;
-        window.timerCompleted1 = 180 - window.timerS;
+        window.timerCompleted5 = 180 - window.timerS;
         if (
           window.timerCompleted5 < window.timerBestCompleted5 ||
           window.timerBestCompleted5 === undefined
@@ -573,7 +575,7 @@ function draw() {
         saveToStorage();
       } else if (window.mission === 6) {
         window.mission6Completed = true;
-        window.timerCompleted1 = 210 - window.timerS;
+        window.timerCompleted6 = 210 - window.timerS;
         if (
           window.timerCompleted6 < window.timerBestCompleted6 ||
           window.timerBestCompleted6 === undefined
@@ -616,7 +618,11 @@ function draw() {
   }
   aim(mouseX, mouseY);
 }
-
+if (gameState === 2) {
+  if (window.shooting) {
+    song.play();
+  }
+}
 window.draw = draw;
 
 //Local storage save function
