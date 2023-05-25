@@ -71,6 +71,8 @@ export default class StartScreen {
       pop();
     } else if (window.startState === 2) {
       push();
+
+      //Backspace button
       fill(255, 255, 255);
       rect(90, -290, 120, 40);
       fill(0, 0, 0);
@@ -78,6 +80,12 @@ export default class StartScreen {
       stroke(0, 0, 0);
       strokeWeight(4);
       line(105, -270, 200, -270);
+      push();
+      fill(205, 205, 205);
+      strokeWeight(1);
+      textAlign(CENTER);
+      text("(BACKSPACE)", 150, -295);
+      pop();
 
       //Mission 6 box
       if (window.mission5Completed) {
@@ -152,7 +160,6 @@ export default class StartScreen {
         stroke(0, 0, 0);
       }
       rect(-210, -210, 200, 150);
-
       noStroke();
       fill(0, 0, 0);
       textSize(20);
@@ -170,75 +177,7 @@ export default class StartScreen {
       text("THE EMPIRE STRIKES BACK", -200, 180);
       text("THE RETURN OF THE JEDI", 25, 180);
 
-      text("Press key 1-6 to choose mission", -200, -240, 35, 35);
-
-      push();
-      fill(100, 100, 100);
-      rect(-55, -200, 35, 35);
-      fill(40, 40, 40);
-      rect(-55, -165, 35, 3);
-      rect(-20, -200, 3, 38);
-      textSize(17);
-      fill(255, 255, 255);
-      text("1", -38, -187, 35, 35);
-      pop();
-
-      push();
-      fill(100, 100, 100);
-      rect(-55 + 220, -200, 35, 35);
-      fill(40, 40, 40);
-      rect(-55 + 220, -165, 35, 3);
-      rect(-20 + 220, -200, 3, 38);
-      textSize(17);
-      fill(255, 255, 255);
-      text("2", -38 + 220, -187, 35, 35);
-      pop();
-
-      push();
-      fill(100, 100, 100);
-      rect(-55, -200 + 170, 35, 35);
-      fill(40, 40, 40);
-      rect(-55, -165 + 170, 35, 3);
-      rect(-20, -200 + 170, 3, 38);
-      textSize(17);
-      fill(255, 255, 255);
-      text("3", -38, -187 + 170, 35, 35);
-      pop();
-
-      push();
-      fill(100, 100, 100);
-      rect(-55 + 220, -200 + 170, 35, 35);
-      fill(40, 40, 40);
-      rect(-55 + 220, -165 + 170, 35, 3);
-      rect(-20 + 220, -200 + 170, 3, 38);
-      textSize(17);
-      fill(255, 255, 255);
-      text("4", -38 + 220, -187 + 170, 35, 35);
-      pop();
-
-      push();
-      fill(100, 100, 100);
-      rect(-55, -200 + 340, 35, 35);
-      fill(40, 40, 40);
-      rect(-55, -165 + 340, 35, 3);
-      rect(-20, -200 + 340, 3, 38);
-      textSize(17);
-      fill(255, 255, 255);
-      text("5", -38, -187 + 340, 35, 35);
-      pop();
-
-      push();
-      fill(100, 100, 100);
-      rect(-55 + 220, -200 + 340, 35, 35);
-      fill(40, 40, 40);
-      rect(-55 + 220, -165 + 340, 35, 3);
-      rect(-20 + 220, -200 + 340, 3, 38);
-      textSize(17);
-      fill(255, 255, 255);
-      text("6", -38 + 220, -187 + 340, 35, 35);
-      pop();
-
-      //Makes the mission not completed or shows the best and last time
+      //Makes the mission not completed or shows the best time
       if (window.timerBestCompleted1 === undefined) {
         text("NOT COMPLETED YET", -200, -100);
       } else {
@@ -269,6 +208,42 @@ export default class StartScreen {
       } else {
         text("Best Time: " + window.timerBestCompleted6 + "s", 25, 250);
       }
+
+      //The "headline text for select mission press key...."
+      textSize(17);
+      fill(255, 255, 255);
+      text("Press key 1-6 to choose mission", -200, -255);
+      text("(You need to unlock the mission first)", -200, -235);
+
+      //The "rectangles" and text for 1,2,3,4,5,6 at select mission
+      fill(100, 100, 100);
+      rect(-55, -200, 35, 35);
+      rect(-55 + 220, -200, 35, 35);
+      rect(-55, -200 + 170, 35, 35);
+      rect(-55 + 220, -200 + 170, 35, 35);
+      rect(-55, -200 + 340, 35, 35);
+      rect(-55 + 220, -200 + 340, 35, 35);
+      fill(40, 40, 40);
+      rect(-55, -165, 35, 3);
+      rect(-20, -200, 3, 38);
+      rect(-55 + 220, -165, 35, 3);
+      rect(-20 + 220, -200, 3, 38);
+      rect(-55, -165 + 170, 35, 3);
+      rect(-20, -200 + 170, 3, 38);
+      rect(-55 + 220, -165 + 170, 35, 3);
+      rect(-20 + 220, -200 + 170, 3, 38);
+      rect(-55, -165 + 340, 35, 3);
+      rect(-20, -200 + 340, 3, 38);
+      rect(-55 + 220, -165 + 340, 35, 3);
+      rect(-20 + 220, -200 + 340, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("1", -38, -187, 35, 35);
+      text("2", -38 + 220, -187, 35, 35);
+      text("3", -38, -187 + 170, 35, 35);
+      text("4", -38 + 220, -187 + 170, 35, 35);
+      text("5", -38, -187 + 340, 35, 35);
+      text("6", -38 + 220, -187 + 340, 35, 35);
       pop();
     } else if (window.startState === 3) {
       push();
