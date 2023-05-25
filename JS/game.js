@@ -316,6 +316,7 @@ function draw() {
       let ufo = new Ufo();
       ufos.push(ufo);
     }
+    //every each ufo's moving, change hp and splice if destroyed
     for (let ufo of ufos) {
       ufo.draw();
       if (mouseIsPressed) {
@@ -444,7 +445,7 @@ function draw() {
     //When you activate booster with B and change some values
     if (window.boostReady && keyIsDown(66)) {
       window.boostCounter = 0;
-      window.boostTimer = 180;
+      window.boostTimer = 200;
       laserColor = [230, 185, 0];
       aimDamage = 15;
       window.boostUsedCounter++;
@@ -520,7 +521,7 @@ function draw() {
       }
       if (window.mission === 1) {
         window.mission1Completed = true;
-        window.timerCompleted1 = 60 - window.timerS;
+        window.timerCompleted1 = Math.floor(60 - window.timerS);
         if (
           window.timerCompleted1 < window.timerBestCompleted1 ||
           window.timerBestCompleted1 === undefined
