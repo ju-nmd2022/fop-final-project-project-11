@@ -49,8 +49,6 @@ window.falconCounter = 0;
 window.obstaclesDestroyed = 0;
 window.boostUsedCounter = 0;
 
-let song;
-
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
@@ -511,7 +509,7 @@ function draw() {
     if (
       window.asteroidCounter >= window.asteroidMission &&
       window.ufoCounter >= window.ufoMission &&
-      window.falconCounter >= window.falconCounter
+      window.falconCounter >= window.falconMission
     ) {
       window.startState = 4;
       window.startScreenColor = [50, 150, 50];
@@ -618,11 +616,7 @@ function draw() {
   }
   aim(mouseX, mouseY);
 }
-if (gameState === 2) {
-  if (window.shooting) {
-    song.play();
-  }
-}
+
 window.draw = draw;
 
 //Local storage save function
