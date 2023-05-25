@@ -20,7 +20,6 @@ innerWidth = innerWidth - 50;
 //Canvas setup
 function setup() {
   const canvas = createCanvas(innerWidth, innerHeight);
-  canvas.parent("midScreen");
 }
 window.setup = setup;
 
@@ -69,11 +68,6 @@ let progressBoardPause = new ProgressBoard(
   innerWidth / 2 - 100,
   innerHeight / 2 - 150
 );
-
-function preload() {
-  soundFormats("mp3");
-  song = loadSound("laserbeam");
-}
 
 //GameState Start
 let gameState = 1;
@@ -131,7 +125,6 @@ function laser(x, y) {
   strokeWeight(1);
   line(0, innerHeight, x, y);
   line(innerWidth, innerHeight, x, y);
-
   pop();
 }
 function aim(x, y) {

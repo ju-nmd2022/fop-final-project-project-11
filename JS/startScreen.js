@@ -170,6 +170,74 @@ export default class StartScreen {
       text("THE EMPIRE STRIKES BACK", -200, 180);
       text("THE RETURN OF THE JEDI", 25, 180);
 
+      text("Press key 1-6 to choose mission", -200, -240, 35, 35);
+
+      push();
+      fill(100, 100, 100);
+      rect(-55, -200, 35, 35);
+      fill(40, 40, 40);
+      rect(-55, -165, 35, 3);
+      rect(-20, -200, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("1", -38, -187, 35, 35);
+      pop();
+
+      push();
+      fill(100, 100, 100);
+      rect(-55 + 220, -200, 35, 35);
+      fill(40, 40, 40);
+      rect(-55 + 220, -165, 35, 3);
+      rect(-20 + 220, -200, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("2", -38 + 220, -187, 35, 35);
+      pop();
+
+      push();
+      fill(100, 100, 100);
+      rect(-55, -200 + 170, 35, 35);
+      fill(40, 40, 40);
+      rect(-55, -165 + 170, 35, 3);
+      rect(-20, -200 + 170, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("3", -38, -187 + 170, 35, 35);
+      pop();
+
+      push();
+      fill(100, 100, 100);
+      rect(-55 + 220, -200 + 170, 35, 35);
+      fill(40, 40, 40);
+      rect(-55 + 220, -165 + 170, 35, 3);
+      rect(-20 + 220, -200 + 170, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("4", -38 + 220, -187 + 170, 35, 35);
+      pop();
+
+      push();
+      fill(100, 100, 100);
+      rect(-55, -200 + 340, 35, 35);
+      fill(40, 40, 40);
+      rect(-55, -165 + 340, 35, 3);
+      rect(-20, -200 + 340, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("5", -38, -187 + 340, 35, 35);
+      pop();
+
+      push();
+      fill(100, 100, 100);
+      rect(-55 + 220, -200 + 340, 35, 35);
+      fill(40, 40, 40);
+      rect(-55 + 220, -165 + 340, 35, 3);
+      rect(-20 + 220, -200 + 340, 3, 38);
+      textSize(17);
+      fill(255, 255, 255);
+      text("6", -38 + 220, -187 + 340, 35, 35);
+      pop();
+
       //Makes the mission not completed or shows the best and last time
       if (window.timerBestCompleted1 === undefined) {
         text("NOT COMPLETED YET", -200, -100);
