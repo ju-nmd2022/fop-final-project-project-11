@@ -20,7 +20,6 @@ innerWidth = innerWidth - 50;
 //Canvas setup
 function setup() {
   const canvas = createCanvas(innerWidth, innerHeight);
-  canvas.parent("midScreen");
 }
 window.setup = setup;
 
