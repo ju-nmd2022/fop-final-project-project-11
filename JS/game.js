@@ -529,7 +529,7 @@ function draw() {
         saveToStorage();
       } else if (window.mission === 2) {
         window.mission2Completed = true;
-        window.timerCompleted1 = 80 - window.timerS;
+        window.timerCompleted2 = 80 - window.timerS;
         if (
           window.timerCompleted2 < window.timerBestCompleted2 ||
           window.timerBestCompleted2 === undefined
@@ -539,7 +539,7 @@ function draw() {
         saveToStorage();
       } else if (window.mission === 3) {
         window.mission3Completed = true;
-        window.timerCompleted1 = 120 - window.timerS;
+        window.timerCompleted3 = 120 - window.timerS;
         if (
           window.timerCompleted3 < window.timerBestCompleted3 ||
           window.timerBestCompleted3 === undefined
@@ -549,7 +549,7 @@ function draw() {
         saveToStorage();
       } else if (window.mission === 4) {
         window.mission4Completed = true;
-        window.timerCompleted1 = 150 - window.timerS;
+        window.timerCompleted4 = 150 - window.timerS;
         if (
           window.timerCompleted4 < window.timerBestCompleted4 ||
           window.timerBestCompleted4 === undefined
@@ -647,40 +647,50 @@ function saveToStorage() {
 }
 
 //Loads in the values from local (if any)
+
+//mission 1
 if (localStorage.mission1Completed) {
   window.mission1Completed = JSON.parse(localStorage.mission1Completed);
 }
-if (localStorage.mission2Completed) {
-  window.mission2Completed = JSON.parse(localStorage.mission2Completed);
-}
-if (localStorage.mission3Completed) {
-  window.mission3Completed = JSON.parse(localStorage.mission3Completed);
-}
-if (localStorage.mission4Completed) {
-  window.mission4Completed = JSON.parse(localStorage.mission4Completed);
-}
-if (localStorage.mission5Completed) {
-  window.mission5Completed = JSON.parse(localStorage.mission5Completed);
-}
-if (localStorage.mission6Completed) {
-  window.mission6Completed = JSON.parse(localStorage.mission6Completed);
-}
-
-//loads in best time from local (If any)
 if (localStorage.mission1BestTime) {
   window.timerBestCompleted1 = JSON.parse(localStorage.mission1BestTime);
+}
+
+//mission 2
+if (localStorage.mission2Completed) {
+  window.mission2Completed = JSON.parse(localStorage.mission2Completed);
 }
 if (localStorage.mission2BestTime) {
   window.timerBestCompleted2 = JSON.parse(localStorage.mission2BestTime);
 }
+
+//Mission 3
+if (localStorage.mission3Completed) {
+  window.mission3Completed = JSON.parse(localStorage.mission3Completed);
+}
 if (localStorage.mission3BestTime) {
   window.timerBestCompleted3 = JSON.parse(localStorage.mission3BestTime);
+}
+
+//mission 4
+if (localStorage.mission4Completed) {
+  window.mission4Completed = JSON.parse(localStorage.mission4Completed);
 }
 if (localStorage.mission4BestTime) {
   window.timerBestCompleted4 = JSON.parse(localStorage.mission4BestTime);
 }
+
+//mission 5
+if (localStorage.mission5Completed) {
+  window.mission5Completed = JSON.parse(localStorage.mission5Completed);
+}
 if (localStorage.mission5BestTime) {
   window.timerBestCompleted5 = JSON.parse(localStorage.mission5BestTime);
+}
+
+//mission 6
+if (localStorage.mission6Completed) {
+  window.mission6Completed = JSON.parse(localStorage.mission6Completed);
 }
 if (localStorage.mission6BestTime) {
   window.timerBestCompleted6 = JSON.parse(localStorage.mission6BestTime);

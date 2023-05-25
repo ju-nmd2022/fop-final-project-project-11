@@ -171,15 +171,36 @@ export default class StartScreen {
       text("THE RETURN OF THE JEDI", 25, 180);
 
       //Makes the mission not completed or shows the best and last time
-      text("Best Time: " + window.timerBestCompleted1 + "s", -200, -90);
-      text("Best Time: " + window.timerBestCompleted2 + "s", 25, -90);
-      text("Best Time: " + window.timerBestCompleted3 + "s", -200, 80);
-
-      text("Best Time: " + window.timerBestCompleted4 + "s", 25, 80);
-
-      text("Best Time: " + window.timerBestCompleted5 + "s", -200, 250);
-      text("Best Time: " + window.timerBestCompleted6 + "s", 25, 250);
-
+      if (window.timerBestCompleted1 === undefined) {
+        text("NOT COMPLETED YET", -200, -100);
+      } else {
+        text("Best Time: " + window.timerBestCompleted1 + "s", -200, -90);
+      }
+      if (window.timerBestCompleted2 === undefined) {
+        text("NOT COMPLETED YET", 25, -100);
+      } else {
+        text("Best Time: " + window.timerBestCompleted2 + "s", 25, -90);
+      }
+      if (window.timerBestCompleted3 === undefined) {
+        text("NOT COMPLETED YET", -200, 70);
+      } else {
+        text("Best Time: " + window.timerBestCompleted3 + "s", -200, 80);
+      }
+      if (window.timerBestCompleted4 === undefined) {
+        text("NOT COMPLETED YET", 25, 70);
+      } else {
+        text("Best Time: " + window.timerBestCompleted4 + "s", 25, 80);
+      }
+      if (window.timerBestCompleted5 === undefined) {
+        text("NOT COMPLETED YET", -200, 240);
+      } else {
+        text("Best Time: " + window.timerBestCompleted5 + "s", -200, 250);
+      }
+      if (window.timerBestCompleted6 === undefined) {
+        text("NOT COMPLETED YET", 25, 240);
+      } else {
+        text("Best Time: " + window.timerBestCompleted6 + "s", 25, 250);
+      }
       pop();
     } else if (window.startState === 3) {
       push();
