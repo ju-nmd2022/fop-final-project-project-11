@@ -76,7 +76,7 @@ let endTimer = 0;
 
 //Mission related variables
 window.mission = 1;
-window.asteroidMission = 10;
+window.asteroidMission = 5;
 window.ufoMission = 0;
 window.falconMission = 0;
 
@@ -212,33 +212,33 @@ function draw() {
 
       if (keyIsDown(49)) {
         window.mission = 1;
-        window.asteroidMission = 10;
+        window.asteroidMission = 5;
         window.ufoMission = 0;
         window.falconMission = 0;
         window.timerS = 60;
       } else if (keyIsDown(50) && window.mission1Completed) {
         window.mission = 2;
-        window.asteroidMission = 8;
-        window.ufoMission = 4;
+        window.asteroidMission = 2;
+        window.ufoMission = 2;
         window.falconMission = 0;
         window.timerS = 80;
       } else if (keyIsDown(51) && window.mission2Completed) {
         window.mission = 3;
-        window.asteroidMission = 5;
-        window.ufoMission = 10;
+        window.asteroidMission = 4;
+        window.ufoMission = 4;
         window.falconMission = 0;
         window.timerS = 120;
       } else if (keyIsDown(52) && window.mission3Completed) {
         window.mission = 4;
-        window.asteroidMission = 8;
-        window.ufoMission = 10;
+        window.asteroidMission = 4;
+        window.ufoMission = 4;
         window.falconMission = 2;
         window.timerS = 150;
       } else if (keyIsDown(53) && window.mission4Completed) {
         window.mission = 5;
-        window.asteroidMission = 10;
+        window.asteroidMission = 3;
         window.ufoMission = 5;
-        window.falconMission = 20;
+        window.falconMission = 3;
         window.timerS = 180;
       } else if (keyIsDown(54) && window.mission5Completed) {
         window.mission = 6;
@@ -429,7 +429,7 @@ function draw() {
     //When you activate booster with B and change some values
     if (window.boostReady && keyIsDown(66)) {
       window.boostCounter = 0;
-      window.boostTimer = 100;
+      window.boostTimer = 180;
       laserColor = [230, 185, 0];
       aimDamage = 15;
       window.boostUsedCounter++;
