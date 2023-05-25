@@ -174,37 +174,31 @@ export default class StartScreen {
       if (window.timerBestCompleted1 === undefined) {
         text("NOT COMPLETED YET", -200, -100);
       } else {
-        text("Last Time: " + window.timerCompleted1 + "s", -200, -105);
         text("Best Time: " + window.timerBestCompleted1 + "s", -200, -90);
       }
       if (window.timerBestCompleted2 === undefined) {
         text("NOT COMPLETED YET", 25, -100);
       } else {
-        text("Last Time: " + window.timerCompleted2 + "s", 25, -105);
         text("Best Time: " + window.timerBestCompleted2 + "s", 25, -90);
       }
       if (window.timerBestCompleted3 === undefined) {
         text("NOT COMPLETED YET", -200, 70);
       } else {
-        text("Last Time: " + window.timerCompleted3 + "s", -200, 65);
         text("Best Time: " + window.timerBestCompleted3 + "s", -200, 80);
       }
       if (window.timerBestCompleted4 === undefined) {
         text("NOT COMPLETED YET", 25, 70);
       } else {
-        text("Last Time: " + window.timerCompleted4 + "s", 25, 65);
         text("Best Time: " + window.timerBestCompleted4 + "s", 25, 80);
       }
       if (window.timerBestCompleted5 === undefined) {
         text("NOT COMPLETED YET", -200, 240);
       } else {
-        text("Last Time: " + window.timerCompleted5 + "s", -200, 235);
         text("Best Time: " + window.timerBestCompleted5 + "s", -200, 250);
       }
       if (window.timerBestCompleted6 === undefined) {
         text("NOT COMPLETED YET", 25, 240);
       } else {
-        text("Last Time: " + window.timerCompleted6 + "s", 25, 235);
         text("Best Time: " + window.timerBestCompleted6 + "s", 25, 250);
       }
       pop();
@@ -307,7 +301,20 @@ export default class StartScreen {
       textSize(20);
       text("Obstacles destroyed: " + window.obstaclesDestroyed, 0, -30);
       text("Boost used: " + window.boostUsedCounter, 0, 0);
-      text("Time: 2s", 0, 30);
+      if (window.mission === 1) {
+        text("Time: " + window.timerCompleted1 + "s", 0, 30);
+      } else if (window.mission === 2) {
+        text("Time: " + window.timerCompleted2 + "s", 0, 30);
+      } else if (window.mission === 3) {
+        text("Time: " + window.timerCompleted3 + "s", 0, 30);
+      } else if (window.mission === 4) {
+        text("Time: " + window.timerCompleted4 + "s", 0, 30);
+      } else if (window.mission === 5) {
+        text("Time: " + window.timerCompleted5 + "s", 0, 30);
+      } else if (window.mission === 6) {
+        text("Time: " + window.timerCompleted6 + "s", 0, 30);
+      }
+
       strokeWeight(6);
       textSize(30);
       text("Press ENTER to Leave", 0, 200);
