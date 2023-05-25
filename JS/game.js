@@ -35,6 +35,8 @@ window.falconCounter = 0;
 window.obstaclesDestroyed = 0;
 window.boostUsedCounter = 0;
 
+let song;
+
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
@@ -53,6 +55,11 @@ let progressBoardPause = new ProgressBoard(
   innerWidth / 2 - 100,
   innerHeight / 2 - 150
 );
+
+function preload() {
+  soundFormats("mp3");
+  song = loadSound("laserbeam");
+}
 
 //GameState Start
 let gameState = 1;
@@ -591,5 +598,10 @@ function draw() {
     progressBoardPause.draw();
   }
   aim(mouseX, mouseY);
+}
+if (gameState === 2) {
+  if (window.shooting) {
+    song.play();
+  }
 }
 window.draw = draw;
