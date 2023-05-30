@@ -49,8 +49,6 @@ window.falconCounter = 0;
 window.obstaclesDestroyed = 0;
 window.boostUsedCounter = 0;
 
-let song;
-
 //Variables to move obstacles positions when using "arrows".
 window.movementX = 0;
 window.movementY = 0;
@@ -616,11 +614,6 @@ function draw() {
     progressBoardPause.draw();
   }
   aim(mouseX, mouseY);
-}
-if (gameState === 2) {
-  if (window.shooting) {
-    song.play();
-  }
 }
 window.draw = draw;
 
