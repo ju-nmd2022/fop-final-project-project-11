@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background: rgb(50, 50, 50);
+}
+#midScreen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
